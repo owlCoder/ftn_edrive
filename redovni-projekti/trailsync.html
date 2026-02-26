@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrailSync – Projektni Zadatak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --primary: #15803d;
+        --primary-light: #22c55e;
+        --primary-dim: #14532d;
+        --navy: #060a08;
+        --navy-mid: #0c1210;
+        --navy-card: #101a12;
+        --text: #e8f0e8;
+        --text-mid: #8ca890;
+        --text-dim: #3a5040;
+        --accent-amber: #f59e0b;
+        --accent-sky: #38bdf8;
+        --accent-rose: #f43f5e;
+        --accent-violet: #a78bfa;
+        --accent-teal: #14b8a6;
+        --accent-lime: #84cc16;
+        --accent-orange: #f97316;
+        --accent-emerald: #10b981;
+        --border: rgba(34,197,94,0.12);
+        --border-bright: rgba(34,197,94,0.32);
+        --glass: rgba(255,255,255,0.025);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        background-color: var(--navy);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        line-height: 1.8;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 55% 40% at 0% 0%, rgba(21,128,61,0.14) 0%, transparent 55%),
+          radial-gradient(ellipse 45% 35% at 100% 100%, rgba(132,204,22,0.07) 0%, transparent 55%),
+          radial-gradient(ellipse 40% 50% at 60% 40%, rgba(20,184,166,0.04) 0%, transparent 60%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .page-wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 60px 40px 100px;
+      }
+
+      /* ── HEADER ── */
+      .doc-header {
+        text-align: center;
+        padding: 70px 0 55px;
+        border-bottom: 1px solid var(--border-bright);
+        margin-bottom: 65px;
+        position: relative;
+      }
+
+      .doc-header::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+      }
+
+      .doc-label {
+        font-size: 10px;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 24px;
+        font-weight: 600;
+      }
+
+      .logo-wrap { display: inline-flex; align-items: center; gap: 18px; margin-bottom: 16px; }
+
+      .logo-icon {
+        width: 58px; height: 58px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        border-radius: 16px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 28px;
+        box-shadow: 0 0 50px rgba(21,128,61,0.45);
+      }
+
+      .doc-title {
+        font-size: clamp(48px, 8vw, 78px);
+        font-weight: 800;
+        letter-spacing: -2.5px;
+        line-height: 1.0;
+        background: linear-gradient(135deg, #e8f5e8 0%, var(--primary-light) 50%, var(--primary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .doc-subtitle {
+        font-size: 14px; font-weight: 400; color: var(--text-dim);
+        letter-spacing: 3px; text-transform: uppercase;
+        margin-top: 10px; margin-bottom: 32px;
+      }
+
+      .badge-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+      .badge {
+        font-size: 11px; font-weight: 600; padding: 5px 16px;
+        border-radius: 20px; border: 1px solid; letter-spacing: 0.5px;
+      }
+
+      .badge-green  { color: var(--primary-light);  border-color: rgba(34,197,94,0.4);   background: rgba(34,197,94,0.08); }
+      .badge-lime   { color: var(--accent-lime);     border-color: rgba(132,204,22,0.4);  background: rgba(132,204,22,0.08); }
+      .badge-teal   { color: var(--accent-teal);     border-color: rgba(20,184,166,0.4);  background: rgba(20,184,166,0.08); }
+      .badge-amber  { color: var(--accent-amber);    border-color: rgba(245,158,11,0.4);  background: rgba(245,158,11,0.08); }
+      .badge-violet { color: var(--accent-violet);   border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.08); }
+
+      /* ── DIVIDER ── */
+      .divider { display: flex; align-items: center; gap: 16px; margin: 52px 0; }
+      .divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border-bright), transparent); }
+      .divider-dot { width: 6px; height: 6px; background: var(--primary-light); border-radius: 50%; box-shadow: 0 0 12px rgba(34,197,94,0.5); }
+
+      /* ── SECTION ── */
+      .section { margin-bottom: 58px; animation: fadeUp 0.5s ease both; }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .section:nth-child(2) { animation-delay: 0.05s; }
+      .section:nth-child(3) { animation-delay: 0.10s; }
+      .section:nth-child(4) { animation-delay: 0.15s; }
+      .section:nth-child(5) { animation-delay: 0.20s; }
+      .section:nth-child(6) { animation-delay: 0.25s; }
+      .section:nth-child(7) { animation-delay: 0.30s; }
+
+      .section-number {
+        font-size: 10px; color: var(--primary-dim);
+        letter-spacing: 4px; text-transform: uppercase;
+        margin-bottom: 6px; font-weight: 700;
+      }
+
+      .section-title {
+        font-size: 22px; font-weight: 700; color: #fff;
+        letter-spacing: -0.3px; margin-bottom: 22px;
+        padding-bottom: 14px; border-bottom: 1px solid var(--border);
+        display: flex; align-items: center; gap: 12px;
+      }
+
+      .section-title .icon { font-size: 20px; }
+
+      .subsection-title {
+        font-size: 13px; font-weight: 700; color: var(--primary-light);
+        margin: 34px 0 14px; letter-spacing: 1px; text-transform: uppercase;
+      }
+
+      p { color: var(--text-mid); margin-bottom: 14px; font-weight: 400; font-size: 15px; }
+      strong { color: var(--text); font-weight: 600; }
+
+      /* ── CALLOUT ── */
+      .callout {
+        border: 1px solid var(--border-bright);
+        border-left: 3px solid var(--primary-light);
+        background: rgba(34,197,94,0.05);
+        padding: 20px 26px; margin: 20px 0;
+        border-radius: 0 10px 10px 0;
+        font-style: italic; color: var(--text);
+        font-size: 15px; line-height: 1.75;
+      }
+
+      .callout.amber { border-left-color: var(--accent-amber); background: rgba(245,158,11,0.05); }
+
+      /* ── INFO BOX ── */
+      .info-box {
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent-sky);
+        background: rgba(56,189,248,0.04);
+        padding: 18px 24px; margin: 20px 0;
+        border-radius: 0 10px 10px 0;
+        font-size: 14px; color: var(--text-mid);
+      }
+
+      /* ── CONCEPT GRID ── */
+      .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+
+      .concept-card {
+        border: 1px solid var(--border); background: var(--glass);
+        padding: 18px 20px; border-radius: 10px;
+        position: relative; overflow: hidden;
+        transition: border-color 0.25s, background 0.25s;
+      }
+
+      .concept-card:hover { border-color: var(--border-bright); background: rgba(255,255,255,0.04); }
+
+      .concept-card::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0;
+        height: 2px; background: var(--card-color, var(--primary-light)); opacity: 0.6;
+      }
+
+      .concept-card-term { font-size: 13px; font-weight: 700; color: var(--card-color, var(--primary-light)); margin-bottom: 8px; }
+      .concept-card p { font-size: 13px; margin-bottom: 0; line-height: 1.6; }
+
+      /* ── REQ GRID ── */
+      .req-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 22px; }
+
+      .req-card {
+        border: 1px solid var(--border); background: var(--glass);
+        padding: 22px; border-radius: 10px;
+        position: relative; overflow: hidden;
+        transition: border-color 0.25s, background 0.25s;
+      }
+
+      .req-card::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0;
+        height: 2px; background: var(--card-accent, var(--primary-light)); opacity: 0.7;
+      }
+
+      .req-card:hover { border-color: var(--border-bright); background: rgba(255,255,255,0.04); }
+      .req-card-title { font-size: 14px; font-weight: 700; color: var(--card-accent, var(--primary-light)); margin-bottom: 10px; }
+      .req-card p { font-size: 14px; margin-bottom: 0; }
+
+      /* ── M:N CARDS ── */
+      .mn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+
+      .mn-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--navy-card); }
+
+      .mn-header {
+        background: rgba(34,197,94,0.08);
+        padding: 12px 18px; font-size: 12px; font-weight: 700;
+        color: var(--primary-light); letter-spacing: 0.5px;
+        border-bottom: 1px solid var(--border);
+        display: flex; align-items: center; gap: 8px;
+      }
+
+      .mn-dot { width: 7px; height: 7px; background: var(--mn-color, var(--primary-light)); border-radius: 50%; }
+      .mn-body { padding: 14px 18px; font-size: 13px; color: var(--text-mid); }
+
+      .mn-tables {
+        display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+        font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      }
+
+      .mn-tbl { padding: 3px 10px; border-radius: 4px; border: 1px solid; font-weight: 600; }
+      .mn-via { font-size: 10px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; text-align: center; }
+      .mn-attrs { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+      .mn-attr {
+        font-size: 11px; padding: 2px 8px; border-radius: 4px;
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+        color: var(--accent-sky); font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* ── SCREENS ── */
+      .screens-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+
+      .screen-card { border: 1px solid var(--border); padding: 18px; border-radius: 10px; background: var(--glass); }
+
+      .screen-role {
+        font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+        color: var(--card-color, var(--text-dim)); margin-bottom: 12px; font-weight: 700;
+      }
+
+      .screen-list { list-style: none; padding: 0; }
+
+      .screen-list li {
+        font-size: 13px; color: var(--text-dim);
+        padding: 4px 0 4px 14px; position: relative;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      .screen-list li:last-child { border-bottom: none; }
+
+      .screen-list li::before {
+        content: '›'; position: absolute; left: 0;
+        color: var(--card-color, var(--text-dim)); font-size: 15px; line-height: 1.4;
+      }
+
+      /* ── API ── */
+      .api-block { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+
+      .api-block-header {
+        font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+        color: var(--primary-dim); padding: 10px 18px;
+        background: rgba(34,197,94,0.06); border-bottom: 1px solid var(--border); font-weight: 700;
+      }
+
+      .api-route {
+        display: flex; align-items: center; gap: 12px; padding: 10px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 12px;
+      }
+
+      .api-route:last-child { border-bottom: none; }
+
+      .method {
+        font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px;
+        min-width: 48px; text-align: center; letter-spacing: 0.5px;
+      }
+
+      .get    { background: rgba(34,197,94,0.12);  color: var(--primary-light); }
+      .post   { background: rgba(56,189,248,0.12); color: var(--accent-sky); }
+      .put    { background: rgba(245,158,11,0.12); color: var(--accent-amber); }
+      .patch  { background: rgba(167,139,250,0.12);color: var(--accent-violet); }
+      .delete { background: rgba(244,63,94,0.12);  color: var(--accent-rose); }
+
+      .route-path { color: var(--text); flex: 1; }
+      .route-desc { color: var(--text-dim); font-size: 11px; font-family: 'Inter', sans-serif; white-space: nowrap; }
+
+      .route-auth {
+        font-size: 10px; padding: 2px 8px; border-radius: 10px;
+        background: rgba(167,139,250,0.1); color: var(--accent-violet);
+        border: 1px solid rgba(167,139,250,0.25);
+        white-space: nowrap; font-family: 'Inter', sans-serif; font-weight: 600;
+      }
+
+      .route-auth.admin {
+        background: rgba(245,158,11,0.1); color: var(--accent-amber);
+        border-color: rgba(245,158,11,0.25);
+      }
+
+      /* ── DIFFICULTY PILLS ── */
+      .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+
+      .pill {
+        font-size: 12px; font-weight: 600; padding: 5px 18px;
+        border-radius: 20px; border: 1px solid; letter-spacing: 0.3px;
+      }
+
+      .pill-easy   { color: #4ade80; border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.08); }
+      .pill-med    { color: var(--accent-amber); border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.08); }
+      .pill-hard   { color: var(--accent-orange); border-color: rgba(249,115,22,0.35); background: rgba(249,115,22,0.08); }
+      .pill-expert { color: var(--accent-rose); border-color: rgba(244,63,94,0.35); background: rgba(244,63,94,0.08); }
+      .pill-teal   { color: var(--accent-teal); border-color: rgba(20,184,166,0.35); background: rgba(20,184,166,0.08); }
+      .pill-lime   { color: var(--accent-lime); border-color: rgba(132,204,22,0.35); background: rgba(132,204,22,0.08); }
+
+      /* ── VAL TABLE ── */
+      .val-table {
+        width: 100%; border-collapse: collapse; margin-top: 22px;
+        border: 1px solid var(--border); border-radius: 10px; overflow: hidden; font-size: 14px;
+      }
+
+      .val-table th {
+        font-size: 10px; color: var(--primary-light); letter-spacing: 2px;
+        text-transform: uppercase; padding: 12px 18px; text-align: left;
+        background: rgba(34,197,94,0.07); border-bottom: 1px solid var(--border-bright); font-weight: 700;
+      }
+
+      .val-table td {
+        padding: 11px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); color: var(--text-mid);
+      }
+
+      .val-table tr:last-child td { border-bottom: none; }
+      .val-table tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+
+      code {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 12px;
+        background: rgba(34,197,94,0.09); padding: 2px 7px; border-radius: 4px;
+        color: var(--primary-light); border: 1px solid rgba(34,197,94,0.2);
+      }
+
+      ul.prose-list { list-style: none; padding: 0; margin: 14px 0; }
+
+      ul.prose-list li {
+        padding: 6px 0 6px 20px; position: relative;
+        color: var(--text-mid); font-size: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      ul.prose-list li:last-child { border-bottom: none; }
+
+      ul.prose-list li::before {
+        content: '▸'; position: absolute; left: 0;
+        font-size: 10px; top: 11px; color: var(--primary-dim);
+      }
+
+      /* ── FOOTER ── */
+      .doc-footer {
+        text-align: center; padding: 50px 0 20px;
+        border-top: 1px solid var(--border); margin-top: 60px;
+      }
+
+      .footer-logo {
+        font-size: 30px; font-weight: 800; letter-spacing: -1.5px;
+        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        margin-bottom: 12px;
+      }
+
+      .footer-ornament { font-size: 10px; letter-spacing: 5px; color: var(--text-dim); text-transform: uppercase; font-weight: 600; }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 680px) {
+        .page-wrap { padding: 36px 20px 80px; }
+        .screens-grid { grid-template-columns: 1fr 1fr; }
+        .concept-grid, .mn-grid { grid-template-columns: 1fr; }
+        .api-route { flex-wrap: wrap; }
+      }
+
+      @media (max-width: 480px) {
+        .screens-grid { grid-template-columns: 1fr; }
+        .req-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrap">
+
+      <!-- HEADER -->
+      <header class="doc-header">
+        <div class="doc-label">osnove · distribuiranog · programiranja</div>
+     
+        <h1 class="doc-title">TrailSync</h1>
+        <div class="doc-subtitle">Platforma za planiranje i praćenje planinarskih ruta</div>
+      </header>
+
+      <!-- ═══════════════════════════
+           I — OPIS PROJEKTA
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje I</div>
+        <h2 class="section-title"> Opis projekta</h2>
+        <p>
+          <code>TrailSync</code> je fullstack web aplikacija za planiranje i evidenciju planinarskih ruta i uspona. Aplikacija ima deo koji korisnik vidi i koristi u pretraživaču (<em>frontend</em> — React + TypeScript), i serverski deo koji obrađuje zahteve i podatke čuva u MySQL bazi podataka (<em>backend</em> — Node.js + Express + mysql2).
+        </p>
+        <div class="callout">
+          „TrailSync funkcioniše kao kombinacija AllTrails-a i planinarskog dnevnika — korisnik kreira nalog, pretražuje globalni katalog planinarskih ruta, dodaje rute u svoju listu za prelaz, evidentira završene uspone sa vremenom i beleškama i planira buduće pohode sa prijateljima."
+        </div>
+
+        <div class="subsection-title">I.1 — Tehničke karakteristike</div>
+        <p>
+          U tehničkom smislu, ovo je <code>CRUD sistem sa autentifikacijom, hijerarhijom uloga i tri M:N relacije</code>. Administrator popunjava globalni katalog ruta, planinari grade sopstvene liste, evidentiraju završene uspone i planiraju grupne pohode.
+        </p>
+
+        <div class="subsection-title">I.2 — Korisničke uloge</div>
+        <div class="req-grid">
+          <div class="req-card" style="--card-accent: var(--text-dim)">
+            <div class="req-card-title">👁 Gost</div>
+            <p>Može pregledati globalni katalog ruta i čitati javne opise. Ne može dodavati rute, evidentirati uspone niti planirati pohode.</p>
+          </div>
+          <div class="req-card" style="--card-accent: var(--primary-light)">
+            <div class="req-card-title">🥾 Planinar (registrovani)</div>
+            <p>Ima sopstveni nalog. Može graditi listu ruta, evidentirati završene uspone i organizovati grupne pohode sa prijateljima.</p>
+          </div>
+          <div class="req-card" style="--card-accent: var(--accent-amber)">
+            <div class="req-card-title">⭐ Administrator</div>
+            <p>Dodaje i uređuje rute u globalnom katalogu, upravlja planinama i regionima, upravlja korisnicima i prati audit log.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           II — FUNKCIONALNI ZAHTEVI
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje II</div>
+        <h2 class="section-title">Funkcionalni zahtevi</h2>
+
+        <div class="subsection-title">II.1 — Registracija i prijava (Autentifikacija)</div>
+        <p>
+          Korisnik se registruje, lozinka se čuva <code>heširana u bazi podataka</code> korišćenjem <code>bcrypt</code> biblioteke. Prijava vraća <code>JSON Web Token (JWT)</code> koji klijent čuva u <code>localStorage</code> pretraživača putem <code>useAuth</code> hook-a unutar autentifikacionog kontekstualnog prostora.
+        </p>
+        <ul class="prose-list">
+          <li>Forma za registraciju: <strong>korisničko ime, ime i prezime, email, lozinka i profilna slika</strong> (base64 ili binarna datoteka putem multer biblioteke)</li>
+          <li>Prijava vraća JWT koji se čuva u <code>localStorage</code>; token se čita pri svakom učitavanju stranice</li>
+          <li>Odjava briše token i šalje <code>POST /api/auth/logout</code> koji beleži odjavu u audit log</li>
+          <li>Zaštićene rute nedostupne bez važećeg tokena — automatski preusmeravanje na <code>/login</code></li>
+          <li>Validacija svakog polja na klijentskoj i na serverskoj strani</li>
+        </ul>
+       <div class="info-box">
+          <span>Local Storage je mini baza podataka nalik <strong>Dictionary&lt;key, value></strong> u pretraživaču koja čuva podatke trajno na korisnikovom računaru (ostaju čak i nakon zatvaranja kartice u pretraživaču ili kompletnog pretraživača). Koristi se za čuvanje JWT tokena koji dokazuje da je korisnik prijavljen. Za razliku od memorije u React-u (state), podaci u localStorage-u ne nestaju pri osvežavanju stranice. </span>
+        </div>
+          <div class="info-box">
+         JWT token sadrži <code>user_id</code>, <code>username</code> i <code>role</code>. Server verifikuje token putem <code>authMiddleware</code> pre svakog zaštićenog route handler-a.
+        </div>
+
+        <div class="subsection-title">II.2 — Katalog planinarskih ruta (javno dostupno)</div>
+        <p>
+          Administrator popunjava globalni katalog ruta. Svaka ruta ima fiksne atribute — <strong>naziv, opis, sliku, dužinu (km), visinsku razliku (m), težinu, procenjeno trajanje i planinu/region</strong> kojoj pripada. Planine su poseban entitet (tabela <code>mountains</code>) — svaka ruta ima strani ključ prema planini. Uz planinu, ruta može biti označena jednim ili više <em>tipova terena</em> (tags) — ovo je prva M:N relacija.
+        </p>
+        <ul class="prose-list">
+          <li>Javna stranica kataloga sa svim rutama kao vizuelnim karticama</li>
+          <li>Filtriranje po težini, planini, dužini i tipu terena — frontend logika bez poziva ka serveru</li>
+          <li>Sortiranje po oceni korisnika, dužini i visini</li>
+          <li>Stranica detalja rute sa svim atributima, tipovima terena, prosečnom ocenom i listom odrađenih uspona korisnika</li>
+        </ul>
+
+        <div class="subsection-title">II.3 — Lista ruta planinara (samo prijavljeni)</div>
+        <p>
+          Planinar može dodati bilo koju rutu iz kataloga na svoju <code>listu ruta</code>. Ovo je <strong>druga M:N relacija</strong> — jedan korisnik može imati više ruta, jedna ruta može biti na listama više korisnika. Vezna tabela <code>user_trails</code> sadrži atribut <code>status</code> koji označava da li planinar želi da prođe rutu ili je već odradio.
+        </p>
+        <ul class="prose-list">
+          <li>Dodavanje rute na listu sa statusom: <strong>want_to_hike</strong> (planira) ili <strong>completed</strong> (završio)</li>
+          <li>Stranica „Moje rute" prikazuje listu grupisanu po statusu</li>
+          <li>Izmena statusa rute na listi</li>
+          <li>Uklanjanje rute sa liste</li>
+          <li>Statistika: ukupni pređeni kilometri, ukupna visinska razlika, omiljene planine</li>
+        </ul>
+
+        <div class="subsection-title">II.4 — Evidencija uspona (samo prijavljeni)</div>
+        <p>
+          Planinar može evidentirati konkretan <code>uspon</code> — datum kada je prošao određenu rutu, sa ličnim podacima o tom prelasku. Uspon je zapis u tabeli <code>ascents</code> sa stranim ključem prema ruti i korisniku (1:N relacija korisnik → uspon, ali jedna ruta može biti pređena više puta).
+        </p>
+        <ul class="prose-list">
+          <li>Kreiranje uspona: <strong>ruta (mora biti na listi), datum, stvarno trajanje u minutima, lična ocena (1–10) i beleška</strong></li>
+          <li>Nakon evidentiranja uspona, status rute na listi automatski se menja u <em>completed</em></li>
+          <li>Stranica „Moji usponi" — lista svih evidentirarnih uspona sortiranih po datumu</li>
+          <li>Detalji uspona sa svim unetim podacima</li>
+          <li>Izmena i brisanje sopstvenog uspona</li>
+        </ul>
+
+        <div class="subsection-title">II.5 — Grupni pohodi (samo prijavljeni)</div>
+        <p>
+          Planinar može organizovati <code>grupni pohod</code> — planiranu turu na konkretnu rutu u određenom datumu, i pozvati registrovane korisnike da se pridruže. Ovo je <strong>treća M:N relacija</strong> — jedan pohod može imati više učesnika, a jedan korisnik može biti učesnik više pohoda. Vezna tabela <code>hike_participants</code> sa atributima <code>status</code> (invited / confirmed / declined) i <code>responded_at</code>.
+        </p>
+        <ul class="prose-list">
+          <li>Kreiranje pohoda: <strong>naziv, ruta iz kataloga, datum i vreme polaska, opis i maksimalan broj učesnika</strong></li>
+          <li>Organizator poziva učesnike po korisničkom imenu — pozvani korisnici prihvataju ili odbijaju</li>
+          <li>Stranica pohoda prikazuje rutu, datum, organizatora i sve pozvane/potvrđene učesnike</li>
+          <li>Organizator može otkazati pohod — svi učesnici se obaveštavaju promenou statusa</li>
+          <li>Stranica „Moji pohodi" prikazuje pohode koje je korisnik organizovao i one na koje je pozvan</li>
+        </ul>
+
+        <div class="subsection-title">II.6 — Administrativni panel (samo za administratore)</div>
+        <p> Administrator ima poseban panel dostupan isključivo korisnicima sa ulogom <code>admin</code>. Pokušaj pristupa od strane običnog korisnika mora biti blokiran i na klijentskoj (koristiti zaštićene rute) i na serverskoj strani (koristiti middleware). </p>
+        <p> Administrator ima sledeće mogućnosti u okviru administrativnog panela: </p>
+        <ul class="prose-list">
+          <li>Dodavanje novih ruta: <strong>naziv, opis, slika, dužina, visinska razlika, težina, trajanje, planina, tipovi terena</strong></li>
+          <li>Izmena i brisanje ruta (briše se samo ako nema evidentiranih uspona)</li>
+          <li>Upravljanje planinama i regionima (dodavanje, izmena)</li>
+          <li>Upravljanje tipovima terena kao globalnim skupom oznaka</li>
+          <li>Pregled svih korisnika sa opcijom promene uloge</li>
+          <li>Pregled audit loga aktivnosti</li>
+        </ul>
+
+        <div class="subsection-title">II.7 — Pregled funkcionalnosti po ulogama</div>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--text-dim)">
+            <div class="concept-card-term">👁 Gost — može</div>
+            <p>Pregledati katalog ruta, filtrirati po planini i težini, čitati opise ruta.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--text-dim)">
+            <div class="concept-card-term">👁 Gost — ne može</div>
+            <p>Dodavati rute na listu, evidentirati uspone, organizovati pohode, pristupiti admin panelu.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--primary-light)">
+            <div class="concept-card-term">🥾 Planinar — može</div>
+            <p>Sve što gost može i dodatno: graditi listu ruta, evidentirati uspone, organizovati pohode i prihvatati pozive.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--primary-light)">
+            <div class="concept-card-term">🥾 Planinar — ne može</div>
+            <p>Pristupiti admin panelu, menjati globalni katalog, videti liste, uspone i pohode tuđih korisnika.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">⭐ Admin — može</div>
+            <p>Sve što planinar može i dodatno: upravljati katalogom, planinama i tipovima terena, upravljati korisnicima, pregledati audit log.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">⭐ Admin — ne može</div>
+            <p>Menjati tuđe liste ruta, uspone i pohode — privatni prostor svakog planinara ostaje nepromenjen.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           III — M:N RELACIJE
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje III</div>
+        <h2 class="section-title">M:N relacije i atributi rute</h2>
+
+        <div class="subsection-title">III.1 — Globalni atributi rute (tabela <code>trails</code>)</div>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--primary-light)">
+            <div class="concept-card-term">Naziv i opis</div>
+            <p>Naziv max 120 karaktera, obavezno. Opis max 2000 karaktera sa punim opisom rute, tačkama interesa i preporukama.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-lime)">
+            <div class="concept-card-term">Dužina (length_km)</div>
+            <p>Decimalni broj u kilometrima, min 0.1. Prikazuje se na kartici. Koristi se za filtriranje i statistiku (ukupni km korisnika).</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-teal)">
+            <div class="concept-card-term">Visinska razlika (elevation_m)</div>
+            <p>Ceo broj u metrima ukupnog uspona. Min 0. Prikazuje se na kartici i koristi za statistiku ukupnog uspona korisnika.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">Težina (difficulty)</div>
+            <p><code>ENUM</code> sa četiri nivoa: easy, moderate, hard, expert. Koristi se za vizuelno razlikovanje i filtriranje u katalogu.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-violet)">
+            <div class="concept-card-term">Planina (mountain_id)</div>
+            <p>Strani ključ prema tabeli <code>mountains</code>. Svaka ruta pripada tačno jednoj planini. Planine imaju naziv, visinu i region.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-rose)">
+            <div class="concept-card-term">Procenjeno trajanje (est_duration_min)</div>
+            <p>Prosečno trajanje prelaska u minutima. Ceo broj, min 10. Prikazuje se na kartici i u detalju rute.</p>
+          </div>
+        </div>
+
+        <div class="subsection-title">III.2 — Tri M:N relacije sistema</div>
+        <div class="mn-grid">
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--accent-lime)"></div>
+              M:N 1 — Rute ↔ Tipovi terena
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--accent-lime);border-color:rgba(132,204,22,0.4)">trails</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--accent-lime);border-color:rgba(132,204,22,0.4)">terrain_tags</span>
+              </div>
+              <div class="mn-via">Vezna tabela: trail_tags</div>
+              <div class="mn-attrs"><span class="mn-attr">— (bez dodatnih atributa)</span></div>
+              <p style="margin-top:10px">Jedna ruta može imati više tipova terena (npr. Šuma + Kamenjak + Voda), a jedan tip terena može biti dodeljen više rutama. Čista M:N bez atributa.</p>
+            </div>
+          </div>
+
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--primary-light)"></div>
+              M:N 2 — Korisnici ↔ Rute (lista)
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--primary-light);border-color:rgba(34,197,94,0.4)">users</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--primary-light);border-color:rgba(34,197,94,0.4)">trails</span>
+              </div>
+              <div class="mn-via">Vezna tabela: user_trails</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">status ENUM('want_to_hike','completed')</span>
+                <span class="mn-attr">added_at DATETIME</span>
+              </div>
+              <p style="margin-top:10px">Ista ruta može biti na listama hiljada korisnika sa različitim statusima. Kada korisnik evidentira uspon, <code>status</code> se automatski ažurira u <em>completed</em>.</p>
+            </div>
+          </div>
+
+          <div class="mn-card" style="grid-column: 1 / -1;">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--accent-teal)"></div>
+              M:N 3 — Korisnici ↔ Pohodi (učešće)
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--accent-teal);border-color:rgba(20,184,166,0.4)">users</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--accent-teal);border-color:rgba(20,184,166,0.4)">hikes</span>
+              </div>
+              <div class="mn-via">Vezna tabela: hike_participants</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">status ENUM('invited','confirmed','declined')</span>
+                <span class="mn-attr">responded_at DATETIME NULL</span>
+              </div>
+              <p style="margin-top:10px">Jedan pohod može imati više učesnika, a korisnik može učestvovati u više pohoda. Atribut <code>responded_at</code> automatski se popunjava na serveru u trenutku kada korisnik prihvati ili odbije pozivnicu.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection-title">III.3 — Tipovi terena</div>
+        <p>Tip terena je kategorizacijska oznaka koja opisuje karakteristike površine rute. Administrator može dodavati nove tipove. Primeri predefinisanih tipova:</p>
+        <div class="pill-row">
+          <span class="pill pill-lime">🌲 Šumska staza</span>
+          <span class="pill pill-easy">🌿 Livada</span>
+          <span class="pill pill-med">🪨 Kamenjak</span>
+          <span class="pill pill-teal">💧 Pored vode</span>
+          <span class="pill pill-hard">❄ Sneg/Led</span>
+          <span class="pill pill-expert">⛰ Greben</span>
+          <span class="pill pill-lime">🌾 Visoravan</span>
+        </div>
+        <div class="callout amber">
+          Nivoi težine ruta su <code>ENUM</code> vrednosti: <strong>easy</strong> (lako — za početnike), <strong>moderate</strong> (srednje — zahteva kondiciju), <strong>hard</strong> (teško — planinarsko iskustvo obavezno), <strong>expert</strong> (stručno — specijalna oprema). Na frontendu svaki nivo ima odgovarajuću boju i ikonicu za brzo prepoznavanje.
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           IV — REST API
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje IV</div>
+        <h2 class="section-title">REST API rute</h2>
+        <p>
+          Rute označene sa <span class="route-auth" style="display:inline-block;margin:0 3px">🔐 user</span> zahtevaju validan JWT token, a <span class="route-auth admin" style="display:inline-block;margin:0 3px">⭐ admin</span> zahtevaju i admin ulogu — proverava se putem <code>authMiddleware</code> i <code>authorizeMiddleware</code> u okviru serverske aplikacije.
+        </p>
+
+        <div class="api-block">
+          <div class="api-block-header">Auth · /api/auth</div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/register</span><span class="route-desc">Registracija novog korisnika</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/login</span><span class="route-desc">Prijava — vraća JWT token</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/logout</span><span class="route-auth">🔐 user</span><span class="route-desc">Beleži odjavu u audit log</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/me</span><span class="route-auth">🔐 user</span><span class="route-desc">Podaci prijavljenog korisnika</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Rute · /api/trails</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-desc">Katalog svih ruta (filterable: difficulty, mountain_id, terrain)</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-desc">Detalji rute sa tipovima terena i usponi</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Dodaj rutu u katalog</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Izmeni rutu</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Briši rutu (samo bez uspona)</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Planine · /api/mountains</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-desc">Lista svih planina sa brojem ruta</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Dodaj planinu</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Izmeni planinu</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Tipovi terena · /api/terrain-tags</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-desc">Lista svih tipova terena</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Dodaj novi tip terena</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Briši tip (samo bez ruta)</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Lista ruta · /api/my-trails</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Lista ruta prijavljenog korisnika</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Dodaj rutu na listu sa statusom</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/:trailId/status</span><span class="route-auth">🔐 user</span><span class="route-desc">Promeni status rute na listi</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:trailId</span><span class="route-auth">🔐 user</span><span class="route-desc">Ukloni rutu sa liste</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Usponi · /api/ascents</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Usponi prijavljenog korisnika</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Evidentiraj uspon (ruta mora biti na listi)</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Detalji uspona</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Izmeni uspon (samo vlasnik)</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Briši uspon (samo vlasnik)</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Pohodi · /api/hikes</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Pohodi korisnika (organizovani + pozvani)</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Kreiraj grupni pohod</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Detalji pohoda sa učesnicima</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Izmena pohoda (samo organizator)</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-desc">Otkazivanje pohoda (organizator)</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/invite</span><span class="route-auth">🔐 user</span><span class="route-desc">Pozovi učesnika (organizator)</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/:id/respond</span><span class="route-auth">🔐 user</span><span class="route-desc">Prihvati / odbij pozivnicu (confirmed/declined)</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/participants/:userId</span><span class="route-auth">🔐 user</span><span class="route-desc">Ukloni učesnika (organizator)</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Admin · /api/admin</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/users</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Lista svih korisnika</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/users/:id/role</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Promena uloge korisnika</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/logs</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Audit log aktivnosti</span></div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           V — EKRANI
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje V</div>
+        <h2 class="section-title">Stranice klijentske aplikacije</h2>
+        <div class="screens-grid">
+          <div class="screen-card" style="--card-color: var(--text-dim)">
+            <div class="screen-role">Javno dostupno</div>
+            <ul class="screen-list">
+              <li>Početna stranica</li>
+              <li>Katalog ruta sa filterima</li>
+              <li>Detalji rute</li>
+              <li>Planine i regioni</li>
+              <li>Prijava / Registracija</li>
+            </ul>
+          </div>
+          <div class="screen-card" style="--card-color: var(--primary-light)">
+            <div class="screen-role">Prijavljeni planinar</div>
+            <ul class="screen-list">
+              <li>Dashboard + Statistika</li>
+              <li>Moja lista ruta</li>
+              <li>Moji usponi</li>
+              <li>Evidentiraj uspon</li>
+              <li>Moji pohodi</li>
+              <li>Kreiraj pohod</li>
+              <li>Detalji pohoda + Učesnici</li>
+              <li>Profil korisnika</li>
+            </ul>
+          </div>
+          <div class="screen-card" style="--card-color: var(--accent-amber)">
+            <div class="screen-role">Administrator</div>
+            <ul class="screen-list">
+              <li>Admin Dashboard</li>
+              <li>Upravljanje rutama</li>
+              <li>Dodaj / Izmeni rutu</li>
+              <li>Upravljanje planinama</li>
+              <li>Tipovi terena</li>
+              <li>Svi korisnici</li>
+              <li>Audit Log</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           VI — VALIDACIJA
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje VI</div>
+        <h2 class="section-title">Pravila validacije</h2>
+        <p>Celokupna validacija implementirana <code>troslojno</code>: <code>klijentska</code> (React + TypeScript), <code>serverska</code> (Express middleware) i <code>ograničenja baze</code> (CREATE TABLE).</p>
+        <table class="val-table">
+          <thead>
+            <tr><th>Polje</th><th>Pravilo</th><th>Poruka greške</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>username</code></td><td>3–40 karaktera, slova/brojevi/crtica, jedinstven</td><td>„Korisničko ime nije validno ili je zauzeto"</td></tr>
+            <tr><td><code>email</code></td><td>Validan format, jedinstven u bazi</td><td>„Email je već zauzet"</td></tr>
+            <tr><td><code>password</code></td><td>Min 8 karaktera, jedno veliko slovo, jedan broj</td><td>„Lozinka ne ispunjava uslove"</td></tr>
+            <tr><td><code>trail.name</code></td><td>Obavezno, 2–120 karaktera</td><td>„Naziv rute je obavezan"</td></tr>
+            <tr><td><code>trail.length_km</code></td><td>Decimalni broj, min 0.1</td><td>„Dužina mora biti veća od 0"</td></tr>
+            <tr><td><code>trail.difficulty</code></td><td>ENUM: easy, moderate, hard, expert</td><td>„Izaberite validan nivo težine"</td></tr>
+            <tr><td><code>trail.est_duration_min</code></td><td>Ceo broj, min 10</td><td>„Trajanje mora biti najmanje 10 minuta"</td></tr>
+            <tr><td><code>ascent.hiked_at</code></td><td>Datum ne sme biti u budućnosti</td><td>„Datum uspona ne može biti u budućnosti"</td></tr>
+            <tr><td><code>ascent trail</code></td><td>Ruta mora biti na korisnikovoj listi</td><td>„Ruta nije na vašoj listi"</td></tr>
+            <tr><td><code>ascent.personal_rating</code></td><td>Ceo broj 1–10</td><td>„Ocena mora biti između 1 i 10"</td></tr>
+            <tr><td><code>hike.scheduled_at</code></td><td>Datum mora biti u budućnosti</td><td>„Datum pohoda mora biti u budućnosti"</td></tr>
+            <tr><td><code>hike.max_participants</code></td><td>Ceo broj 2–50</td><td>„Broj učesnika mora biti između 2 i 50"</td></tr>
+            <tr><td><code>hike_participants</code></td><td>Korisnik ne može biti dva puta pozvan na isti pohod</td><td>„Korisnik je već pozvan na ovaj pohod"</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusHub – Projektni Zadatak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --primary: #6366f1;
+        --primary-light: #818cf8;
+        --primary-dim: #3730a3;
+        --secondary: #f59e0b;
+        --secondary-light: #fcd34d;
+        --navy: #07080f;
+        --navy-mid: #0f1117;
+        --navy-card: #13161f;
+        --navy-card2: #181c27;
+        --text: #e2e8f0;
+        --text-mid: #94a3b8;
+        --text-dim: #475569;
+        --accent-green: #10b981;
+        --accent-red: #ef4444;
+        --accent-sky: #38bdf8;
+        --accent-rose: #f43f5e;
+        --accent-violet: #a78bfa;
+        --accent-amber: #f59e0b;
+        --accent-teal: #14b8a6;
+        --accent-pink: #ec4899;
+        --accent-orange: #f97316;
+        --border: rgba(99, 102, 241, 0.15);
+        --border-bright: rgba(99, 102, 241, 0.4);
+        --glass: rgba(255,255,255,0.025);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        background-color: var(--navy);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        line-height: 1.8;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 60% 40% at 15% 0%, rgba(99,102,241,0.12) 0%, transparent 55%),
+          radial-gradient(ellipse 50% 35% at 85% 100%, rgba(245,158,11,0.08) 0%, transparent 55%),
+          radial-gradient(ellipse 40% 50% at 50% 50%, rgba(16,185,129,0.04) 0%, transparent 60%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .page-wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 60px 40px 100px;
+      }
+
+      /* ── HEADER ── */
+      .doc-header {
+        text-align: center;
+        padding: 75px 0 60px;
+        border-bottom: 1px solid var(--border-bright);
+        margin-bottom: 70px;
+        position: relative;
+      }
+
+      .doc-header::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      }
+
+      .doc-label {
+        font-size: 10px;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 26px;
+        font-weight: 600;
+      }
+
+      .logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .logo-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        box-shadow: 0 0 50px rgba(99,102,241,0.35);
+      }
+
+      .doc-title {
+        font-size: clamp(50px, 9vw, 82px);
+        font-weight: 800;
+        letter-spacing: -3px;
+        line-height: 1;
+        background: linear-gradient(135deg, #fff 0%, var(--primary-light) 45%, var(--primary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .doc-subtitle {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text-dim);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-top: 12px;
+        margin-bottom: 36px;
+      }
+
+      .badge-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+      }
+
+      .badge {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 5px 16px;
+        border-radius: 20px;
+        border: 1px solid;
+        letter-spacing: 0.5px;
+      }
+
+      .badge-indigo { color: var(--primary-light); border-color: rgba(99,102,241,0.4); background: rgba(99,102,241,0.08); }
+      .badge-amber  { color: var(--secondary-light); border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.08); }
+      .badge-green  { color: var(--accent-green); border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.08); }
+      .badge-sky    { color: var(--accent-sky); border-color: rgba(56,189,248,0.4); background: rgba(56,189,248,0.08); }
+      .badge-rose   { color: var(--accent-rose); border-color: rgba(244,63,94,0.4); background: rgba(244,63,94,0.08); }
+
+      /* ── DIVIDER ── */
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 56px 0;
+      }
+      .divider-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-bright), transparent);
+      }
+      .divider-dot {
+        width: 6px; height: 6px;
+        background: var(--primary);
+        border-radius: 50%;
+        box-shadow: 0 0 12px rgba(99,102,241,0.6);
+      }
+
+      /* ── SECTION ── */
+      .section {
+        margin-bottom: 62px;
+        animation: fadeUp 0.5s ease both;
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .section:nth-child(2)  { animation-delay: 0.04s; }
+      .section:nth-child(3)  { animation-delay: 0.08s; }
+      .section:nth-child(4)  { animation-delay: 0.12s; }
+      .section:nth-child(5)  { animation-delay: 0.16s; }
+      .section:nth-child(6)  { animation-delay: 0.20s; }
+      .section:nth-child(7)  { animation-delay: 0.24s; }
+      .section:nth-child(8)  { animation-delay: 0.28s; }
+      .section:nth-child(9)  { animation-delay: 0.32s; }
+
+      .section-number {
+        font-size: 10px;
+        color: var(--primary-dim);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+
+      .section-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: -0.3px;
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .section-title .icon { font-size: 20px; }
+
+      .subsection-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--primary-light);
+        margin: 36px 0 14px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      p {
+        color: var(--text-mid);
+        margin-bottom: 14px;
+        font-weight: 400;
+        font-size: 15px;
+      }
+
+      strong { color: var(--text); font-weight: 600; }
+
+      /* ── CALLOUT ── */
+      .callout {
+        border: 1px solid var(--border-bright);
+        border-left: 3px solid var(--primary);
+        background: rgba(99,102,241,0.05);
+        padding: 20px 26px;
+        margin: 20px 0;
+        border-radius: 0 10px 10px 0;
+        font-style: italic;
+        color: var(--text);
+        font-size: 15px;
+        line-height: 1.75;
+      }
+
+      .callout.amber {
+        border-left-color: var(--accent-amber);
+        background: rgba(245,158,11,0.05);
+      }
+
+      .callout.green {
+        border-left-color: var(--accent-green);
+        background: rgba(16,185,129,0.05);
+      }
+
+      .callout.red {
+        border-left-color: var(--accent-red);
+        background: rgba(239,68,68,0.05);
+      }
+
+      /* ── INFO BOX ── */
+      .info-box {
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent-sky);
+        background: rgba(56,189,248,0.04);
+        padding: 18px 24px;
+        margin: 20px 0;
+        border-radius: 0 10px 10px 0;
+        font-size: 14px;
+        color: var(--text-mid);
+      }
+
+      /* ── ARCH DIAGRAM ── */
+      .arch-diagram {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--navy-card);
+        padding: 32px;
+        margin: 24px 0;
+        font-size: 13px;
+      }
+
+      .arch-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+
+      .arch-node {
+        border: 1px solid;
+        border-radius: 8px;
+        padding: 10px 18px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        min-width: 130px;
+      }
+
+      .arch-node.client   { border-color: rgba(99,102,241,0.5); color: var(--primary-light); background: rgba(99,102,241,0.08); }
+      .arch-node.vercel   { border-color: rgba(255,255,255,0.25); color: #fff; background: rgba(255,255,255,0.04); }
+      .arch-node.api      { border-color: rgba(245,158,11,0.5); color: var(--secondary-light); background: rgba(245,158,11,0.08); }
+      .arch-node.master   { border-color: rgba(16,185,129,0.5); color: var(--accent-green); background: rgba(16,185,129,0.08); }
+      .arch-node.slave    { border-color: rgba(56,189,248,0.4); color: var(--accent-sky); background: rgba(56,189,248,0.06); }
+      .arch-node.slave2   { border-color: rgba(167,139,250,0.4); color: var(--accent-violet); background: rgba(167,139,250,0.06); }
+      .arch-node.lb       { border-color: rgba(244,63,94,0.4); color: var(--accent-rose); background: rgba(244,63,94,0.06); }
+
+      .arch-arrow {
+        font-size: 18px;
+        color: var(--text-dim);
+        padding: 0 8px;
+        display: flex;
+        align-items: center;
+      }
+
+      .arch-label {
+        font-size: 10px;
+        color: var(--text-dim);
+        text-align: center;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .arch-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .arch-db-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 8px;
+      }
+
+      .repl-arrow {
+        font-size: 12px;
+        color: var(--accent-green);
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      /* ── CONCEPT GRID ── */
+      .concept-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 20px 0;
+      }
+
+      .concept-card {
+        border: 1px solid var(--border);
+        background: var(--glass);
+        padding: 18px 20px;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.25s, background 0.25s;
+      }
+
+      .concept-card:hover {
+        border-color: var(--border-bright);
+        background: rgba(255,255,255,0.04);
+      }
+
+      .concept-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: var(--card-color, var(--primary));
+        opacity: 0.65;
+      }
+
+      .concept-card-term {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--card-color, var(--primary-light));
+        margin-bottom: 8px;
+        letter-spacing: 0.2px;
+      }
+
+      .concept-card p {
+        font-size: 13px;
+        margin-bottom: 0;
+        line-height: 1.6;
+      }
+
+      /* ── REQ GRID ── */
+      .req-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .req-card {
+        border: 1px solid var(--border);
+        background: var(--glass);
+        padding: 22px;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.25s, background 0.25s;
+      }
+
+      .req-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: var(--card-accent, var(--primary));
+        opacity: 0.7;
+      }
+
+      .req-card:hover {
+        border-color: var(--border-bright);
+        background: rgba(255,255,255,0.04);
+      }
+
+      .req-card-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--card-accent, var(--primary-light));
+        margin-bottom: 10px;
+      }
+
+      .req-card p { font-size: 14px; margin-bottom: 0; }
+
+      /* ── MN TABLE ── */
+      .mn-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 20px 0;
+      }
+
+      .mn-card {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        background: var(--navy-card);
+      }
+
+      .mn-header {
+        background: rgba(99,102,241,0.1);
+        padding: 12px 18px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--primary-light);
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .mn-dot {
+        width: 7px; height: 7px;
+        background: var(--mn-color, var(--primary));
+        border-radius: 50%;
+      }
+
+      .mn-body {
+        padding: 14px 18px;
+        font-size: 13px;
+        color: var(--text-mid);
+      }
+
+      .mn-tables {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+      }
+
+      .mn-tbl {
+        padding: 3px 10px;
+        border-radius: 4px;
+        border: 1px solid;
+        font-weight: 600;
+      }
+
+      .mn-via {
+        font-size: 10px;
+        color: var(--text-dim);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .mn-attrs {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .mn-attr {
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: var(--accent-sky);
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* ── SCREENS ── */
+      .screens-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .screen-card {
+        border: 1px solid var(--border);
+        padding: 18px;
+        border-radius: 10px;
+        background: var(--glass);
+      }
+
+      .screen-role {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--card-color, var(--text-dim));
+        margin-bottom: 12px;
+        font-weight: 700;
+      }
+
+      .screen-list { list-style: none; padding: 0; }
+
+      .screen-list li {
+        font-size: 13px;
+        color: var(--text-dim);
+        padding: 4px 0 4px 14px;
+        position: relative;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      .screen-list li:last-child { border-bottom: none; }
+
+      .screen-list li::before {
+        content: '›';
+        position: absolute;
+        left: 0;
+        color: var(--card-color, var(--text-dim));
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      /* ── API ── */
+      .api-block {
+        background: var(--navy-mid);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 14px;
+      }
+
+      .api-block-header {
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--primary-dim);
+        padding: 10px 18px;
+        background: rgba(99,102,241,0.06);
+        border-bottom: 1px solid var(--border);
+        font-weight: 700;
+      }
+
+      .api-route {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 12px;
+      }
+
+      .api-route:last-child { border-bottom: none; }
+
+      .method {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 4px;
+        min-width: 46px;
+        text-align: center;
+        letter-spacing: 0.5px;
+      }
+
+      .get    { background: rgba(16,185,129,0.12);  color: var(--accent-green); }
+      .post   { background: rgba(56,189,248,0.12);  color: var(--accent-sky); }
+      .put    { background: rgba(245,158,11,0.12);  color: var(--accent-amber); }
+      .patch  { background: rgba(167,139,250,0.12); color: var(--accent-violet); }
+      .delete { background: rgba(244,63,94,0.12);   color: var(--accent-rose); }
+
+      .route-path  { color: var(--text); flex: 1; }
+      .route-desc  { color: var(--text-dim); font-size: 11px; font-family: 'Inter', sans-serif; white-space: nowrap; }
+
+      .route-auth {
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 10px;
+        background: rgba(167,139,250,0.1);
+        color: var(--accent-violet);
+        border: 1px solid rgba(167,139,250,0.25);
+        white-space: nowrap;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+      }
+
+      .route-auth.admin {
+        background: rgba(245,158,11,0.1);
+        color: var(--accent-amber);
+        border-color: rgba(245,158,11,0.25);
+      }
+
+      /* ── DB TABLES ── */
+      .db-table {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 14px;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 12px;
+      }
+
+      .db-table-header {
+        background: rgba(99,102,241,0.08);
+        padding: 10px 18px;
+        color: var(--primary-light);
+        font-weight: 700;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: 0.5px;
+      }
+
+      .db-dot {
+        width: 7px; height: 7px;
+        background: var(--primary);
+        border-radius: 50%;
+        opacity: 0.8;
+      }
+
+      .db-table-body {
+        padding: 12px 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        background: var(--navy-card);
+      }
+
+      .db-field .fname  { color: var(--accent-sky); }
+      .db-field .ftype  { color: var(--text-dim); }
+      .db-field .fpk    { color: var(--secondary-light); }
+      .db-field .ffk    { color: var(--accent-violet); }
+      .db-field .fnull  { color: #ef4444; opacity: 0.7; font-size: 10px; }
+
+      /* ── HEALTH STATES ── */
+      .health-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 20px 0;
+      }
+
+      .health-card {
+        border: 1px solid;
+        border-radius: 10px;
+        padding: 18px;
+        text-align: center;
+      }
+
+      .health-card.ok    { border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.06); }
+      .health-card.warn  { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+      .health-card.fail  { border-color: rgba(239,68,68,0.4);  background: rgba(239,68,68,0.06); }
+
+      .health-status {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      .health-label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+
+      .health-card.ok   .health-label { color: var(--accent-green); }
+      .health-card.warn .health-label { color: var(--accent-amber); }
+      .health-card.fail .health-label { color: var(--accent-red); }
+
+      .health-desc {
+        font-size: 12px;
+        color: var(--text-dim);
+        line-height: 1.5;
+      }
+
+      /* ── VAL TABLE ── */
+      .val-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 22px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        font-size: 14px;
+      }
+
+      .val-table th {
+        font-size: 10px;
+        color: var(--primary-light);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 12px 18px;
+        text-align: left;
+        background: rgba(99,102,241,0.08);
+        border-bottom: 1px solid var(--border-bright);
+        font-weight: 700;
+      }
+
+      .val-table td {
+        padding: 11px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        color: var(--text-mid);
+      }
+
+      .val-table tr:last-child td { border-bottom: none; }
+      .val-table tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+
+      code {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 12px;
+        background: rgba(99,102,241,0.1);
+        padding: 2px 7px;
+        border-radius: 4px;
+        color: var(--primary-light);
+        border: 1px solid rgba(99,102,241,0.2);
+      }
+
+      ul.prose-list {
+        list-style: none;
+        padding: 0;
+        margin: 14px 0;
+      }
+
+      ul.prose-list li {
+        padding: 6px 0 6px 20px;
+        position: relative;
+        color: var(--text-mid);
+        font-size: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      ul.prose-list li:last-child { border-bottom: none; }
+
+      ul.prose-list li::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        font-size: 10px;
+        top: 11px;
+        color: var(--primary-dim);
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 14px 0;
+      }
+
+      .tech-tag {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 14px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        color: var(--text-mid);
+        background: var(--glass);
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* ── STEP LIST ── */
+      .step-list {
+        list-style: none;
+        padding: 0;
+        margin: 16px 0;
+        counter-reset: steps;
+      }
+
+      .step-list li {
+        counter-increment: steps;
+        padding: 14px 16px 14px 52px;
+        position: relative;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 8px;
+        background: var(--glass);
+        color: var(--text-mid);
+        font-size: 14px;
+      }
+
+      .step-list li::before {
+        content: counter(steps);
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 26px;
+        height: 26px;
+        background: rgba(99,102,241,0.15);
+        border: 1px solid rgba(99,102,241,0.35);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primary-light);
+        line-height: 26px;
+        text-align: center;
+      }
+
+      /* ── ENV TABLE ── */
+      .env-block {
+        background: var(--navy-card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 16px 0;
+      }
+
+      .env-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+      }
+
+      .env-row:last-child { border-bottom: none; }
+
+      .env-key {
+        padding: 10px 18px;
+        color: var(--accent-sky);
+        min-width: 280px;
+        border-right: 1px solid rgba(255,255,255,0.04);
+        font-weight: 600;
+      }
+
+      .env-desc {
+        padding: 10px 18px;
+        color: var(--text-dim);
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        flex: 1;
+      }
+
+      /* ── FOOTER ── */
+      .doc-footer {
+        text-align: center;
+        padding: 50px 0 20px;
+        border-top: 1px solid var(--border);
+        margin-top: 60px;
+      }
+
+      .footer-logo {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -2px;
+        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 12px;
+      }
+
+      .footer-ornament {
+        font-size: 10px;
+        letter-spacing: 5px;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 700px) {
+        .page-wrap { padding: 36px 18px 80px; }
+        .screens-grid { grid-template-columns: 1fr 1fr; }
+        .concept-grid, .mn-grid { grid-template-columns: 1fr; }
+        .health-grid { grid-template-columns: 1fr; }
+        .api-route { flex-wrap: wrap; }
+        .env-key { min-width: 0; width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .env-row { flex-direction: column; }
+      }
+
+      @media (max-width: 480px) {
+        .screens-grid { grid-template-columns: 1fr; }
+        .req-grid { grid-template-columns: 1fr; }
+        .arch-row { flex-direction: column; gap: 6px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrap">
+
+      <!-- HEADER -->
+      <header class="doc-header">
+        <div class="doc-label">osnove · distribuiranog · programiranja </div>
+        <h1 class="doc-title">NexusHub</h1>
+        <div class="doc-subtitle">Distribuirana platforma za upravljanje projektima i timovima</div>
+      </header>
+
+      <!-- ═══════════════════════════
+           I — OPIS PROJEKTA
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje I</div>
+        <h2 class="section-title">Opis projekta</h2>
+        <p>
+          <code>NexusHub</code> je distribuirana fullstack web aplikacija za upravljanje timovima i projektima. Aplikacija ima deo koji korisnik vidi i koristi u pretraživaču (<em>frontend</em> — React + TypeScript, deployovan na Vercel), i serverski deo koji radi kao REST API, prihvata zahteve i podatke čuva u MySQL bazi podataka sa replikacijom (<em>backend</em> — Node.js + Express + mysql2).
+        </p>
+        <div class="callout">
+          „NexusHub funkcioniše kao kombinacija Trello-a i Slack-a — korisnik kreira nalog, formira timove, dodaje članove u timove, kreira projekte i dodeljuje zadatke članovima tima. Svaki korisnik može biti u više timova, a svaki tim može imati više aktivnih projekata. Sistem je distribuiran — baza podataka radi u Master-Slave replikaciji sa automatskim failoverom i balansiranjem čitanja između replika."
+        </div>
+
+        <div class="subsection-title">I.1 — Tehničke karakteristike sistema</div>
+        <p>
+          U tehničkom smislu, ovo je <code>CRUD sistem sa autentifikacijom, hijerarhijom uloga i distribuiranom bazom podataka</code>. Sistem obuhvata četiri M:N relacije između ključnih entiteta, a kritična komponenta je sloj za upravljanje konekcijama ka bazi koji podržava replikaciju, health check i failover. Ceo frontend je deployovan kao statički sajt, dok backend radi kao Node.js serverless ili klasični server.
+        </p>
+
+        <div class="subsection-title">I.2 — Arhitektura sistema</div>
+        <p>Sistem se sastoji od tri logička sloja koji komuniciraju kroz definisane interfejse:</p>
+        <div class="arch-diagram">
+          <div class="arch-label">Klijentski sloj</div>
+          <div class="arch-row">
+            <div class="arch-group">
+              <div class="arch-node client">React + TypeScript<br><small style="font-weight:400;color:var(--text-dim)">Vercel CDN</small></div>
+            </div>
+          </div>
+          <div class="arch-row" style="margin: 8px 0;">
+            <div style="font-size:22px;color:var(--primary-dim);text-align:center;width:100%;">↕ HTTPS / REST API</div>
+          </div>
+          <div class="arch-label">Serverski sloj</div>
+          <div class="arch-row">
+            <div class="arch-group">
+              <div class="arch-node api">Node.js Express API<br><small style="font-weight:400;color:var(--text-dim)">JWT Middleware · RBAC</small></div>
+            </div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-node lb">DB Router / Load Balancer<br><small style="font-weight:400;color:var(--text-dim)">Reads → Slaves · Writes → Master</small></div>
+          </div>
+          <div class="arch-row" style="margin: 8px 0;">
+            <div style="font-size:22px;color:var(--text-dim);text-align:center;width:100%;">↕ mysql2 pool</div>
+          </div>
+          <div class="arch-label">Sloj podataka — MySQL Master-Slave replikacija</div>
+          <div class="arch-db-row">
+            <div class="arch-node master">MySQL Master<br><small style="font-weight:400;color:var(--text-dim)">Čitanje + Pisanje</small></div>
+            <div class="repl-arrow">──REPL──▶</div>
+            <div class="arch-node slave">MySQL Slave 1<br><small style="font-weight:400;color:var(--text-dim)">Samo čitanje</small></div>
+            <div class="repl-arrow">──REPL──▶</div>
+            <div class="arch-node slave2">MySQL Slave 2<br><small style="font-weight:400;color:var(--text-dim)">Samo čitanje</small></div>
+          </div>
+        </div>
+
+        <div class="subsection-title">I.3 — Korisničke uloge</div>
+        <p>Aplikacija podržava tri tipa korisnika sa različitim nivoima pristupa:</p>
+        <div class="req-grid">
+          <div class="req-card" style="--card-accent: var(--text-dim)">
+            <div class="req-card-title">👁 Gost (neregistrovani)</div>
+            <p>Može videti javni landing page i stranicu za prijavu/registraciju. Ne može pristupiti nijednom funkcionalnom delu aplikacije.</p>
+          </div>
+          <div class="req-card" style="--card-accent: var(--primary-light)">
+            <div class="req-card-title">👤 Korisnik (registrovani član)</div>
+            <p>Ima sopstveni nalog. Može kreirati timove, biti dodat u tuđe timove, kreirati projekte i upravljati zadacima u timovima čiji je član.</p>
+          </div>
+          <div class="req-card" style="--card-accent: var(--accent-amber)">
+            <div class="req-card-title">⭐ Administrator</div>
+            <p>Ima globalni pristup. Upravlja svim korisnicima i timovima, prati sistemski log aktivnosti i ima uvid u zdravlje čvorova baze.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           II — FUNKCIONALNI ZAHTEVI
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje II</div>
+        <h2 class="section-title">Funkcionalni zahtevi</h2>
+
+        <div class="subsection-title">II.1 — Registracija i prijava (Autentifikacija)</div>
+        <p>
+          Autentifikacija je proces kojim sistem <code>proverava identitet korisnika</code>. Korisnik se registruje, unosi lozinku koja se čuva <code>heširana u bazi podataka</code> korišćenjem <code>bcrypt</code> biblioteke (nikad u originalnom formatu). Prilikom uspešne prijave, server generiše i vraća <code>JSON Web Token (JWT)</code> koji klijent čuva u <code>localStorage</code> pretraživača putem <code>useAuth</code> hook-a unutar autentifikacionog kontekstualnog prostora.
+        </p>
+        <ul class="prose-list">
+          <li>Forma za registraciju sadrži: <strong>korisničko ime, ime i prezime, email, lozinku i profilnu sliku</strong> (base64 string ili binarna datoteka putem multer biblioteke)</li>
+          <li>Prijava proverava kredencijale na serveru i pri uspehu vraća JWT token koji se čuva u <code>localStorage</code>; pri svakom sledećem učitavanju aplikacije token se čita iz <code>localStorage</code> i korisnik ostaje prijavljen</li>
+          <li>Odjava briše token iz <code>localStorage</code> i šalje <code>POST /api/auth/logout</code> koji beleži odjavu u evidenciji događaja (audits)</li>
+          <li>Zaštićene rute nisu dostupne bez važećeg tokena — korisnik se automatski preusmerava na <code>/login</code></li>
+          <li>Validacija svakog polja mora biti implementirana i na klijentskoj (React) i na serverskoj strani (validatori podataka)</li>
+        </ul>
+        <div class="info-box">
+          JWT token sadrži enkodovane podatke o korisniku: <code>user_id</code>, <code>username</code> i <code>role</code>. Server verifikuje token pri svakom zahtevu putem <code>authMiddleware</code> funkcije. Nikad ne čuvati osetljive podatke (lozinku, kartice...) unutar JWT payload-a.
+        </div>
+
+        <div class="subsection-title">II.2 — Upravljanje timovima</div>
+        <p>
+          Korisnik može kreirati tim i postati njegov vlasnik (<em>owner</em>), ili biti dodat u tuđi tim kao član (<em>member</em>). Ovo je prva M:N relacija — jedan korisnik može biti u više timova, a jedan tim može imati više korisnika. Vezna tabela <code>team_members</code> sadrži i atribut <code>role</code> koji definiše ulogu korisnika unutar tima (owner / member), i <code>joined_at</code> timestamp.
+        </p>
+        <ul class="prose-list">
+          <li>Kreiranje tima sa nazivom, opisom i avatarskom slikom</li>
+          <li>Pregled svih timova čiji je korisnik član (dashboard)</li>
+          <li>Vlasnik tima može dodavati i uklanjati članove (pretraga korisnika po username-u)</li>
+          <li>Vlasnik može promeniti ulogu člana unutar tima ili preneti vlasništvo drugom članu</li>
+          <li>Napuštanje tima uklanja korisnika iz svih projekata tog tima</li>
+          <li>Brisanje tima moguće samo od strane vlasnika — kaskadno briše sve projekte i zadatke tima</li>
+        </ul>
+
+        <div class="subsection-title">II.3 — Upravljanje projektima</div>
+        <p>
+          Projekat pripada jednom timu (strani ključ <code>team_id</code>). Svaki projekat može biti označen sa jednom ili više <em>oznaka (tags)</em> koje opisuju oblast — ovo je druga M:N relacija. Korisnici koji su u timu mogu biti <em>pratioci (watchers)</em> projekta — treća M:N relacija.
+        </p>
+        <ul class="prose-list">
+          <li>Kreiranje projekta sa nazivom, opisom, rokom (<code>deadline</code>), statusom i prioritetom</li>
+          <li>Dodavanje oznaka projektu iz predefinisanog skupa oznaka (tagova)</li>
+          <li>Korisnici iz tima mogu se prijaviti kao pratioci projekta — dobijaju pregled svih projekata koje prate na svom dashboard-u</li>
+          <li>Filtriranje projekata tima po statusu, prioritetu i tagovima — frontend logika bez poziva ka serveru</li>
+          <li>Stranica detalja projekta prikazuje sve zadatke grupisane po statusu (Kanban prikaz: Todo, In Progress, Done)</li>
+          <li>Izmena i brisanje projekta dostupni samo vlasniku tima ili članu sa ulogom <em>owner</em> unutar tima</li>
+        </ul>
+
+        <div class="subsection-title">II.4 — Upravljanje zadacima</div>
+        <p>
+          Zadatak (<em>task</em>) pripada projektu (strani ključ <code>project_id</code>) i može biti dodeljen jednom ili više korisnika koji su članovi tima u kom projekat postoji. Ovo je četvrta M:N relacija — vezna tabela <code>task_assignees</code> sa atributom <code>assigned_at</code>.
+        </p>
+        <ul class="prose-list">
+          <li>Kreiranje zadatka sa: <strong>naslovom, opisom, prioritetom, rokom, statusom i procenom trajanja u satima</strong></li>
+          <li>Dodela zadatka jednom ili više članova tima (unutar task assignees M:N relacije)</li>
+          <li>Promena statusa zadatka (<em>Todo → In Progress → Done</em>) dostupna svim dodeljenim korisnicima i vlasniku tima</li>
+          <li>Komentar sistem: svaki korisnik koji je dodeljen zadatku može ostaviti komentar sa tekstom i timestamp-om</li>
+          <li>Brisanje zadatka — samo vlasnik tima ili kreator zadatka</li>
+        </ul>
+
+        <div class="subsection-title">II.5 — Dashboard korisnika</div>
+        <ul class="prose-list">
+          <li>Pregled svih timova kojima korisnik pripada</li>
+          <li>Pregled svih projekata koje korisnik prati</li>
+          <li>Pregled svih zadataka koji su dodeljeni korisniku, sortirani po roku i prioritetu</li>
+          <li>Vizuelni prikaz <code>tagova projekata</code> na koje je korisnik prijavljen kao pratilac (frontend logika)</li>
+        </ul>
+
+        <div class="subsection-title">II.6 — Administrativni panel</div>
+        <p>
+          Dostupan isključivo korisnicima sa ulogom <code>admin</code>. Pokušaj pristupa od strane korisnika mora biti blokiran i na klijentskoj i na serverskoj strani upotrebom mehanizma <code>zaštićenih ruta/auth middleware</code>
+        </p>
+        <ul class="prose-list">
+          <li>Pregled svih registrovanih korisnika, timova i projekata u sistemu</li>
+          <li>Promena uloge korisnika (promovisanje u admina ili vraćanje na standardnog korisnika)</li>
+          <li>Pregled kompletnog <code>audit loga</code> aktivnosti — ko je, kada i šta uradio</li>
+          <li><strong>Health Dashboard</strong> — pregled statusa i stanja svih čvorova baze podataka (master + slave replike); prikazuje koji čvorovi su aktivni, koji su u degradovanom stanju i koji su u ispadu</li>
+          <li>Ručno pokretanje failover procedure iz admin panela u slučaju da auto-failover nije aktivan</li>
+        </ul>
+
+        <div class="subsection-title">II.7 — Pregled funkcionalnosti po ulogama</div>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--text-dim)">
+            <div class="concept-card-term">👁 Gost — može</div>
+            <p>Videti landing page, otvoriti stranicu za registraciju i prijavu.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--text-dim)">
+            <div class="concept-card-term">👁 Gost — ne može</div>
+            <p>Pristupiti dashboardu, timovima, projektima, zadacima ili admin panelu.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--primary-light)">
+            <div class="concept-card-term">👤 Korisnik — može</div>
+            <p>Kreirati timove, biti dodat u timove, kreirati projekte, pratiti projekte, upravljati zadacima unutar svojih timova, ostavljati komentare.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--primary-light)">
+            <div class="concept-card-term">👤 Korisnik — ne može</div>
+            <p>Pristupiti admin panelu, menjati timove čiji nije vlasnik, brisati tuđe zadatke i komentare.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">⭐ Admin — može</div>
+            <p>Sve što korisnik može i dodatno: upravljati svim korisnicima, pregledati sve timove i projekte, čitati audit log, videti health status čvorova baze.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">⭐ Admin — ne može</div>
+            <p>Direktno menjati sadržaj zadataka i komentare u projektima — to ostaje privatni prostor timova.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           III — M:N RELACIJE
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje III</div>
+        <h2 class="section-title">M:N relacije u bazi podataka</h2>
+        <p>
+          Sistem sadrži četiri M:N relacije. Svaka se realizuje posebnom veznom tabelom sa stranim ključevima prema obe strane relacije i opcionim dodatnim atributima koji opisuju tu vezu. Vezne tabele nisu puke spojnice — svaka nosi podatke koji imaju semantičko značenje.
+        </p>
+        <div class="mn-grid">
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--primary)"></div>
+              M:N Relacija 1 — Korisnici ↔ Timovi
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--primary-light);border-color:rgba(99,102,241,0.4)">users</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--primary-light);border-color:rgba(99,102,241,0.4)">teams</span>
+              </div>
+              <div class="mn-via">Vezna tabela: team_members</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">role ENUM('owner','member')</span>
+                <span class="mn-attr">joined_at DATETIME</span>
+              </div>
+              <p style="margin-top:10px">Jedan korisnik može biti u više timova, jedan tim može imati više korisnika. Atribut <code>role</code> definiše nivo pristupa unutar konkretnog tima.</p>
+            </div>
+          </div>
+
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--accent-teal)"></div>
+              M:N Relacija 2 — Projekti ↔ Tagovi
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--accent-teal);border-color:rgba(20,184,166,0.4)">projects</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--accent-teal);border-color:rgba(20,184,166,0.4)">tags</span>
+              </div>
+              <div class="mn-via">Vezna tabela: project_tags</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">— (bez dodatnih atributa)</span>
+              </div>
+              <p style="margin-top:10px">Jedan projekat može imati više tagova, jedan tag može biti dodeljen više projekata. Ovo je čista M:N relacija bez dodatnih atributa — vezna tabela ima samo dva strana ključa.</p>
+            </div>
+          </div>
+
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--accent-amber)"></div>
+              M:N Relacija 3 — Korisnici ↔ Projekti (praćenje)
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--accent-amber);border-color:rgba(245,158,11,0.4)">users</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--accent-amber);border-color:rgba(245,158,11,0.4)">projects</span>
+              </div>
+              <div class="mn-via">Vezna tabela: project_watchers</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">watching_since DATETIME</span>
+              </div>
+              <p style="margin-top:10px">Korisnik može pratiti više projekata (iz timova čiji je član), a projekat može imati više pratilaca. Atribut <code>watching_since</code> beleži kad je korisnik počeo pratiti.</p>
+            </div>
+          </div>
+
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--accent-rose)"></div>
+              M:N Relacija 4 — Zadaci ↔ Korisnici (dodele)
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--accent-rose);border-color:rgba(244,63,94,0.4)">tasks</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--accent-rose);border-color:rgba(244,63,94,0.4)">users</span>
+              </div>
+              <div class="mn-via">Vezna tabela: task_assignees</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">assigned_at DATETIME</span>
+                <span class="mn-attr">assigned_by INT (FK)</span>
+              </div>
+              <p style="margin-top:10px">Jedan zadatak može biti dodeljen više korisnika, a jedan korisnik može imati više zadataka. Atribut <code>assigned_by</code> beleži ko je izvršio dodelu.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           IV — REPLIKACIJA I FAILOVER
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje IV</div>
+        <h2 class="section-title">Replikacija, Load Balancing i Failover</h2>
+        <p>
+          Ovo poglavlje opisuje distribuiranu komponentu sistema — upravljanje konekcijama ka MySQL bazi podataka u scenariju sa jednim Master čvorom i dva Slave čvora. Celokupna logika replikacije i failovera implementira se na nivou serverske aplikacije, u posebnom modulu koji se naziva <code>db.ts</code> (ili <code>dbManager.ts</code>).
+        </p>
+        <div class="callout amber">
+          Ključni princip: <strong>sve operacije pisanja (INSERT, UPDATE, DELETE) uvek idu isključivo na Master</strong>. Operacije čitanja (SELECT) distribuiraju se između dostupnih Slave čvorova radi ravnomerne raspodele opterećenja. Ako su oba Slave čvora nedostupna, čitanje pada na Master kao poslednju liniju odbrane.
+        </div>
+
+        <div class="subsection-title">IV.1 — Master-Slave replikacija</div>
+        <p>
+          MySQL Master-Slave replikacija je mehanizam gde Master čvor beleži sve promene u <code>binary log</code> fajl, a Slave čvorovi kontinuirano čitaju taj log i primenjuju iste promene na sebi. Iz ugla aplikacije, replikacija je transparentna — aplikacija ne kreira replikaciju, već samo koristi već postavljene čvorove tako što svakom dodeljuje odgovarajuće upite.
+        </p>
+        <p>
+          U <code>db.ts</code> modulu definišu se tri odvojena <code>mysql2</code> connection pool-a — po jedan za svaki čvor. Svaki pool ima definisan <code>host</code>, <code>port</code>, <code>user</code>, <code>password</code> i <code>database</code> koji se čitaju iz environment varijabli.
+        </p>
+
+        <div class="subsection-title">IV.2 — Load Balancing između Slave čvorova</div>
+        <p>
+          Load balancing implementirati kao <code>Round-Robin</code> algoritam nad listom zdravih Slave čvorova. Modul čuva interni brojač koji pri svakom zahtevu za čitanje bira sledeći Slave u nizu (kružno). Ako je Slave nedostupan (označen kao nezdrav), preskače se i bira sledeći zdravi.
+        </p>
+        <ul class="prose-list">
+          <li>Implementirati funkciju <code>getReadConnection(): Pool</code> koja vraca connection pool slave čvora prema Round-Robin logici</li>
+          <li>Implementirati funkciju <code>getWriteConnection(): Pool</code> koja uvek vraća Master pool</li>
+          <li>Svaki Express route handler mora koristiti ispravnu funkciju — <code>GET</code> rute koriste <code>getReadConnection()</code>, sve ostale koriste <code>getWriteConnection()</code></li>
+        </ul>
+
+        <div class="subsection-title">IV.3 — Health Check sistem</div>
+        <p>
+          Health Check je mehanizam kojim aplikacija periodično proverava da li je svaki čvor baze dostupan i ispravno radi. Implementirati kao <code>setInterval</code> koji se izvršava svakih <strong>10 sekundi</strong> i šalje <code>SELECT 1</code> upit svakom čvoru.
+        </p>
+        <p>
+          Svaki čvor ima interno stanje koje se ažurira na osnovu rezultata health check-a. Stanja čvora:
+        </p>
+        <div class="health-grid">
+          <div class="health-card ok">
+            <div class="health-status">✅</div>
+            <div class="health-label">Healthy</div>
+            <div class="health-desc">Čvor odgovara na <code>SELECT 1</code> unutar timeout-a. Uključen u pool za distribuciju zahteva.</div>
+          </div>
+          <div class="health-card warn">
+            <div class="health-status">⚠️</div>
+            <div class="health-label">Degraded</div>
+            <div class="health-desc">Čvor odgovara, ali sa kašnjenjem iznad praga (npr. >500ms). Koristi se samo ako nema healthy čvorova.</div>
+          </div>
+          <div class="health-card fail">
+            <div class="health-status">❌</div>
+            <div class="health-label">Unreachable</div>
+            <div class="health-desc">Čvor ne odgovara ili baca grešku. Isključen iz pool-a — zahtevi se ne rutiraju na njega.</div>
+          </div>
+        </div>
+        <p>
+          Rezultati health check-a čuvaju se u memoriji servera (TypeScript objekat/Map). Stanje se izlaže kroz poseban <code>GET /api/health</code> endpoint koji Admin panel koristi da bi prikazao tabelu zdravlja čvorova u realnom vremenu.
+        </p>
+
+        <div class="subsection-title">IV.4 — Automatski Failover</div>
+        <p>
+          Failover je procedura automatskog prelaska na rezervni čvor kada primarni prestane da radi. U ovom sistemu postoje dva tipa failovera:
+        </p>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--accent-sky)">
+            <div class="concept-card-term">Slave Failover (čitanje)</div>
+            <p>Kada Slave čvor postane <em>Unreachable</em>, health check ga označava kao nedostupnog. Sledeći <code>getReadConnection()</code> poziv ga automatski preskače. Ako nijedan Slave nije dostupan, čitanje se rutira na Master.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-rose)">
+            <div class="concept-card-term">Master Failover (pisanje)</div>
+            <p>Kada Master postane nedostupan, sistem to detektuje kroz health check. Automatski se unapređuje (promote) Slave 1 u novu Master ulogu. Svi write zahtevi se preusmeravaju. Ova procedura se loguje u <code>audit</code> tabelu.</p>
+          </div>
+        </div>
+        <div class="callout red">
+          Master failover je najkritičnija procedura — tokom njenog trajanja kratko postoji prozor u kom pisanje nije moguće. Aplikacija mora ovaj slučaj da obradi elegantno: API vraća HTTP <code>503 Service Unavailable</code> sa porukom dok failover nije završen. Ne sme doći do gubitka podataka.
+        </div>
+
+        <div class="subsection-title">IV.5 — Struktura db.ts modula</div>
+        <p>Cela logika replikacije enkapsulirana je u jednom modulu koji ostatak aplikacije uvozi. Modul izvozi:</p>
+        <ul class="prose-list">
+          <li><code>getReadConnection()</code> — vraća pool zdravog Slave čvora (Round-Robin), ili Master ako nema Slave-ova</li>
+          <li><code>getWriteConnection()</code> — uvek vraća Master pool</li>
+          <li><code>getHealthStatus()</code> — vraća TypeScript objekat sa stanjem svakog čvora (za health endpoint)</li>
+          <li><code>startHealthCheck(interval: number)</code> — pokretanje periodičnog health check-a</li>
+          <li><code>promoteSlaveToMaster(slaveIndex: number)</code> — ručno ili automatsko promovisanje Slave-a u Master</li>
+        </ul>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           V — REST API
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje V</div>
+        <h2 class="section-title">REST API rute</h2>
+        <p>
+          Backend izlaže sledeće HTTP tačke pristupa. Rute označene sa
+          <span class="route-auth" style="display:inline-block;margin:0 3px">🔐 user</span> zahtevaju validan JWT token, a
+          <span class="route-auth admin" style="display:inline-block;margin:0 3px">⭐ admin</span> zahtevaju i admin ulogu u tokenu. Server proverava token putem <code>authMiddleware</code>, a admin ulogu putem <code>authorizeMiddleware</code> — oba su Express middleware funkcije koje se dodaju pre route handler-a.
+        </p>
+
+        <div class="api-block">
+          <div class="api-block-header">Auth · /api/auth</div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/register</span><span class="route-desc">Registracija novog korisnika</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/login</span><span class="route-desc">Prijava — vraća JWT token</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/logout</span><span class="route-auth">🔐 user</span><span class="route-desc">Beleži odjavu u audit log</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/me</span><span class="route-auth">🔐 user</span><span class="route-desc">Podaci trenutno prijavljenog korisnika</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Timovi · /api/teams</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Timovi kojima korisnik pripada</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Kreiranje novog tima (korisnik postaje owner)</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Detalji tima sa listom članova</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Izmena podataka tima (samo owner)</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Brisanje tima (samo owner, kaskadno)</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/members</span><span class="route-auth">🔐 user</span><span class="route-desc">Dodavanje člana u tim (owner)</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/:id/members/:userId/role</span><span class="route-auth">🔐 user</span><span class="route-desc">Promena uloge člana u timu</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/members/:userId</span><span class="route-auth">🔐 user</span><span class="route-desc">Uklanjanje člana / napuštanje tima</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Projekti · /api/projects</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/team/:teamId</span><span class="route-auth">🔐 user</span><span class="route-desc">Svi projekti tima (filterable)</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Kreiranje projekta unutar tima</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Detalji projekta sa zadacima i tagovima</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Izmena projekta (owner tima)</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Brisanje projekta</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/tags</span><span class="route-auth">🔐 user</span><span class="route-desc">Dodavanje taga projektu</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/tags/:tagId</span><span class="route-auth">🔐 user</span><span class="route-desc">Uklanjanje taga sa projekta</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/watch</span><span class="route-auth">🔐 user</span><span class="route-desc">Počni pratiti projekat</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/watch</span><span class="route-auth">🔐 user</span><span class="route-desc">Prestani pratiti projekat</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Zadaci · /api/tasks</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/project/:projectId</span><span class="route-auth">🔐 user</span><span class="route-desc">Svi zadaci projekta grupisani po statusu</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Kreiranje zadatka unutar projekta</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Detalji zadatka sa komentarima i dodelenima</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Izmena zadatka (naslov, opis, rok, prioritet)</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/:id/status</span><span class="route-auth">🔐 user</span><span class="route-desc">Promena statusa zadatka</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Brisanje zadatka (owner ili kreator)</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/assignees</span><span class="route-auth">🔐 user</span><span class="route-desc">Dodela zadatka korisniku</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/assignees/:userId</span><span class="route-auth">🔐 user</span><span class="route-desc">Uklanjanje dodele</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/comments</span><span class="route-auth">🔐 user</span><span class="route-desc">Dodavanje komentara na zadatak</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/comments/:commentId</span><span class="route-auth">🔐 user</span><span class="route-desc">Brisanje sopstvenog komentara</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Tagovi · /api/tags</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Lista svih dostupnih tagova</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Kreiranje novog taga (globalno)</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Brisanje taga</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Health · /api/health</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-desc">Javni health check (200 OK ako server živi)</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/db</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Status svih DB čvorova (master + slaves)</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/failover</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Ručno pokretanje failover procedure</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Admin · /api/admin</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/users</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Lista svih korisnika sa statistikama</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/users/:id/role</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Promena uloge korisnika</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/teams</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Lista svih timova u sistemu</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/logs</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Kompletni audit log (sa paginacijom)</span></div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           VI — EKRANI
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje VI</div>
+        <h2 class="section-title">Stranice klijentske aplikacije</h2>
+        <div class="screens-grid">
+          <div class="screen-card" style="--card-color: var(--text-dim)">
+            <div class="screen-role">Javno dostupno</div>
+            <ul class="screen-list">
+              <li>Landing page</li>
+              <li>Prijava</li>
+              <li>Registracija</li>
+            </ul>
+          </div>
+          <div class="screen-card" style="--card-color: var(--primary-light)">
+            <div class="screen-role">Prijavljeni korisnik</div>
+            <ul class="screen-list">
+              <li>Dashboard (pregled)</li>
+              <li>Moji timovi</li>
+              <li>Detalji tima + Članovi</li>
+              <li>Projekti tima (Kanban)</li>
+              <li>Detalji projekta</li>
+              <li>Kreiraj / Izmeni projekat</li>
+              <li>Detalji zadatka + Komentari</li>
+              <li>Praćeni projekti</li>
+              <li>Moji zadaci (sve dodele)</li>
+              <li>Podešavanja profila</li>
+            </ul>
+          </div>
+          <div class="screen-card" style="--card-color: var(--accent-amber)">
+            <div class="screen-role">Administrator</div>
+            <ul class="screen-list">
+              <li>Admin Dashboard</li>
+              <li>Svi korisnici + uloge</li>
+              <li>Svi timovi</li>
+              <li>Audit Log</li>
+              <li>Health Dashboard (DB čvorovi)</li>
+              <li>Upravljanje tagovima</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           VII — DEPLOY NA VERCEL
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje VII</div>
+        <h2 class="section-title"> [OPCIONO] Deploy na Vercel i konfiguracija okruženja</h2>
+        <p>
+          Frontend React aplikacija deployuje se na <strong>Vercel</strong> platformu kao statički sajt. Vercel automatski detektuje Vite/CRA projekat, builduje ga i distribuira putem globalnog CDN-a. Backend (Node.js Express server) mora biti deployovan odvojeno na platformi koja podržava long-running servere — preporučeno <strong>Railway</strong> ili <strong>Vercel</strong>, a MySQL baza na <strong>PlanetScale</strong>, <strong>Clever Cloud</strong> ili <strong>Aiven (besplatan)</strong> servisu.
+        </p>
+
+        <div class="subsection-title">VII.1 — Koraci deploymenta</div>
+        <ol class="step-list">
+          <li>Kreirati <code>vercel.json</code> u root-u frontend projekta sa konfiguracijom ruta (SPA redirect: sve rute → <code>index.html</code>)</li>
+          <li>Pushati kod na GitHub repozitorijum i spojiti ga sa Vercel nalogom putem Vercel Dashboard-a</li>
+          <li>U Vercel Dashboard-u postaviti <strong>Environment Variables</strong> — minimalno <code>VITE_API_URL</code> koji pokazuje na URL deployovanog backend-a</li>
+          <li>Deployovati backend na Railway/Render — postaviti sve environment varijable za konekcije ka bazi</li>
+          <li>Pokrenuti MySQL Master i Slave instance (lokalno za razvoj, cloud servis za produkciju)</li>
+          <li>Verifikovati da je replikacija aktivna (<code>SHOW SLAVE STATUS</code> na Slave čvoru mora prikazivati <code>Slave_IO_Running: Yes</code>)</li>
+          <li>Testirati health check endpoint (<code>GET /api/health/db</code>) — mora prikazati sve čvorove kao Healthy</li>
+          <li>Simulirati pad Slave čvora i verifikovati da Round-Robin automatski preskače nedostupni čvor</li>
+        </ol>
+
+        <div class="subsection-title">VII.2 — Environment varijable</div>
+        <p>Sve osetljive vrednosti se nikad ne commituju u kod — čuvaju se isključivo u <code>.env</code> fajlu (lokalno) i u platformskim environment varijablama (produkcija). Frontend koristi samo varijable koje počinju sa <code>VITE_</code>.</p>
+        <div class="env-block">
+          <div class="env-row">
+            <div class="env-key">VITE_API_URL</div>
+            <div class="env-desc">Puna URL adresa backend servera (npr. https://nexushub-api.railway.app) — Frontend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">JWT_SECRET</div>
+            <div class="env-desc">Tajni ključ za potpisivanje JWT tokena — min 32 karaktera, nasumičan string — Backend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">DB_MASTER_HOST</div>
+            <div class="env-desc">Host adresa MySQL Master čvora — Backend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">DB_MASTER_PORT</div>
+            <div class="env-desc">Port MySQL Master čvora (default: 3306) — Backend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">DB_SLAVE1_HOST</div>
+            <div class="env-desc">Host adresa prvog MySQL Slave čvora — Backend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">DB_SLAVE2_HOST</div>
+            <div class="env-desc">Host adresa drugog MySQL Slave čvora — Backend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">DB_USER</div>
+            <div class="env-desc">Korisničko ime za konekciju na MySQL (isti za sve čvorove) — Backend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">DB_PASSWORD</div>
+            <div class="env-desc">Lozinka za MySQL konekciju — Backend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">DB_NAME</div>
+            <div class="env-desc">Naziv baze podataka — Backend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">DB_HEALTH_INTERVAL_MS</div>
+            <div class="env-desc">Interval health check-a u milisekundama (default: 10000) — Backend</div>
+          </div>
+          <div class="env-row">
+            <div class="env-key">PORT</div>
+            <div class="env-desc">Port na kom Express server sluša (default: 3001) — Backend</div>
+          </div>
+        </div>
+        <div class="callout green">
+          <code>.env</code> fajl mora biti dodat u <code>.gitignore</code> pre prvog commita. U repozitorijumu se umesto toga commituje <code>.env.example</code> fajl sa svim ključevima ali bez vrednosti — služi kao dokumentacija za druge programere.
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           VIII — VALIDACIJA
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje VIII</div>
+        <h2 class="section-title">Pravila validacije</h2>
+        <p>
+          Celokupna validacija mora biti implementirana <code>troslojno</code>: <code>klijentska</code> (React + TypeScript) za trenutnu povratnu informaciju korisniku; <code>serverska</code> (validatori podataka) kao jedini pouzdan bezbednosni sloj koji se ne može zaobići; <code>ograničenja baze podataka</code> unutar <code>CREATE TABLE</code> SQL upita.
+        </p>
+        <table class="val-table">
+          <thead>
+            <tr>
+              <th>Polje</th>
+              <th>Pravilo</th>
+              <th>Poruka greške</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>username</code></td><td>3–40 karaktera, samo slova/brojevi/crtica, jedinstven</td><td>„Korisničko ime nije validno ili je zauzeto"</td></tr>
+            <tr><td><code>email</code></td><td>Validan email format, jedinstven u bazi</td><td>„Email je već zauzet"</td></tr>
+            <tr><td><code>password</code></td><td>Min 8 karaktera, jedno veliko slovo, jedan broj</td><td>„Lozinka ne ispunjava uslove"</td></tr>
+            <tr><td><code>team.name</code></td><td>Obavezno, 2–80 karaktera</td><td>„Naziv tima je obavezan (2–80 karaktera)"</td></tr>
+            <tr><td><code>project.name</code></td><td>Obavezno, 2–120 karaktera</td><td>„Naziv projekta je obavezan"</td></tr>
+            <tr><td><code>project.deadline</code></td><td>Mora biti datum u budućnosti</td><td>„Rok mora biti u budućnosti"</td></tr>
+            <tr><td><code>project.status</code></td><td>ENUM: planning, active, on_hold, completed</td><td>„Izaberite validan status"</td></tr>
+            <tr><td><code>task.title</code></td><td>Obavezno, 2–200 karaktera</td><td>„Naslov zadatka je obavezan"</td></tr>
+            <tr><td><code>task.priority</code></td><td>ENUM: low, medium, high, critical</td><td>„Izaberite validan prioritet"</td></tr>
+            <tr><td><code>task.estimated_hours</code></td><td>Decimalni broj, min 0.5, max 500</td><td>„Procena mora biti između 0.5 i 500 sati"</td></tr>
+            <tr><td><code>task_assignees</code></td><td>Korisnik mora biti član tima projekta; bez duplikata</td><td>„Korisnik nije član ovog tima" / „Već je dodat"</td></tr>
+            <tr><td><code>comment.content</code></td><td>Obavezno, 1–2000 karaktera</td><td>„Komentar ne može biti prazan"</td></tr>
+            <tr><td><code>team_members.role</code></td><td>ENUM: owner, member; tačno jedan owner po timu</td><td>„Tim mora imati tačno jednog vlasnika"</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </body>
+</html>

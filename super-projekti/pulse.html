@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseGrid – Projektni Zadatak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --primary: #e11d48;
+        --primary-light: #fb7185;
+        --primary-dim: #9f1239;
+        --secondary: #0ea5e9;
+        --secondary-light: #38bdf8;
+        --navy: #080a0f;
+        --navy-mid: #0d1017;
+        --navy-card: #111520;
+        --navy-card2: #161b28;
+        --text: #e2e8f0;
+        --text-mid: #94a3b8;
+        --text-dim: #3f4a5e;
+        --accent-green: #22c55e;
+        --accent-amber: #f59e0b;
+        --accent-violet: #a78bfa;
+        --accent-teal: #14b8a6;
+        --accent-orange: #f97316;
+        --accent-pink: #ec4899;
+        --accent-sky: #0ea5e9;
+        --accent-lime: #84cc16;
+        --border: rgba(225, 29, 72, 0.13);
+        --border-bright: rgba(225, 29, 72, 0.38);
+        --glass: rgba(255,255,255,0.025);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        background-color: var(--navy);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        line-height: 1.8;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 55% 40% at 0% 0%, rgba(225,29,72,0.13) 0%, transparent 55%),
+          radial-gradient(ellipse 50% 35% at 100% 100%, rgba(14,165,233,0.09) 0%, transparent 55%),
+          radial-gradient(ellipse 40% 50% at 60% 40%, rgba(167,139,250,0.04) 0%, transparent 60%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .page-wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 60px 40px 100px;
+      }
+
+      /* ── HEADER ── */
+      .doc-header {
+        text-align: center;
+        padding: 75px 0 60px;
+        border-bottom: 1px solid var(--border-bright);
+        margin-bottom: 70px;
+        position: relative;
+      }
+
+      .doc-header::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      }
+
+      .doc-label {
+        font-size: 10px;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 26px;
+        font-weight: 600;
+      }
+
+      .logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .logo-icon {
+        width: 62px;
+        height: 62px;
+        background: linear-gradient(135deg, var(--primary) 0%, #f43f5e 100%);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        box-shadow: 0 0 55px rgba(225,29,72,0.4);
+      }
+
+      .doc-title {
+        font-size: clamp(50px, 9vw, 84px);
+        font-weight: 800;
+        letter-spacing: -3px;
+        line-height: 1;
+        background: linear-gradient(135deg, #fff 0%, var(--primary-light) 40%, var(--primary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .doc-subtitle {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text-dim);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-top: 12px;
+        margin-bottom: 36px;
+      }
+
+      .badge-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+      }
+
+      .badge {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 5px 16px;
+        border-radius: 20px;
+        border: 1px solid;
+        letter-spacing: 0.5px;
+      }
+
+      .badge-red    { color: var(--primary-light);   border-color: rgba(225,29,72,0.4);   background: rgba(225,29,72,0.08); }
+      .badge-sky    { color: var(--secondary-light);  border-color: rgba(14,165,233,0.4);  background: rgba(14,165,233,0.08); }
+      .badge-green  { color: var(--accent-green);     border-color: rgba(34,197,94,0.4);   background: rgba(34,197,94,0.08); }
+      .badge-violet { color: var(--accent-violet);    border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.08); }
+      .badge-amber  { color: var(--accent-amber);     border-color: rgba(245,158,11,0.4);  background: rgba(245,158,11,0.08); }
+
+      /* ── DIVIDER ── */
+      .divider { display: flex; align-items: center; gap: 16px; margin: 56px 0; }
+      .divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border-bright), transparent); }
+      .divider-dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 14px rgba(225,29,72,0.7); }
+
+      /* ── SECTION ── */
+      .section { margin-bottom: 62px; animation: fadeUp 0.5s ease both; }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .section:nth-child(2) { animation-delay: 0.04s; }
+      .section:nth-child(3) { animation-delay: 0.08s; }
+      .section:nth-child(4) { animation-delay: 0.12s; }
+      .section:nth-child(5) { animation-delay: 0.16s; }
+      .section:nth-child(6) { animation-delay: 0.20s; }
+      .section:nth-child(7) { animation-delay: 0.24s; }
+      .section:nth-child(8) { animation-delay: 0.28s; }
+      .section:nth-child(9) { animation-delay: 0.32s; }
+
+      .section-number {
+        font-size: 10px;
+        color: var(--primary-dim);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+
+      .section-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: -0.3px;
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .section-title .icon { font-size: 20px; }
+
+      .subsection-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--primary-light);
+        margin: 36px 0 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      p { color: var(--text-mid); margin-bottom: 14px; font-weight: 400; font-size: 15px; }
+      strong { color: var(--text); font-weight: 600; }
+
+      /* ── CALLOUT ── */
+      .callout {
+        border: 1px solid var(--border-bright);
+        border-left: 3px solid var(--primary);
+        background: rgba(225,29,72,0.05);
+        padding: 20px 26px;
+        margin: 20px 0;
+        border-radius: 0 10px 10px 0;
+        font-style: italic;
+        color: var(--text);
+        font-size: 15px;
+        line-height: 1.75;
+      }
+
+      .callout.sky   { border-left-color: var(--secondary); background: rgba(14,165,233,0.05); }
+      .callout.green { border-left-color: var(--accent-green); background: rgba(34,197,94,0.05); }
+      .callout.amber { border-left-color: var(--accent-amber); background: rgba(245,158,11,0.05); }
+      .callout.red   { border-left-color: var(--primary); background: rgba(225,29,72,0.06); }
+
+      /* ── INFO BOX ── */
+      .info-box {
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--secondary-light);
+        background: rgba(14,165,233,0.04);
+        padding: 18px 24px;
+        margin: 20px 0;
+        border-radius: 0 10px 10px 0;
+        font-size: 14px;
+        color: var(--text-mid);
+      }
+
+      /* ── ARCH DIAGRAM ── */
+      .arch-diagram {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--navy-card);
+        padding: 32px;
+        margin: 24px 0;
+      }
+
+      .arch-label {
+        font-size: 10px;
+        color: var(--text-dim);
+        text-align: center;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .arch-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+
+      .arch-node {
+        border: 1px solid;
+        border-radius: 8px;
+        padding: 10px 18px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        min-width: 130px;
+        line-height: 1.5;
+      }
+
+      .arch-node small { font-weight: 400; color: var(--text-dim); display: block; }
+      .arch-node.client  { border-color: rgba(225,29,72,0.5);  color: var(--primary-light);  background: rgba(225,29,72,0.08); }
+      .arch-node.api     { border-color: rgba(245,158,11,0.5);  color: var(--accent-amber);   background: rgba(245,158,11,0.08); }
+      .arch-node.lb      { border-color: rgba(14,165,233,0.5);  color: var(--secondary-light); background: rgba(14,165,233,0.08); }
+      .arch-node.master  { border-color: rgba(34,197,94,0.5);   color: var(--accent-green);   background: rgba(34,197,94,0.08); }
+      .arch-node.slave   { border-color: rgba(14,165,233,0.4);  color: var(--secondary-light); background: rgba(14,165,233,0.06); }
+      .arch-node.slave2  { border-color: rgba(167,139,250,0.4); color: var(--accent-violet);  background: rgba(167,139,250,0.06); }
+
+      .arch-arrow { font-size: 18px; color: var(--text-dim); padding: 0 8px; display: flex; align-items: center; }
+      .arch-db-row { display: flex; gap: 12px; align-items: center; justify-content: center; margin-top: 8px; }
+      .repl-arrow { font-size: 11px; color: var(--accent-green); letter-spacing: 1px; font-weight: 700; }
+
+      /* ── CONCEPT GRID ── */
+      .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+
+      .concept-card {
+        border: 1px solid var(--border);
+        background: var(--glass);
+        padding: 18px 20px;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.25s, background 0.25s;
+      }
+
+      .concept-card:hover { border-color: var(--border-bright); background: rgba(255,255,255,0.04); }
+
+      .concept-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: var(--card-color, var(--primary));
+        opacity: 0.65;
+      }
+
+      .concept-card-term { font-size: 13px; font-weight: 700; color: var(--card-color, var(--primary-light)); margin-bottom: 8px; }
+      .concept-card p { font-size: 13px; margin-bottom: 0; line-height: 1.6; }
+
+      /* ── REQ GRID ── */
+      .req-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 22px; }
+
+      .req-card {
+        border: 1px solid var(--border);
+        background: var(--glass);
+        padding: 22px;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.25s, background 0.25s;
+      }
+
+      .req-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: var(--card-accent, var(--primary));
+        opacity: 0.7;
+      }
+
+      .req-card:hover { border-color: var(--border-bright); background: rgba(255,255,255,0.04); }
+      .req-card-title { font-size: 14px; font-weight: 700; color: var(--card-accent, var(--primary-light)); margin-bottom: 10px; }
+      .req-card p { font-size: 14px; margin-bottom: 0; }
+
+      /* ── M:N CARDS ── */
+      .mn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+
+      .mn-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--navy-card); }
+
+      .mn-header {
+        background: rgba(225,29,72,0.08);
+        padding: 12px 18px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--primary-light);
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .mn-dot { width: 7px; height: 7px; background: var(--mn-color, var(--primary)); border-radius: 50%; }
+
+      .mn-body { padding: 14px 18px; font-size: 13px; color: var(--text-mid); }
+
+      .mn-tables {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+      }
+
+      .mn-tbl { padding: 3px 10px; border-radius: 4px; border: 1px solid; font-weight: 600; }
+      .mn-via { font-size: 10px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; text-align: center; }
+
+      .mn-attrs { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+      .mn-attr {
+        font-size: 11px; padding: 2px 8px; border-radius: 4px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: var(--secondary-light);
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* ── SCREENS ── */
+      .screens-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+
+      .screen-card { border: 1px solid var(--border); padding: 18px; border-radius: 10px; background: var(--glass); }
+
+      .screen-role {
+        font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+        color: var(--card-color, var(--text-dim));
+        margin-bottom: 12px; font-weight: 700;
+      }
+
+      .screen-list { list-style: none; padding: 0; }
+
+      .screen-list li {
+        font-size: 13px; color: var(--text-dim);
+        padding: 4px 0 4px 14px; position: relative;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      .screen-list li:last-child { border-bottom: none; }
+
+      .screen-list li::before {
+        content: '›'; position: absolute; left: 0;
+        color: var(--card-color, var(--text-dim));
+        font-size: 15px; line-height: 1.4;
+      }
+
+      /* ── API ── */
+      .api-block { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+
+      .api-block-header {
+        font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+        color: var(--primary-dim); padding: 10px 18px;
+        background: rgba(225,29,72,0.06);
+        border-bottom: 1px solid var(--border); font-weight: 700;
+      }
+
+      .api-route {
+        display: flex; align-items: center; gap: 12px;
+        padding: 10px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 12px;
+      }
+
+      .api-route:last-child { border-bottom: none; }
+
+      .method {
+        font-size: 10px; font-weight: 700;
+        padding: 3px 8px; border-radius: 4px;
+        min-width: 48px; text-align: center; letter-spacing: 0.5px;
+      }
+
+      .get    { background: rgba(34,197,94,0.12);  color: var(--accent-green); }
+      .post   { background: rgba(14,165,233,0.12); color: var(--secondary-light); }
+      .put    { background: rgba(245,158,11,0.12); color: var(--accent-amber); }
+      .patch  { background: rgba(167,139,250,0.12);color: var(--accent-violet); }
+      .delete { background: rgba(225,29,72,0.12);  color: var(--primary-light); }
+
+      .route-path { color: var(--text); flex: 1; }
+      .route-desc { color: var(--text-dim); font-size: 11px; font-family: 'Inter', sans-serif; white-space: nowrap; }
+
+      .route-auth {
+        font-size: 10px; padding: 2px 8px; border-radius: 10px;
+        background: rgba(167,139,250,0.1); color: var(--accent-violet);
+        border: 1px solid rgba(167,139,250,0.25);
+        white-space: nowrap; font-family: 'Inter', sans-serif; font-weight: 600;
+      }
+
+      .route-auth.admin {
+        background: rgba(245,158,11,0.1); color: var(--accent-amber);
+        border-color: rgba(245,158,11,0.25);
+      }
+
+      /* ── HEALTH STATES ── */
+      .health-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+
+      .health-card { border: 1px solid; border-radius: 10px; padding: 18px; text-align: center; }
+      .health-card.ok   { border-color: rgba(34,197,94,0.4);  background: rgba(34,197,94,0.06); }
+      .health-card.warn { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+      .health-card.fail { border-color: rgba(225,29,72,0.4);  background: rgba(225,29,72,0.06); }
+
+      .health-status { font-size: 24px; margin-bottom: 8px; }
+      .health-label  { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+      .health-card.ok   .health-label { color: var(--accent-green); }
+      .health-card.warn .health-label { color: var(--accent-amber); }
+      .health-card.fail .health-label { color: var(--primary-light); }
+      .health-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+      /* ── VAL TABLE ── */
+      .val-table {
+        width: 100%; border-collapse: collapse; margin-top: 22px;
+        border: 1px solid var(--border); border-radius: 10px; overflow: hidden; font-size: 14px;
+      }
+
+      .val-table th {
+        font-size: 10px; color: var(--primary-light); letter-spacing: 2px;
+        text-transform: uppercase; padding: 12px 18px; text-align: left;
+        background: rgba(225,29,72,0.08);
+        border-bottom: 1px solid var(--border-bright); font-weight: 700;
+      }
+
+      .val-table td {
+        padding: 11px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); color: var(--text-mid);
+      }
+
+      .val-table tr:last-child td { border-bottom: none; }
+      .val-table tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+
+      code {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 12px;
+        background: rgba(225,29,72,0.09); padding: 2px 7px; border-radius: 4px;
+        color: var(--primary-light); border: 1px solid rgba(225,29,72,0.2);
+      }
+
+      ul.prose-list { list-style: none; padding: 0; margin: 14px 0; }
+
+      ul.prose-list li {
+        padding: 6px 0 6px 20px; position: relative;
+        color: var(--text-mid); font-size: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      ul.prose-list li:last-child { border-bottom: none; }
+
+      ul.prose-list li::before {
+        content: '▸'; position: absolute; left: 0;
+        font-size: 10px; top: 11px; color: var(--primary-dim);
+      }
+
+      /* ── STEP LIST ── */
+      .step-list { list-style: none; padding: 0; margin: 16px 0; counter-reset: steps; }
+
+      .step-list li {
+        counter-increment: steps;
+        padding: 13px 16px 13px 52px;
+        position: relative;
+        border: 1px solid var(--border); border-radius: 8px;
+        margin-bottom: 8px; background: var(--glass);
+        color: var(--text-mid); font-size: 14px;
+      }
+
+      .step-list li::before {
+        content: counter(steps);
+        position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+        width: 26px; height: 26px;
+        background: rgba(225,29,72,0.12);
+        border: 1px solid rgba(225,29,72,0.35);
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        font-size: 11px; font-weight: 700; color: var(--primary-light);
+        line-height: 26px; text-align: center;
+      }
+
+      /* ── ENV BLOCK ── */
+      .env-block { background: var(--navy-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 16px 0; }
+
+      .env-row {
+        display: flex; align-items: flex-start;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      }
+
+      .env-row:last-child { border-bottom: none; }
+
+      .env-key {
+        padding: 10px 18px; color: var(--secondary-light);
+        min-width: 280px; border-right: 1px solid rgba(255,255,255,0.04); font-weight: 600;
+      }
+
+      .env-desc { padding: 10px 18px; color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 13px; flex: 1; }
+
+      /* ── BRACKET VISUAL ── */
+      .bracket-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+
+      .bracket-match {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 16px;
+        background: var(--navy-card);
+        font-size: 13px;
+        text-align: center;
+        min-width: 100px;
+      }
+
+      .bracket-match .bm-round {
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .bracket-match .bm-teams {
+        font-size: 12px;
+        color: var(--text-mid);
+        font-weight: 600;
+      }
+
+      .bracket-match .bm-score {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--primary-light);
+        margin-top: 4px;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .bracket-arrow { font-size: 20px; color: var(--text-dim); }
+
+      /* ── FOOTER ── */
+      .doc-footer {
+        text-align: center; padding: 50px 0 20px;
+        border-top: 1px solid var(--border); margin-top: 60px;
+      }
+
+      .footer-logo {
+        font-size: 32px; font-weight: 800; letter-spacing: -2px;
+        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        margin-bottom: 12px;
+      }
+
+      .footer-ornament { font-size: 10px; letter-spacing: 5px; color: var(--text-dim); text-transform: uppercase; font-weight: 600; }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 700px) {
+        .page-wrap { padding: 36px 18px 80px; }
+        .screens-grid { grid-template-columns: 1fr 1fr; }
+        .concept-grid, .mn-grid { grid-template-columns: 1fr; }
+        .health-grid { grid-template-columns: 1fr; }
+        .api-route { flex-wrap: wrap; }
+        .env-key { min-width: 0; width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .env-row { flex-direction: column; }
+      }
+
+      @media (max-width: 480px) {
+        .screens-grid { grid-template-columns: 1fr; }
+        .req-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrap">
+
+      <!-- HEADER -->
+      <header class="doc-header">
+        <div class="doc-label">osnove · distribuiranog · programiranja </div>
+        <h1 class="doc-title">PulseGrid</h1>
+        <div class="doc-subtitle">Distribuirana platforma za organizaciju esports turnira</div>
+       
+      </header>
+
+      <!-- ═══════════════════════════
+           I — OPIS PROJEKTA
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje I</div>
+        <h2 class="section-title">Opis projekta</h2>
+        <p>
+          <code>PulseGrid</code> je distribuirana fullstack web aplikacija za organizaciju i praćenje esports turnira. Aplikacija ima deo koji korisnik vidi i koristi u pretraživaču (<em>frontend</em> — React + TypeScript) i serverski deo koji radi kao REST API, obrađuje zahteve i podatke čuva u MySQL bazi podataka sa replikacijom (<em>backend</em> — Node.js + Express + mysql2).
+        </p>
+        <div class="callout">
+          „PulseGrid funkcioniše kao kombinacija Battlefy-ja i Challonge-a — organizatori kreiraju turnire za konkretne igre, igrači formiraju timove i prijavljuju se na turnire, a sistem automatski generiše raspored mečeva u eliminacionom formatu. Svaki igrač može biti u više timova i prijaviti se na više turnira. Sistem je distribuiran — baza podataka radi u Master-Slave replikaciji sa automatskim failoverom i balansiranjem čitanja između replika."
+        </div>
+
+        <div class="subsection-title">I.1 — Tehničke karakteristike sistema</div>
+        <p>
+          U tehničkom smislu, ovo je <code>CRUD sistem sa autentifikacijom, hijerarhijom uloga i distribuiranom bazom podataka</code>. Sistem obuhvata četiri M:N relacije između ključnih entiteta. Kritična komponenta je modul <code>db.ts</code> koji upravljanja konekcijama ka bazi i podržava replikaciju, health check i failover. Frontend je deployovan kao statički sajt.
+        </p>
+
+        <div class="subsection-title">I.2 — Arhitektura sistema</div>
+        <div class="arch-diagram">
+          <div class="arch-label">Klijentski sloj</div>
+          <div class="arch-row">
+            <div class="arch-node client">React + TypeScript<br><small>Vercel CDN</small></div>
+          </div>
+          <div class="arch-row" style="margin:8px 0;">
+            <div style="font-size:22px;color:var(--primary-dim);text-align:center;width:100%;">↕ HTTPS / REST API</div>
+          </div>
+          <div class="arch-label">Serverski sloj</div>
+          <div class="arch-row">
+            <div class="arch-node api">Node.js Express API<br><small>JWT Middleware · RBAC</small></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-node lb">DB Router / Load Balancer<br><small>Reads → Slaves · Writes → Master</small></div>
+          </div>
+          <div class="arch-row" style="margin:8px 0;">
+            <div style="font-size:22px;color:var(--text-dim);text-align:center;width:100%;">↕ mysql2 pool</div>
+          </div>
+          <div class="arch-label">Sloj podataka — MySQL Master-Slave replikacija</div>
+          <div class="arch-db-row">
+            <div class="arch-node master">MySQL Master<br><small>Čitanje + Pisanje</small></div>
+            <div class="repl-arrow">──REPL──▶</div>
+            <div class="arch-node slave">MySQL Slave 1<br><small>Samo čitanje</small></div>
+            <div class="repl-arrow">──REPL──▶</div>
+            <div class="arch-node slave2">MySQL Slave 2<br><small>Samo čitanje</small></div>
+          </div>
+        </div>
+
+        <div class="subsection-title">I.3 — Korisničke uloge</div>
+        <div class="req-grid">
+          <div class="req-card" style="--card-accent: var(--text-dim)">
+            <div class="req-card-title">👁 Gost (neregistrovani)</div>
+            <p>Može pregledati aktivne turnire i javne profile timova. Ne može se prijavljivati na turnire, kreirati timove niti pratiti mečeve.</p>
+          </div>
+          <div class="req-card" style="--card-accent: var(--secondary-light)">
+            <div class="req-card-title">🎮 Igrač (registrovani korisnik)</div>
+            <p>Ima sopstveni nalog i gamer profil. Može kreirati timove, biti dodat u tuđe timove, prijavljivati timove na turnire i pratiti napredak svojih mečeva.</p>
+          </div>
+          <div class="req-card" style="--card-accent: var(--accent-amber)">
+            <div class="req-card-title">⭐ Administrator</div>
+            <p>Ima globalni pristup. Kreira i upravlja turnirima i igrama u katalogu, generiše raspored mečeva, upravlja korisnicima i prati sistemski log i zdravlje čvorova baze.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           II — FUNKCIONALNI ZAHTEVI
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje II</div>
+        <h2 class="section-title">Funkcionalni zahtevi</h2>
+
+        <div class="subsection-title">II.1 — Registracija i prijava (Autentifikacija)</div>
+        <p>
+          Autentifikacija je proces kojim sistem <code>proverava identitet korisnika</code>. Korisnik se registruje, unosi lozinku koja se čuva <code>heširana u bazi podataka</code> korišćenjem <code>bcrypt</code> biblioteke. Prilikom uspešne prijave, server generiše i vraća <code>JSON Web Token (JWT)</code> koji klijent čuva u <code>localStorage</code> pretraživača putem <code>useAuth</code> hook-a unutar autentifikacionog kontekstualnog prostora.
+        </p>
+        <ul class="prose-list">
+          <li>Forma za registraciju sadrži: <strong>korisničko ime (gamer tag), pravo ime, email, lozinku i profilnu sliku</strong> (base64 string ili binarna datoteka putem multer biblioteke)</li>
+          <li>Prijava proverava kredencijale na serveru i pri uspehu vraća JWT token koji se čuva u <code>localStorage</code>; pri svakom sledećem učitavanju token se čita i korisnik ostaje prijavljen</li>
+          <li>Odjava briše token iz <code>localStorage</code> i šalje <code>POST /api/auth/logout</code> koji beleži odjavu u evidenciju događaja (audit)</li>
+          <li>Zaštićene rute nisu dostupne bez važećeg tokena — korisnik se automatski preusmerava na <code>/login</code></li>
+          <li>Validacija svakog polja mora biti implementirana i na klijentskoj (React) i na serverskoj strani (validatori podataka)</li>
+        </ul>
+        <div class="info-box">
+         JWT token sadrži enkodovane podatke — <code>user_id</code>, <code>gamer_tag</code> i <code>role</code>. Server verifikuje token pri svakom zahtevu putem <code>authMiddleware</code>. Nikad ne čuvati osetljive podatke unutar JWT payload-a.
+        </div>
+
+        <div class="subsection-title">II.2 — Katalog igara (javno dostupno)</div>
+        <p>
+          Administrator popunjava globalni katalog igara (<em>games</em>) koje platforma podržava — npr. League of Legends, Valorant, CS2, Dota 2, Genshin Impact. Svaka igra ima naziv, logotip, žanr i maksimalan broj igrača po timu. Turniri se kreiraju za konkretnu igru (strani ključ <code>game_id</code>).
+        </p>
+        <ul class="prose-list">
+          <li>Javna stranica sa svim igrama i brojem aktivnih turnira po igri</li>
+          <li>Klik na igru filtrira prikaz turnira samo na tu igru — frontend logika bez poziva ka serveru</li>
+          <li>Administrator dodaje, menja i briše igre iz kataloga (briše se samo ako nema turnira za tu igru)</li>
+        </ul>
+
+        <div class="subsection-title">II.3 — Upravljanje timovima</div>
+        <p>
+          Igrač može kreirati tim i postati njegov kapiten (<em>captain</em>), ili biti pozvan u tuđi tim kao član (<em>member</em>). Ovo je <strong>prva M:N relacija</strong> — jedan igrač može biti u više timova, a jedan tim može imati više igrača. Vezna tabela <code>team_members</code> sadrži atribut <code>role</code> (captain / member) i <code>joined_at</code>.
+        </p>
+        <ul class="prose-list">
+          <li>Kreiranje tima sa nazivom, tagom (kratkim identifikatorom poput "TSM"), logotipom i opisom</li>
+          <li>Kapiten tima može slati pozivnice drugim igračima (pretraga po gamer tagu)</li>
+          <li>Pozvani igrač prima obaveštenje i može prihvatiti ili odbiti pozivnicu</li>
+          <li>Kapiten može ukloniti člana iz tima ili preneti kapitenstvo drugom igraču</li>
+          <li>Igrač može napustiti tim (ne može napustiti tim čiji je kapiten dok ne prenese kapitenstvo)</li>
+          <li>Brisanje tima povlači odjavu sa svih turnira na koje je tim prijavljen</li>
+        </ul>
+
+        <div class="subsection-title">II.4 — Turniri i prijave</div>
+        <p>
+          Administrator kreira turnire koji su vezani za konkretnu igru. Tim može biti prijavljen na jedan ili više turnira — ovo je <strong>druga M:N relacija</strong>. Vezna tabela <code>tournament_registrations</code> sadrži atribute: <code>registered_at</code>, <code>status</code> (pending / confirmed / disqualified) i <code>seed</code> (startni broj u rasporedu).
+        </p>
+        <ul class="prose-list">
+          <li>Javna stranica svih turnira sa filterima po igri, statusu i formatu</li>
+          <li>Detalji turnira: naziv, igra, format (<em>single elimination / double elimination / round robin</em>), maksimalan broj timova, rok za prijavu, nagradni fond i status turnira</li>
+          <li>Kapiten tima može prijaviti tim na turnir ako: rok nije istekao, tim ima minimalan broj članova i tim već nije prijavljen</li>
+          <li>Administrator potvrđuje ili odbija prijave timova i može diskvalifikovati tim tokom turnira</li>
+          <li>Administrator može zaključati prijave i pokrenuti generisanje rasporeda mečeva</li>
+        </ul>
+
+        <div class="subsection-title">II.5 — Mečevi i rezultati</div>
+        <p>
+          Meč (<em>match</em>) se generiše između dva tima u okviru turnira. Igrači koji su u timu mogu biti direktno dodeljeni konkretnom meču kao aktivni učesnici — ovo je <strong>treća M:N relacija</strong>. Vezna tabela <code>match_players</code> beleži koji igrači su nastupili u kom meču, sa atributom <code>performance_notes</code> (opcioni tekst kapetena).
+        </p>
+        <ul class="prose-list">
+          <li>Prikaz svih mečeva turnira u obliku bracket dijagrama (vizuelni prikaz eliminacionog stabla, implementiran kao frontend komponenta)</li>
+          <li>Administrator unosi rezultat meča (skor tipa 2:1, 3:0 i sl.) i pobednički tim automatski napreduje u sledeću rundu</li>
+          <li>Kapiten može označiti koji igrači iz tima nastupaju u konkretnom meču (iz <code>match_players</code> vezne tabele)</li>
+          <li>Stranica detalja meča prikazuje oba tima, nastupajuće igrače i rezultat</li>
+          <li>Filtriranje mečeva po rundi, statusu (scheduled / ongoing / completed) i timu — frontend logika</li>
+        </ul>
+
+        <div class="subsection-title">II.6 — Praćenje turnira (Watch List)</div>
+        <p>
+          Registrovani igrač može dodati bilo koji aktivni turnir na svoju listu praćenja, čak i ako nije učesnik — ovo je <strong>četvrta M:N relacija</strong>. Vezna tabela <code>user_watchlist</code> sa atributom <code>added_at</code>. Na dashboardu korisnik vidi sve turnire koje prati sa najnovijim rezultatima.
+        </p>
+        <ul class="prose-list">
+          <li>Dugme „Prati" / „Otprati" na stranici detalja svakog turnira</li>
+          <li>Dashboard sekcija „Praćeni turniri" prikazuje najnovije mečeve i rezultate iz praćenih turnira</li>
+          <li>Uklanjanje turnira sa liste praćenja ne utiče na prijavu tima na turnir</li>
+        </ul>
+
+        <div class="subsection-title">II.7 — Administrativni panel</div>
+        <p>
+          Dostupan isključivo korisnicima sa ulogom <code>admin</code>. Pokušaj pristupa od strane korisnika mora biti blokiran i na klijentskoj i na serverskoj strani upotrebom mehanizma <code>zaštićenih ruta/auth middleware</code>
+        </p>
+        <ul class="prose-list">
+          <li>Kreiranje i upravljanje turnirima — naziv, igra, format, maksimalan broj timova, datumi, nagradni fond</li>
+          <li>Upravljanje katalogom igara (dodavanje, izmena, brisanje)</li>
+          <li>Pregled svih prijava timova, potvrđivanje i diskvalifikacija</li>
+          <li>Generisanje rasporeda mečeva za turnir (nasumično seedovanje ili po rangu)</li>
+          <li>Unos rezultata mečeva i napredovanje pobednika u sledeću rundu</li>
+          <li>Pregled svih korisnika sa opcijom promene uloge</li>
+          <li><strong>Health Dashboard</strong> — pregled zdravlja svih čvorova baze (master + slave replike) u realnom vremenu</li>
+          <li>Pregled kompletnog <code>audit loga</code> aktivnosti sa paginacijom</li>
+        </ul>
+
+        <div class="subsection-title">II.8 — Pregled funkcionalnosti po ulogama</div>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--text-dim)">
+            <div class="concept-card-term">👁 Gost — može</div>
+            <p>Pregledati listu turnira, katalog igara, javne profile timova, detalje turnira i bracket dijagram.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--text-dim)">
+            <div class="concept-card-term">👁 Gost — ne može</div>
+            <p>Kreirati timove, prijavljivati se na turnire, pratiti turnire niti pristupiti bilo kojoj zaštićenoj stranici.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--secondary-light)">
+            <div class="concept-card-term">🎮 Igrač — može</div>
+            <p>Kreirati timove i upravljati članovima, prijavljivati timove na turnire, pratiti turnire, označavati nastupajuće igrače u mečevima, upravljati watchlist-om.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--secondary-light)">
+            <div class="concept-card-term">🎮 Igrač — ne može</div>
+            <p>Pristupiti admin panelu, unositi rezultate mečeva, kreirati ili brisati turnire, upravljati igrama u katalogu.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">⭐ Admin — može</div>
+            <p>Sve što igrač može i dodatno: upravljati turnirima i igrama, potvrđivati prijave, unositi rezultate, generisati raspored, upravljati korisnicima, pregledati health dashboard i audit log.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">⭐ Admin — ne može</div>
+            <p>Direktno menjati składove i interne podatke timova — to ostaje u nadležnosti kapetena.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           III — M:N RELACIJE
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje III</div>
+        <h2 class="section-title">M:N relacije u bazi podataka</h2>
+        <p>
+          Sistem sadrži četiri M:N relacije. Svaka se realizuje posebnom veznom tabelom sa stranim ključevima prema obe strane relacije i opcionim dodatnim atributima koji opisuju tu vezu. Vezne tabele nisu puke spojnice — svaka nosi podatke koji imaju semantičko značenje u domenu esports turnira.
+        </p>
+        <div class="mn-grid">
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--secondary-light)"></div>
+              M:N Relacija 1 — Igrači ↔ Timovi
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--secondary-light);border-color:rgba(14,165,233,0.4)">users</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--secondary-light);border-color:rgba(14,165,233,0.4)">teams</span>
+              </div>
+              <div class="mn-via">Vezna tabela: team_members</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">role ENUM('captain','member')</span>
+                <span class="mn-attr">joined_at DATETIME</span>
+              </div>
+              <p style="margin-top:10px">Jedan igrač može biti u više timova (npr. u različitim igrama), a jedan tim može imati više igrača. Atribut <code>role</code> određuje da li je igrač kapiten ili običan član.</p>
+            </div>
+          </div>
+
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--primary-light)"></div>
+              M:N Relacija 2 — Timovi ↔ Turniri
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--primary-light);border-color:rgba(225,29,72,0.4)">teams</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--primary-light);border-color:rgba(225,29,72,0.4)">tournaments</span>
+              </div>
+              <div class="mn-via">Vezna tabela: tournament_registrations</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">registered_at DATETIME</span>
+                <span class="mn-attr">status ENUM('pending','confirmed','disqualified')</span>
+                <span class="mn-attr">seed INT NULL</span>
+              </div>
+              <p style="margin-top:10px">Tim može biti prijavljen na više turnira, a turnir može imati više prijavljenih timova. Atribut <code>seed</code> se popunjava tek kada admin generiše raspored.</p>
+            </div>
+          </div>
+
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--accent-violet)"></div>
+              M:N Relacija 3 — Igrači ↔ Mečevi
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--accent-violet);border-color:rgba(167,139,250,0.4)">users</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--accent-violet);border-color:rgba(167,139,250,0.4)">matches</span>
+              </div>
+              <div class="mn-via">Vezna tabela: match_players</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">team_id INT (FK)</span>
+                <span class="mn-attr">performance_notes TEXT NULL</span>
+              </div>
+              <p style="margin-top:10px">Igrač može nastupiti u više mečeva, a jedan meč može imati više nastupajućih igrača. Atribut <code>team_id</code> označava za koji tim je igrač nastupio u tom meču.</p>
+            </div>
+          </div>
+
+          <div class="mn-card">
+            <div class="mn-header">
+              <div class="mn-dot" style="--mn-color: var(--accent-amber)"></div>
+              M:N Relacija 4 — Igrači ↔ Turniri (praćenje)
+            </div>
+            <div class="mn-body">
+              <div class="mn-tables">
+                <span class="mn-tbl" style="color:var(--accent-amber);border-color:rgba(245,158,11,0.4)">users</span>
+                <span style="color:var(--text-dim);font-size:16px">⟷</span>
+                <span class="mn-tbl" style="color:var(--accent-amber);border-color:rgba(245,158,11,0.4)">tournaments</span>
+              </div>
+              <div class="mn-via">Vezna tabela: user_watchlist</div>
+              <div class="mn-attrs">
+                <span class="mn-attr">added_at DATETIME</span>
+              </div>
+              <p style="margin-top:10px">Korisnik može pratiti više turnira (i kao gledalac, ne samo kao učesnik). Jedan turnir može imati više pratilaca. Potpuno odvojena relacija od prijave tima na turnir.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           IV — REPLIKACIJA I FAILOVER
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje IV</div>
+        <h2 class="section-title">Replikacija, Load Balancing i Failover</h2>
+        <p>
+          Ovo poglavlje opisuje distribuiranu komponentu sistema — upravljanje konekcijama ka MySQL bazi podataka u scenariju sa jednim Master čvorom i dva Slave čvora. Celokupna logika implementirana je u modulu <code>db.ts</code> na serverskoj strani.
+        </p>
+        <div class="callout amber">
+       <strong>Sve operacije pisanja (INSERT, UPDATE, DELETE) uvek idu isključivo na Master</strong>. Operacije čitanja (SELECT) distribuiraju se između dostupnih Slave čvorova radi ravnomerne raspodele opterećenja. Ako su oba Slave čvora nedostupna, čitanje pada na Master kao poslednju liniju odbrane.
+        </div>
+
+        <div class="subsection-title">IV.1 — Master-Slave replikacija</div>
+        <p>
+          MySQL Master-Slave replikacija je mehanizam gde Master čvor beleži sve promene u <code>binary log</code> fajl, a Slave čvorovi kontinuirano čitaju taj log i primenjuju iste promene na sebi. Iz ugla aplikacije, replikacija je transparentna — aplikacija samo koristi već postavljene čvorove dodeljujući im odgovarajuće upite.
+        </p>
+        <p>
+          U <code>db.ts</code> modulu definišu se tri odvojena <code>mysql2</code> connection pool-a — po jedan za svaki čvor. Svaki pool ima definisan <code>host</code>, <code>port</code>, <code>user</code>, <code>password</code> i <code>database</code> koji se čitaju isključivo iz environment varijabli.
+        </p>
+
+        <div class="subsection-title">IV.2 — Load Balancing između Slave čvorova</div>
+        <p>
+          Load balancing implementirati kao <code>Round-Robin</code> algoritam nad listom zdravih Slave čvorova. Modul čuva interni brojač koji pri svakom zahtevu za čitanje bira sledeći Slave u nizu (kružno). Ako je Slave označen kao nezdrav, preskače se i bira sledeći zdravi.
+        </p>
+        <ul class="prose-list">
+          <li>Implementirati funkciju <code>getReadConnection(): Pool</code> — vraća pool zdravog Slave čvora prema Round-Robin logici, ili Master ako nema zdravih Slave-ova</li>
+          <li>Implementirati funkciju <code>getWriteConnection(): Pool</code> — uvek vraća Master pool</li>
+          <li>Svaki Express route handler mora koristiti ispravnu funkciju — <code>GET</code> rute koriste <code>getReadConnection()</code>, sve ostale koriste <code>getWriteConnection()</code></li>
+        </ul>
+
+        <div class="subsection-title">IV.3 — Health Check sistem</div>
+        <p>
+          Implementirati kao <code>setInterval</code> koji se izvršava svakih <strong>10 sekundi</strong> i šalje <code>SELECT 1</code> upit svakom čvoru. Svaki čvor ima interno stanje koje se ažurira na osnovu rezultata.
+        </p>
+        <div class="health-grid">
+          <div class="health-card ok">
+            <div class="health-status">✅</div>
+            <div class="health-label">Healthy</div>
+            <div class="health-desc">Čvor odgovara na <code>SELECT 1</code> unutar timeout-a. Uključen u pool za distribuciju zahteva.</div>
+          </div>
+          <div class="health-card warn">
+            <div class="health-status">⚠️</div>
+            <div class="health-label">Degraded</div>
+            <div class="health-desc">Čvor odgovara, ali sa kašnjenjem iznad praga (>500ms). Koristi se samo ako nema healthy čvorova.</div>
+          </div>
+          <div class="health-card fail">
+            <div class="health-status">❌</div>
+            <div class="health-label">Unreachable</div>
+            <div class="health-desc">Čvor ne odgovara. Isključen iz pool-a — zahtevi se ne rutiraju na njega dok health check ne potvrdi oporavak.</div>
+          </div>
+        </div>
+        <p>
+          Stanje svih čvorova čuva se u memoriji servera i izlaže kroz <code>GET /api/health/db</code> endpoint koji Admin panel konzumira za prikaz Health Dashboard-a u realnom vremenu.
+        </p>
+
+        <div class="subsection-title">IV.4 — Automatski Failover</div>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--secondary-light)">
+            <div class="concept-card-term">Slave Failover (čitanje)</div>
+            <p>Kada Slave čvor postane <em>Unreachable</em>, health check ga označava kao nedostupnog. Sledeći <code>getReadConnection()</code> poziv ga automatski preskače. Ako nijedan Slave nije dostupan, čitanje se rutira na Master.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--primary-light)">
+            <div class="concept-card-term">Master Failover (pisanje)</div>
+            <p>Kada Master postane nedostupan, health check to detektuje. Automatski se promoviše Slave 1 u novu Master ulogu i svi write zahtevi se preusmeravaju. Tokom tranzicije API vraća HTTP <code>503</code>. Procedura se loguje u tabelu <code>audits</code>.</p>
+          </div>
+        </div>
+        <div class="callout red">
+          <strong>Važno:</strong> Tokom Master failovera postoji kratak prozor u kom pisanje nije moguće. Aplikacija mora ovaj slučaj da obradi elegantno: API vraća <code>503 Service Unavailable</code> sa odgovarajućom porukom dok failover nije završen. Ne sme doći do gubitka podataka.
+        </div>
+
+        <div class="subsection-title">IV.5 — Struktura db.ts modula</div>
+        <ul class="prose-list">
+          <li><code>getReadConnection()</code> — Round-Robin selekcija zdravog Slave-a, fallback na Master</li>
+          <li><code>getWriteConnection()</code> — uvek vraća Master pool</li>
+          <li><code>getHealthStatus()</code> — TypeScript objekat sa stanjem svakog čvora</li>
+          <li><code>startHealthCheck(interval: number)</code> — pokretanje periodičnog <code>SELECT 1</code> ciklusa</li>
+          <li><code>promoteSlaveToMaster(slaveIndex: number)</code> — automatsko ili ručno promovisanje Slave-a u Master</li>
+        </ul>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           V — REST API
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje V</div>
+        <h2 class="section-title"> REST API rute</h2>
+        <p>
+          Backend izlaže sledeće HTTP tačke pristupa. Rute označene sa
+          <span class="route-auth" style="display:inline-block;margin:0 3px">🔐 user</span> zahtevaju validan JWT token, a
+          <span class="route-auth admin" style="display:inline-block;margin:0 3px">⭐ admin</span> zahtevaju i admin ulogu. Server proverava token putem <code>authMiddleware</code>, a admin ulogu putem <code>authorizeMiddleware</code> — oba su Express middleware funkcije koje se dodaju pre route handler-a.
+        </p>
+
+        <div class="api-block">
+          <div class="api-block-header">Auth · /api/auth</div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/register</span><span class="route-desc">Registracija novog igrača</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/login</span><span class="route-desc">Prijava — vraća JWT token</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/logout</span><span class="route-auth">🔐 user</span><span class="route-desc">Beleži odjavu u audit log</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/me</span><span class="route-auth">🔐 user</span><span class="route-desc">Podaci trenutno prijavljenog korisnika</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Igre · /api/games</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-desc">Lista svih igara sa brojem aktivnih turnira</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-desc">Detalji igre</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Dodaj igru u katalog</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Izmeni igru</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Briši igru (samo bez turnira)</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Timovi · /api/teams</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Timovi čiji je korisnik član</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Kreiranje tima (korisnik postaje kapiten)</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-desc">Javni profil tima sa članovima</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Izmena podataka tima (samo kapiten)</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Brisanje tima (samo kapiten)</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/invite</span><span class="route-auth">🔐 user</span><span class="route-desc">Slanje pozivnice igraču (kapiten)</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/invite/respond</span><span class="route-auth">🔐 user</span><span class="route-desc">Prihvatanje ili odbijanje pozivnice</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/:id/members/:userId/role</span><span class="route-auth">🔐 user</span><span class="route-desc">Prenos kapitetstva</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/members/:userId</span><span class="route-auth">🔐 user</span><span class="route-desc">Uklanjanje člana / napuštanje tima</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Turniri · /api/tournaments</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-desc">Lista svih turnira (filterable: game, status, format)</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-desc">Detalji turnira sa prijavama i mečevima</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Kreiranje turnira</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Izmena turnira</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Brisanje turnira</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/register</span><span class="route-auth">🔐 user</span><span class="route-desc">Prijava tima na turnir (kapiten)</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/register/:teamId</span><span class="route-auth">🔐 user</span><span class="route-desc">Odjava tima sa turnira</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/:id/registrations/:teamId</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Potvrda / diskvalifikacija prijave</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/generate-bracket</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Generisanje rasporeda mečeva</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/watch</span><span class="route-auth">🔐 user</span><span class="route-desc">Dodaj turnir na watchlist</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/watch</span><span class="route-auth">🔐 user</span><span class="route-desc">Ukloni turnir sa watchlist-a</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Mečevi · /api/matches</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/tournament/:tournamentId</span><span class="route-desc">Svi mečevi turnira (bracket)</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-desc">Detalji meča sa nastupajućim igračima</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/:id/result</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Unos rezultata i napredovanje pobednika</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/:id/players</span><span class="route-auth">🔐 user</span><span class="route-desc">Dodaj nastupajuće igrače (kapiten)</span></div>
+          <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id/players/:userId</span><span class="route-auth">🔐 user</span><span class="route-desc">Izmena performance_notes igrača</span></div>
+          <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id/players/:userId</span><span class="route-auth">🔐 user</span><span class="route-desc">Ukloni igrača iz nastupa (kapiten)</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Health · /api/health</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-desc">Javni health check (200 OK ako server živi)</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/db</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Status svih DB čvorova sa latencijom</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/failover</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Ručno pokretanje failover procedure</span></div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Admin · /api/admin</div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/users</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Lista svih korisnika sa statistikama</span></div>
+          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/users/:id/role</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Promena uloge korisnika</span></div>
+          <div class="api-route"><span class="method get">GET</span><span class="route-path">/logs</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Audit log sa paginacijom</span></div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           VI — EKRANI
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje VI</div>
+        <h2 class="section-title">Stranice klijentske aplikacije</h2>
+        <div class="screens-grid">
+          <div class="screen-card" style="--card-color: var(--text-dim)">
+            <div class="screen-role">Javno dostupno</div>
+            <ul class="screen-list">
+              <li>Landing page</li>
+              <li>Lista turnira sa filterima</li>
+              <li>Detalji turnira + Bracket</li>
+              <li>Katalog igara</li>
+              <li>Javni profil tima</li>
+              <li>Prijava / Registracija</li>
+            </ul>
+          </div>
+          <div class="screen-card" style="--card-color: var(--secondary-light)">
+            <div class="screen-role">Prijavljeni igrač</div>
+            <ul class="screen-list">
+              <li>Dashboard (pregled)</li>
+              <li>Moji timovi</li>
+              <li>Detalji tima + Upravljanje</li>
+              <li>Prijava na turnir</li>
+              <li>Nastup u mečevima</li>
+              <li>Watchlist (praćeni turniri)</li>
+              <li>Moji mečevi (sve dodele)</li>
+              <li>Podešavanja profila</li>
+            </ul>
+          </div>
+          <div class="screen-card" style="--card-color: var(--accent-amber)">
+            <div class="screen-role">Administrator</div>
+            <ul class="screen-list">
+              <li>Admin Dashboard</li>
+              <li>Upravljanje turnirima</li>
+              <li>Kreiranje turnira</li>
+              <li>Upravljanje prijavama</li>
+              <li>Unos rezultata mečeva</li>
+              <li>Katalog igara</li>
+              <li>Svi korisnici + uloge</li>
+              <li>Health Dashboard</li>
+              <li>Audit Log</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           VII — DEPLOY
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje VII</div>
+        <h2 class="section-title"> [OPCIONO] Deploy na Vercel i konfiguracija okruženja</h2>
+        <p>
+          Frontend React aplikacija deployuje se na <strong>Vercel</strong> platformu kao statički sajt. Vercel automatski detektuje Vite/CRA projekat, builduje ga i distribuira putem globalnog CDN-a. Backend (Node.js Express server) mora biti deployovan odvojeno na platformi koja podržava long-running servere — preporučeno <strong>Railway</strong> ili <strong>Vercel</strong>, a MySQL baza na <strong>PlanetScale</strong>, <strong>Clever Cloud</strong> ili <strong>Aiven (besplatan)</strong> servisu.
+        </p>
+        <div class="subsection-title">VII.1 — Koraci deploymenta</div>
+        <ol class="step-list">
+          <li>Kreirati <code>vercel.json</code> u root-u frontend projekta sa SPA konfiguracijom — sve rute preusmeri na <code>index.html</code></li>
+          <li>Pushati kod na GitHub i spojiti repozitorijum sa Vercel nalogom putem Vercel Dashboard-a</li>
+          <li>U Vercel Dashboard-u postaviti environment varijablu <code>VITE_API_URL</code> koja pokazuje na URL deployovanog backend-a</li>
+          <li>Deployovati backend na Railway/Render i postaviti sve environment varijable za konekcije ka bazi</li>
+          <li>Pokrenuti MySQL Master i oba Slave čvora (lokalno za razvoj, cloud servis za produkciju)</li>
+          <li>Verifikovati replikaciju: <code>SHOW SLAVE STATUS</code> na oba Slave čvora mora prikazati <code>Slave_IO_Running: Yes</code></li>
+          <li>Testirati health check endpoint (<code>GET /api/health/db</code>) — svi čvorovi moraju biti Healthy</li>
+          <li>Simulirati pad Slave čvora i verifikovati da Round-Robin automatski preskače nedostupni čvor bez greške na klijentu</li>
+        </ol>
+
+        <div class="subsection-title">VII.2 — Environment varijable</div>
+        <p>Sve osetljive vrednosti čuvaju se isključivo u <code>.env</code> fajlu lokalno i u platformskim environment varijablama u produkciji. U repozitorijumu se commituje samo <code>.env.example</code> sa ključevima bez vrednosti.</p>
+        <div class="env-block">
+          <div class="env-row"><div class="env-key">VITE_API_URL</div><div class="env-desc">URL backend servera (npr. https://pulsegrid-api.railway.app) — Frontend</div></div>
+          <div class="env-row"><div class="env-key">JWT_SECRET</div><div class="env-desc">Tajni ključ za potpisivanje JWT tokena — min 32 karaktera — Backend</div></div>
+          <div class="env-row"><div class="env-key">DB_MASTER_HOST</div><div class="env-desc">Host adresa MySQL Master čvora — Backend</div></div>
+          <div class="env-row"><div class="env-key">DB_MASTER_PORT</div><div class="env-desc">Port MySQL Master čvora (default: 3306) — Backend</div></div>
+          <div class="env-row"><div class="env-key">DB_SLAVE1_HOST</div><div class="env-desc">Host adresa prvog MySQL Slave čvora — Backend</div></div>
+          <div class="env-row"><div class="env-key">DB_SLAVE2_HOST</div><div class="env-desc">Host adresa drugog MySQL Slave čvora — Backend</div></div>
+          <div class="env-row"><div class="env-key">DB_USER</div><div class="env-desc">Korisničko ime za MySQL konekciju (isto za sve čvorove) — Backend</div></div>
+          <div class="env-row"><div class="env-key">DB_PASSWORD</div><div class="env-desc">Lozinka za MySQL konekciju — Backend</div></div>
+          <div class="env-row"><div class="env-key">DB_NAME</div><div class="env-desc">Naziv baze podataka — Backend</div></div>
+          <div class="env-row"><div class="env-key">DB_HEALTH_INTERVAL_MS</div><div class="env-desc">Interval health check-a u ms (default: 10000) — Backend</div></div>
+          <div class="env-row"><div class="env-key">PORT</div><div class="env-desc">Port na kom Express server sluša (default: 3001) — Backend</div></div>
+        </div>
+        <div class="callout green">
+         <code>.env</code> fajl mora biti dodat u <code>.gitignore</code> pre prvog commita. U repozitorijumu se umesto toga commituje <code>.env.example</code> sa svim ključevima ali bez vrednosti — služi kao dokumentacija za ostale članove tima.
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════
+           VIII — VALIDACIJA
+      ═══════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje VIII</div>
+        <h2 class="section-title">Pravila validacije</h2>
+        <p>
+          Celokupna validacija mora biti implementirana <code>troslojno</code>: <code>klijentska</code> (React + TypeScript) za trenutnu povratnu informaciju; <code>serverska</code> (Express middleware) kao jedini pouzdan bezbednosni sloj; <code>ograničenja baze podataka</code> unutar <code>CREATE TABLE</code> SQL upita.
+        </p>
+        <table class="val-table">
+          <thead>
+            <tr>
+              <th>Polje</th>
+              <th>Pravilo</th>
+              <th>Poruka greške</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>gamer_tag</code></td><td>3–30 karaktera, slova/brojevi/crtica/tačka, jedinstven</td><td>„Gamer tag je zauzet ili nije validan"</td></tr>
+            <tr><td><code>email</code></td><td>Validan email format, jedinstven u bazi</td><td>„Email je već zauzet"</td></tr>
+            <tr><td><code>password</code></td><td>Min 8 karaktera, jedno veliko slovo, jedan broj</td><td>„Lozinka ne ispunjava uslove"</td></tr>
+            <tr><td><code>team.name</code></td><td>Obavezno, 2–80 karaktera</td><td>„Naziv tima je obavezan (2–80 karaktera)"</td></tr>
+            <tr><td><code>team.tag</code></td><td>2–6 karaktera, samo velika slova/brojevi, jedinstven</td><td>„Tag tima nije validan ili je zauzet"</td></tr>
+            <tr><td><code>tournament.name</code></td><td>Obavezno, 3–120 karaktera</td><td>„Naziv turnira je obavezan"</td></tr>
+            <tr><td><code>tournament.format</code></td><td>ENUM: single_elimination, double_elimination, round_robin</td><td>„Izaberite validan format"</td></tr>
+            <tr><td><code>tournament.max_teams</code></td><td>Ceo broj, min 4, max 256, mora biti stepen broja 2 za eliminacione formate</td><td>„Broj timova mora biti stepen broja 2 (4, 8, 16...)"</td></tr>
+            <tr><td><code>tournament.registration_deadline</code></td><td>Datum u budućnosti, pre datuma početka</td><td>„Rok prijave mora biti pre početka turnira"</td></tr>
+            <tr><td><code>match.score</code></td><td>Format X:Y, oba broja ≥ 0, pobednik mora biti jasan</td><td>„Unesite validan rezultat (npr. 2:0)"</td></tr>
+            <tr><td><code>tournament_registrations</code></td><td>Tim mora imati min. broj članova; rok prijave ne sme biti istekao; tim ne sme biti već prijavljen</td><td>„Rok prijave je istekao" / „Tim je već prijavljen"</td></tr>
+            <tr><td><code>match_players</code></td><td>Igrač mora biti član tima koji nastupa; bez duplikata</td><td>„Igrač nije član ovog tima"</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </body>
+</html>
