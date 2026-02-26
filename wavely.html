@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavely – Projektni Zadatak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --teal: #1db994;
+        --teal-light: #1ed760;
+        --teal-dim: #117a5e;
+        --navy: #0a0f1e;
+        --navy-mid: #111827;
+        --navy-card: #141d2e;
+        --text: #e2e8f0;
+        --text-dim: #64748b;
+        --text-mid: #94a3b8;
+        --accent-pop: #f472b6;
+        --accent-amber: #fbbf24;
+        --accent-violet: #a78bfa;
+        --accent-sky: #38bdf8;
+        --accent-rose: #fb7185;
+        --accent-emerald: #34d399;
+        --accent-orange: #fb923c;
+        --border: rgba(30, 215, 96, 0.12);
+        --border-bright: rgba(30, 215, 96, 0.35);
+        --glass: rgba(255, 255, 255, 0.03);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        background-color: var(--navy);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 17px;
+        line-height: 1.75;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 70% 50% at 20% -10%, rgba(29, 185, 148, 0.1) 0%, transparent 60%),
+          radial-gradient(ellipse 50% 40% at 90% 90%, rgba(167, 139, 250, 0.07) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 50% at 50% 110%, rgba(56, 189, 248, 0.06) 0%, transparent 60%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .page-wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 60px 40px 100px;
+      }
+
+      /* HEADER */
+      .doc-header {
+        text-align: center;
+        padding: 70px 0 55px;
+        border-bottom: 1px solid var(--border-bright);
+        margin-bottom: 65px;
+        position: relative;
+      }
+
+      .doc-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--teal), transparent);
+      }
+
+      .doc-label {
+        font-size: 11px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 22px;
+        font-weight: 500;
+      }
+
+      .doc-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .logo-icon {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        box-shadow: 0 0 40px rgba(29, 185, 148, 0.3);
+      }
+
+      .doc-title {
+        font-size: clamp(48px, 8vw, 74px);
+        font-weight: 700;
+        letter-spacing: -2px;
+        line-height: 1.05;
+        background: linear-gradient(135deg, #fff 0%, var(--teal-light) 50%, var(--teal) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .doc-subtitle {
+        font-size: 15px;
+        font-weight: 400;
+        color: var(--text-dim);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-top: 10px;
+        margin-bottom: 30px;
+      }
+
+      .doc-meta {
+        display: flex;
+        justify-content: center;
+        gap: 36px;
+        flex-wrap: wrap;
+        margin-top: 32px;
+      }
+
+      .meta-item {
+        font-size: 12px;
+        color: var(--text-dim);
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .meta-item span {
+        color: var(--teal);
+      }
+
+      /* DIVIDER */
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 52px 0;
+      }
+
+      .divider-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-bright), transparent);
+      }
+
+      .divider-gem {
+        width: 6px;
+        height: 6px;
+        background: var(--teal);
+        border-radius: 50%;
+        box-shadow: 0 0 12px rgba(29, 185, 148, 0.5);
+      }
+
+      /* SECTION */
+      .section {
+        margin-bottom: 58px;
+        animation: fadeUp 0.5s ease both;
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(18px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .section:nth-child(2) { animation-delay: 0.05s; }
+      .section:nth-child(3) { animation-delay: 0.10s; }
+      .section:nth-child(4) { animation-delay: 0.15s; }
+      .section:nth-child(5) { animation-delay: 0.20s; }
+      .section:nth-child(6) { animation-delay: 0.25s; }
+      .section:nth-child(7) { animation-delay: 0.30s; }
+
+      .section-number {
+        font-size: 11px;
+        color: var(--teal-dim);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+
+      .section-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: -0.3px;
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .section-title .icon { font-size: 20px; opacity: 0.85; }
+
+      .subsection-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--teal-light);
+        margin: 32px 0 14px;
+        letter-spacing: 0.2px;
+      }
+
+      p {
+        color: var(--text-mid);
+        margin-bottom: 14px;
+        font-weight: 400;
+      }
+
+      /* CALLOUT */
+      .callout {
+        border: 1px solid var(--border-bright);
+        border-left: 3px solid var(--teal);
+        background: rgba(29, 185, 148, 0.05);
+        padding: 20px 24px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+        font-style: italic;
+        color: var(--text);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .callout.violet {
+        border-left-color: var(--accent-violet);
+        background: rgba(167, 139, 250, 0.05);
+      }
+
+      /* INFO BOX */
+      .info-box {
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent-sky);
+        background: rgba(56, 189, 248, 0.04);
+        padding: 18px 24px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--text-dim);
+      }
+
+      .info-box strong { color: var(--accent-sky); }
+
+      /* CONCEPT GRID */
+      .concept-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 20px 0;
+      }
+
+      .concept-card {
+        border: 1px solid var(--border);
+        background: var(--glass);
+        padding: 18px 20px;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.3s, background 0.3s;
+      }
+
+      .concept-card:hover {
+        border-color: var(--border-bright);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .concept-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: var(--card-color, var(--teal));
+        opacity: 0.6;
+      }
+
+      .concept-card-term {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--card-color, var(--teal-light));
+        margin-bottom: 8px;
+        letter-spacing: 0.3px;
+      }
+
+      .concept-card p {
+        font-size: 14px;
+        margin-bottom: 0;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+
+      /* REQ CARDS */
+      .req-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .req-card {
+        border: 1px solid var(--border);
+        background: var(--glass);
+        padding: 22px;
+        border-radius: 10px;
+        transition: border-color 0.3s, background 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .req-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: var(--card-accent, var(--teal));
+        opacity: 0.7;
+      }
+
+      .req-card:hover {
+        border-color: var(--border-bright);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .req-card-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--card-accent, var(--teal));
+        margin-bottom: 10px;
+        letter-spacing: 0.3px;
+      }
+
+      .req-card p { font-size: 15px; margin-bottom: 0; color: var(--text-dim); }
+
+      /* SCREENS */
+      .screens-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .screen-card {
+        border: 1px solid var(--border);
+        padding: 18px;
+        border-radius: 10px;
+        background: var(--glass);
+      }
+
+      .screen-role {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--card-color, var(--teal-dim));
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+
+      .screen-list { list-style: none; padding: 0; }
+
+      .screen-list li {
+        font-size: 14px;
+        color: var(--text-dim);
+        padding: 4px 0 4px 16px;
+        position: relative;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      .screen-list li:last-child { border-bottom: none; }
+
+      .screen-list li::before {
+        content: '›';
+        position: absolute;
+        left: 0;
+        color: var(--card-color, var(--teal-dim));
+        font-size: 16px;
+        line-height: 1.4;
+      }
+
+      /* GENRE PILLS */
+      .genre-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 16px 0;
+      }
+
+      .genre-pill {
+        font-size: 12px;
+        font-weight: 500;
+        padding: 5px 16px;
+        border-radius: 20px;
+        border: 1px solid;
+        letter-spacing: 0.3px;
+      }
+
+      .gp-pop    { color: var(--accent-pop);     border-color: rgba(244,114,182,0.35); background: rgba(244,114,182,0.08); }
+      .gp-rock   { color: var(--accent-rose);    border-color: rgba(251,113,133,0.35); background: rgba(251,113,133,0.08); }
+      .gp-hip    { color: var(--accent-amber);   border-color: rgba(251,191,36,0.35);  background: rgba(251,191,36,0.08); }
+      .gp-elec   { color: var(--accent-violet);  border-color: rgba(167,139,250,0.35); background: rgba(167,139,250,0.08); }
+      .gp-jazz   { color: var(--accent-sky);     border-color: rgba(56,189,248,0.35);  background: rgba(56,189,248,0.08); }
+      .gp-rnb    { color: var(--accent-orange);  border-color: rgba(251,146,60,0.35);  background: rgba(251,146,60,0.08); }
+      .gp-class  { color: var(--accent-emerald); border-color: rgba(52,211,153,0.35);  background: rgba(52,211,153,0.08); }
+
+      /* API */
+      .api-block {
+        background: var(--navy-mid);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 14px;
+      }
+
+      .api-block-header {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--teal-dim);
+        padding: 10px 18px;
+        background: rgba(29, 185, 148, 0.05);
+        border-bottom: 1px solid var(--border);
+        font-weight: 600;
+      }
+
+      .api-route {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 10px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 13px;
+      }
+
+      .api-route:last-child { border-bottom: none; }
+
+      .method {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 4px;
+        min-width: 48px;
+        text-align: center;
+        letter-spacing: 0.5px;
+      }
+
+      .get    { background: rgba(52,211,153,0.12);  color: var(--accent-emerald); }
+      .post   { background: rgba(56,189,248,0.12);  color: var(--accent-sky); }
+      .put    { background: rgba(251,191,36,0.12);  color: var(--accent-amber); }
+      .delete { background: rgba(251,113,133,0.12); color: var(--accent-rose); }
+
+      .route-path  { color: var(--text); }
+      .route-desc  { color: var(--text-dim); font-size: 12px; margin-left: auto; }
+
+      .route-auth {
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 10px;
+        background: rgba(167,139,250,0.12);
+        color: var(--accent-violet);
+        border: 1px solid rgba(167,139,250,0.25);
+        white-space: nowrap;
+        font-family: 'Inter', sans-serif;
+      }
+
+      /* DB TABLES */
+      .db-table {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 16px;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 13px;
+      }
+
+      .db-table-header {
+        background: rgba(29, 185, 148, 0.08);
+        padding: 11px 18px;
+        color: var(--teal-light);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .db-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--teal);
+        border-radius: 50%;
+        opacity: 0.8;
+      }
+
+      .db-table-body {
+        padding: 14px 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        background: var(--navy-card);
+      }
+
+      .db-field { color: var(--text-dim); font-size: 12px; }
+      .db-field .fname  { color: var(--accent-sky); }
+      .db-field .ftype  { color: var(--text-dim); opacity: 0.6; }
+      .db-field .fpk    { color: var(--teal-light); }
+      .db-field .ffk    { color: var(--accent-violet); opacity: 0.9; }
+
+      /* VAL TABLE */
+      .val-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 22px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+
+      .val-table th {
+        font-size: 11px;
+        color: var(--teal);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 12px 18px;
+        text-align: left;
+        background: rgba(29, 185, 148, 0.07);
+        border-bottom: 1px solid var(--border-bright);
+        font-weight: 600;
+      }
+
+      .val-table td {
+        padding: 12px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        font-size: 15px;
+        color: var(--text-mid);
+      }
+
+      .val-table tr:last-child td { border-bottom: none; }
+      .val-table tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+
+      code {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 13px;
+        background: rgba(29, 185, 148, 0.08);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: var(--teal-light);
+        border: 1px solid rgba(29, 185, 148, 0.15);
+      }
+
+      ul.prose-list {
+        list-style: none;
+        padding: 0;
+        margin: 12px 0;
+      }
+
+      ul.prose-list li {
+        padding: 6px 0 6px 20px;
+        position: relative;
+        color: var(--text-mid);
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+
+      ul.prose-list li:last-child { border-bottom: none; }
+
+      ul.prose-list li::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        font-size: 11px;
+        top: 10px;
+        color: var(--teal-dim);
+      }
+
+      /* MOOD TAG */
+      .mood-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 16px 0;
+      }
+
+      .mood-tag {
+        font-size: 12px;
+        font-weight: 500;
+        padding: 4px 14px;
+        border-radius: 20px;
+        border: 1px solid var(--border-bright);
+        color: var(--teal-light);
+        background: rgba(29, 185, 148, 0.07);
+        letter-spacing: 0.3px;
+      }
+
+      /* FOOTER */
+      .doc-footer {
+        text-align: center;
+        padding: 50px 0 20px;
+        border-top: 1px solid var(--border);
+        margin-top: 60px;
+      }
+
+      .footer-ornament {
+        font-size: 11px;
+        letter-spacing: 5px;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .footer-logo {
+        font-size: 28px;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--teal-light), var(--teal));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 12px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 680px) {
+        .page-wrap { padding: 40px 20px 80px; }
+        .screens-grid { grid-template-columns: 1fr 1fr; }
+        .concept-grid { grid-template-columns: 1fr; }
+        .api-route { flex-wrap: wrap; }
+        .route-desc { margin-left: 0; }
+      }
+
+      @media (max-width: 480px) {
+        .screens-grid { grid-template-columns: 1fr; }
+        .req-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrap">
+
+      <!-- HEADER -->
+      <header class="doc-header">
+        <div class="doc-label">osnove · distribuiranog · programiranja</div>
+          <h1 class="doc-title">Wavely</h1>
+        <div class="doc-subtitle">Sistem za strimovanje i upravljanje muzikom</div>
+  
+      </header>
+
+      <!-- ═══════════════════════════════════
+           POGLAVLJE I — OPIS PROJEKTA
+      ═══════════════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje I</div>
+        <h2 class="section-title"> Opis projekta</h2>
+        <p>
+          <code>Wavely</code> je fullstack web aplikacija — što znači da aplikacija ima deo koji korisnik vidi i koristi u pretraživaču (<em>frontend</em>), i deo koji radi na serveru, prihvata i obrađuje korisničke zahteve i podatke čuva u bazi podataka (<em>backend</em>). Aplikacija je zamišljena kao moderna muzička streaming platforma nalik Spotify-ju, sa fokusom na otkrivanje novih izvođača i upravljanje ličnom muzičkom bibliotekom.
+        </p>
+        <div class="callout">
+          „Aplikacija funkcioniše slično Spotify-ju — korisnik kreira nalog, pretražuje globalni katalog pesama i izvođača, sačuvava pesme u svoju biblioteku, prati omiljene izvođače i sastavlja tematske plejliste. Svaka plejlista je privatni prostor korisnika, a globalni katalog pesama vidi svako ko otvori aplikaciju."
+        </div>
+        <div class="subsection-title">Opšte tehničke karakteristike</div>
+        <p>
+          U tehničkom smislu, ovo je klasičan <code>CRUD sistem sa autentifikacijom i hijerarhijom uloga</code>. Pesme i izvođači su entiteti u bazi podataka — analogno knjigama u biblioteci ili filmovima na streaming platformi. Žanr pesme je kategorijska vrednost (<code>ENUM</code>), potpuno analogna žanru filma ili tipu proizvoda. Sistem sadrži tri M:N relacije: praćenje izvođača, čuvanje pesama u biblioteci i dodavanje pesama u plejliste.
+        </p>
+        <p>Aplikacija podržava tri tipa korisnika sa različitim nivoima pristupa:</p>
+        <div class="req-grid">
+          <div class="req-card" style="--card-accent: var(--text-dim)">
+            <div class="req-card-title">👁 Gost (neregistrovani posetilac)</div>
+            <p>Može otvoriti aplikaciju u pretraživaču i pregledati globalni katalog pesama i izvođača. Ne može čuvati, pratiti niti kreirati ništa — analogno pregledanju online prodavnice bez naloga.</p>
+          </div>
+          <div class="req-card" style="--card-accent: var(--teal)">
+            <div class="req-card-title">🎧 Slušalac (registrovani korisnik)</div>
+            <p>Ima sopstveni nalog. Može pratiti izvođače, čuvati pesme u ličnu biblioteku i kreirati tematske plejliste od sačuvanih pesama.</p>
+          </div>
+          <div class="req-card" style="--card-accent: var(--accent-amber)">
+            <div class="req-card-title">⭐ Administrator</div>
+            <p>Ima najviši nivo pristupa. Dodaje i uređuje izvođače i pesme u globalnom katalogu, upravlja svim korisnicima i prati sistemsku evidenciju događaja.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════════════
+           POGLAVLJE II — FUNKCIONALNI ZAHTEVI
+      ═══════════════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje II</div>
+        <h2 class="section-title">Funkcionalni zahtevi</h2>
+        <p>
+          Funkcionalni zahtevi opisuju <code>šta aplikacija može da uradi</code>, iz ugla korisnika. Svaki zahtev se može shvatiti kao konkretna stranica, forma ili akcija koju aplikacija mora da podrži. Zahtevi su organizovani po oblastima funkcionalnosti.
+        </p>
+
+        <div class="subsection-title">II.1 — Registracija i prijava (Autentifikacija)</div>
+        <p>
+          Autentifikacija je proces kojim sistem <code>proverava identitet korisnika</code>. Korisnik se registruje, unosi lozinku koja se čuva <code>heširana u bazi podataka</code> (nikad u originalnom formatu). Prilikom uspešne prijave, korisnik dobija <code>JSON Web Token</code> — dugački string koji služi kao privremena „propusnica" i dokazuje da je korisnik validno prijavljen bez stalnog ponovnog unosa lozinke.
+        </p>
+        <ul class="prose-list">
+          <li>Forma za registraciju sadrži: <strong>korisničko ime, ime i prezime, profilnu sliku</strong> (čuvati kao base64 string ili binarno putem multer npm biblioteke), <strong>email adresu i lozinku</strong></li>
+          <li>Forma za prijavu proverava kredencijale na serveru i pri uspehu vraća token koji se čuva u <code>localStorage</code> pretraživača upotrebom <code>useAuth hook</code> — autentifikacionog kontekstualnog prostora</li>
+          <li>Pri svakom sledećem učitavanju aplikacije, token se čita iz <code>localStorage</code> — korisnik ostaje prijavljen bez ponovne prijave</li>
+          <li>Odjava (logout) briše token iz <code>localStorage</code> i vraća korisnika na javni deo aplikacije</li>
+          <li>Validacija svakog polja za unos mora biti implementirana i na klijentskoj i na serverskoj strani</li>
+          <li>Zaštićene rute — stranice poput biblioteke i kreatora plejlisti nisu dostupne bez važećeg tokena; korisnik se automatski preusmerava na stranicu za prijavu</li>
+        </ul>
+        <div class="info-box">
+          <strong style="font-weight: normal; font-style: italic;">LocalStorage je mini baza podataka nalik <strong>Dictionary&lt;key, value&gt;</strong> u pretraživaču koja čuva podatke trajno na korisnikovom računaru (ostaju čak i nakon zatvaranja kartice). Koristi se za čuvanje JWT tokena koji dokazuje da je korisnik prijavljen. Za razliku od memorije u React-u (state), podaci u localStorage-u ne nestaju pri osvežavanju stranice.</strong>
+        </div>
+
+        <div class="subsection-title">II.2 — Katalog izvođača i pesama (javno dostupno)</div>
+        <p>
+          Katalog je centralni deo aplikacije dostupan svima, čak i bez registracije. Prikazuje sve izvođače i sve pesme koje postoje u globalnoj bazi podataka. Svaki izvođač ima skup fiksnih karakteristika — <strong>ime, biografija, slika, zemlja porekla i žanr</strong>. Svaka pesma ima: <strong>naziv, izvođač, trajanje, žanr, album i godinu izdavanja</strong>.
+        </p>
+        <ul class="prose-list">
+          <li>Prikaz svih pesama kao vizuelnih kartica sa ključnim atributima (naziv, izvođač, žanr, trajanje, albumska slika, godina)</li>
+          <li>Prikaz svih izvođača sa slikom, imenom i žanrom</li>
+          <li>Filtriranje liste pesama po žanru, izvođaču i godini izdavanja — bez ponovnog učitavanja stranice (implementirati na klijentskoj strani)</li>
+          <li>Stranica detalja pojedinačnog izvođača sa svim pesmama tog izvođača</li>
+          <li>Stranica detalja pojedinačne pesme sa svim atributima</li>
+        </ul>
+
+        <div class="subsection-title">II.3 — Praćenje izvođača (samo za prijavljene korisnike)</div>
+        <p>
+          Prijavljeni slušalac može da <code>prati (follow)</code> bilo kojeg izvođača iz globalnog kataloga. Ovo je čista M:N relacija bez dodatnih atributa — korisnik ili prati ili ne prati izvođača. Implementaciono se realizuje posebnom, veznom tabelom <code>user_artists</code> koja ima strane ključeve prema tabeli korisnika i tabeli izvođača.
+        </p>
+        <ul class="prose-list">
+          <li>Dugme „Prati" / „Otprati" na svakoj kartici i stranici detalja izvođača — vizuelno razlikuje praćene od nepraćenih</li>
+          <li>Stranica „Moji izvođači" prikazuje sve izvođače koje korisnik prati</li>
+          <li>Broj pratilaca vidljiv je na stranici detalja svakog izvođača</li>
+          <li>Otpraćivanje uklanja izvođača iz liste odmah bez ponovnog učitavanja stranice</li>
+        </ul>
+
+        <div class="subsection-title">II.4 — Lična biblioteka pesama (samo za prijavljene korisnike)</div>
+        <p>
+          Prijavljeni slušalac može da <code>sačuva (save)</code> bilo koju pesmu iz globalnog kataloga u svoju ličnu biblioteku. Ovo je M:N relacija sa jednim dodatnim atributom — datumom kada je pesma sačuvana. Implementaciono se realizuje veznom tabelom <code>user_tracks</code> sa stranim ključevima prema korisniku i pesmi, i kolonom <code>saved_at</code> tipa <code>DATETIME</code>.
+        </p>
+        <ul class="prose-list">
+          <li>Dugme „Sačuvaj" / „Ukloni" na svakoj kartici i stranici detalja pesme</li>
+          <li>Stranica „Moja biblioteka" prikazuje sve sačuvane pesme sortirane po datumu čuvanja (najskorije prve)</li>
+          <li>Filtriranje biblioteke po žanru i izvođaču</li>
+          <li>Uklanjanje pesme iz biblioteke ne briše pesmu iz globalnog kataloga</li>
+        </ul>
+
+        <div class="subsection-title">II.5 — Plejliste (samo za prijavljene korisnike)</div>
+        <p>
+          Slušalac može kreirati <code>plejliste</code> — lično uređene liste pesama. Za razliku od Spotify-ja, u ovom sistemu korisnik može dodati u plejlistu isključivo pesme koje su prethodno sačuvane u njegovoj biblioteci. Ova zaštita mora biti implementirana i na frontendu i na backendu. Implementaciono se realizuje tabelama <code>playlists</code> i <code>playlist_tracks</code> (vezna tabela sa redosledom pesama — atribut <code>position</code>).
+        </p>
+        <ul class="prose-list">
+          <li>Kreiranje plejliste sa nazivom, opcionalnim opisom i naslovnom slikom (cover)</li>
+          <li>Dodavanje pesama u plejlistu isključivo iz korisnikove biblioteke</li>
+          <li>Prikaz svih plejlisti korisnika sa brojem pesama i ukupnim trajanjem</li>
+          <li>Promena redosleda pesama unutar plejliste (atribut <code>position</code>)</li>
+          <li>Izmena naziva, opisa i naslovne slike plejliste</li>
+          <li>Brisanje plejliste (ne briše pesme iz biblioteke)</li>
+          <li>Validacija: ista pesma ne može biti dva puta u istoj plejlisti; plejlista mora imati naziv</li>
+          <li>Prikaz <code>žanrovskog profila</code> plejliste (frontend logika — objašnjeno u Poglavlju III)</li>
+        </ul>
+
+        <div class="subsection-title">II.6 — Administrativni panel (samo za administratore)</div>
+        <p>
+          Administrator ima poseban panel dostupan isključivo korisnicima sa ulogom <code>admin</code>. Pokušaj pristupa od strane običnog korisnika mora biti blokiran i na klijentskoj i na serverskoj strani (koristiti middleware).
+        </p>
+        <ul class="prose-list">
+          <li>Dodavanje novih izvođača u globalni katalog: <strong>ime, žanr, slika/fotografija, zemlja porekla, biografija</strong></li>
+          <li>Dodavanje novih pesama u globalni katalog: <strong>naziv, izvođač (strani ključ), žanr, album, trajanje u sekundama, godina izdavanja, albumska slika</strong></li>
+          <li>Izmena i brisanje postojećih izvođača i pesama</li>
+          <li>Pregled liste svih registrovanih korisnika sa njihovim ulogama i brojem sačuvanih pesama</li>
+          <li>Promena uloge korisnika (promovisanje u admina ili vraćanje na standardnog korisnika)</li>
+          <li>Pregled <code>evidencije aktivnosti</code> — sistem automatski beleži ko je, kada i šta uradio i čuva u tabeli <code>audits</code></li>
+        </ul>
+
+        <div class="subsection-title">II.7 — Pregled svih funkcionalnosti po ulogama</div>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--text-dim)">
+            <div class="concept-card-term">👁 Gost — može</div>
+            <p>Pregledati katalog pesama i izvođača, filtrirati po žanru/godini, videti detalje pesme i izvođača, otvoriti stranicu za prijavu/registraciju.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--text-dim)">
+            <div class="concept-card-term">👁 Gost — ne može</div>
+            <p>Pratiti izvođače, čuvati pesme u biblioteku, kreirati plejliste, pristupiti administratorskom panelu ili bilo kojoj zaštićenoj stranici.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--teal)">
+            <div class="concept-card-term">🎧 Slušalac — može</div>
+            <p>Sve što gost može i dodatno: pratiti izvođače, čuvati pesme u biblioteku, kreirati i uređivati plejliste sa pesmama iz biblioteke.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--teal)">
+            <div class="concept-card-term">🎧 Slušalac — ne može</div>
+            <p>Pristupiti administrativnom panelu, menjati globalni katalog, pregledati biblioteke ili plejliste drugih korisnika.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">⭐ Admin — može</div>
+            <p>Sve što slušalac može i dodatno: upravljati globalnim katalogom (pesme i izvođači), upravljati korisnicima, pregledati evidenciju aktivnosti.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">⭐ Admin — ne može</div>
+            <p>Admin ne može menjati biblioteke i plejliste drugih korisnika — to je i dalje privatni prostor svakog slušaoca.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════════════
+           POGLAVLJE III — ŽANROVI I ATRIBUTI
+      ═══════════════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje III</div>
+        <h2 class="section-title">Žanrovi, atributi i žanrovski profil</h2>
+        <p>
+          Svaka pesma i svaki izvođač imaju dva tipa karakteristika: one koje su fiksirane u globalnom katalogu i važe za sve korisnike, i one vezane za korisnikovu interakciju (kada je sačuvana pesma, redosled u plejlisti).
+        </p>
+
+        <div class="subsection-title">III.1 — Globalni atributi izvođača (tabela <code>artists</code>)</div>
+        <p>Vrednosti unosi administrator pri kreiranju izvođača. Identične su za sve korisnike koji pregledaju katalog.</p>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--teal)">
+            <div class="concept-card-term">Ime izvođača (name)</div>
+            <p>Tekstualni string, max 100 karaktera. Jedinstven naziv u sistemu. Obavezno polje — ne može biti prazno.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-pop)">
+            <div class="concept-card-term">Žanr (genre)</div>
+            <p>Kojoj muzičkoj kategoriji izvođač pripada. <code>ENUM</code> kolona sa 7 mogućih vrednosti. Baza automatski odbija svaki unos koji nije na listi. Koristi se za vizuelno razlikovanje i filtriranje.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-sky)">
+            <div class="concept-card-term">Zemlja porekla (country)</div>
+            <p>Tekstualni string, max 60 karaktera. Prikazuje se na stranici detalja izvođača. Informativnog karaktera.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">Biografija (bio)</div>
+            <p>Duži tekstualni opis, max 1000 karaktera. Prikazuje se na stranici detalja izvođača.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-violet)">
+            <div class="concept-card-term">Slika (image)</div>
+            <p>Fotografija ili ilustracija izvođača. Čuva se kao base64 string ili kao relativna putanja do lokalne slike (binarna datoteka putem multer npm biblioteke).</p>
+          </div>
+        </div>
+
+        <div class="subsection-title">III.2 — Globalni atributi pesme (tabela <code>tracks</code>)</div>
+        <p>Vrednosti unosi administrator. Pesma je direktno vezana za izvođača stranim ključem.</p>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--teal)">
+            <div class="concept-card-term">Naziv pesme (title)</div>
+            <p>Tekstualni string, max 120 karaktera. Obavezno polje.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-pop)">
+            <div class="concept-card-term">Izvođač (artist_id)</div>
+            <p>Strani ključ prema tabeli <code>artists</code>. Svaka pesma mora imati tačno jednog izvođača. Brisanje izvođača mora biti blokirano dok ima pesama u katalogu (ili kaskadirati — po izboru).</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-amber)">
+            <div class="concept-card-term">Trajanje (duration_sec)</div>
+            <p>Trajanje pesme u sekundama. Ceo broj, min vrednost 1. Na frontendu se prikazuje konvertovano u format <code>m:ss</code> (npr. 3:47). Konverzija je isključivo frontend logika.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-sky)">
+            <div class="concept-card-term">Album (album)</div>
+            <p>Naziv albuma kome pesma pripada. Tekstualni string, max 120 karaktera. Obavezno polje.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-rose)">
+            <div class="concept-card-term">Godina izdavanja (release_year)</div>
+            <p>Ceo broj između 1900 i tekuće godine. Koristi se za filtriranje u katalogu. Validacija mora odbiti nemoguće vrednosti.</p>
+          </div>
+          <div class="concept-card" style="--card-color: var(--accent-violet)">
+            <div class="concept-card-term">Albumska slika (cover_image)</div>
+            <p>Slika albuma. Čuva se kao base64 string ili relativna putanja do lokalne slike. Prikazuje se na kartici i stranici detalja pesme.</p>
+          </div>
+        </div>
+
+        <div class="subsection-title">III.3 — Korisnički atributi pesme (tabela <code>user_tracks</code>)</div>
+        <p>
+          Ove vrednosti nastaju automatski kada korisnik sačuva pesmu. Realizuje se posebnom, veznom tabelom koja ima strane ključeve prema tabeli korisnika i tabeli pesama.
+        </p>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--teal)">
+            <div class="concept-card-term">Datum čuvanja (saved_at)</div>
+            <p>Tip <code>DATETIME</code>. Automatski se popunjava na serveru u trenutku čuvanja pesme (<code>DEFAULT CURRENT_TIMESTAMP</code>). Korisnik ga ne unosi — ne prikazuje se u formi.</p>
+          </div>
+        </div>
+
+        <div class="subsection-title">III.4 — Korisnički atribut pesme u plejlisti (tabela <code>playlist_tracks</code>)</div>
+        <div class="concept-grid">
+          <div class="concept-card" style="--card-color: var(--accent-violet)">
+            <div class="concept-card-term">Redosled u plejlisti (position)</div>
+            <p>Ceo broj koji određuje redosled pesme unutar plejliste. Počinje od 1. Kada korisnik menja redosled, backend ažurira vrednosti <code>position</code> za sve pesme u plejlisti.</p>
+          </div>
+        </div>
+
+        <div class="subsection-title">III.5 — Sedam muzičkih žanrova</div>
+        <p>
+          Žanr je jedna od sedam kategorija kojima pesma ili izvođač može pripadati. Sa programske strane, to su string konstante u TypeScript-u i <code>ENUM</code> vrednosti u MySQL-u. Svaki žanr se vizuelno razlikuje bojom u katalogu.
+        </p>
+        <div class="genre-pills">
+          <span class="genre-pill gp-pop">💜 Pop</span>
+          <span class="genre-pill gp-rock">🎸 Rock</span>
+          <span class="genre-pill gp-hip">🎤 Hip-Hop</span>
+          <span class="genre-pill gp-elec">🎛 Electronic</span>
+          <span class="genre-pill gp-jazz">🎷 Jazz</span>
+          <span class="genre-pill gp-rnb">🎶 R&amp;B</span>
+          <span class="genre-pill gp-class">🎻 Classical</span>
+        </div>
+        <div class="callout violet">
+          Sa implementacione strane žanr je isključivo <strong>ENUM vrednost u bazi podataka</strong> i <strong>string konstanta u TypeScript-u</strong>. Jedina razlika između žanrova je kako se prikazuju (boja, ikonica) i kako se filtriraju. Nema nikakve dodatne logike na serverskoj strani koja ih razlikuje.
+        </div>
+
+        <div class="subsection-title">III.6 — Žanrovski profil plejliste</div>
+        <p>
+          Kada korisnik pregleda plejlistu, aplikacija prikazuje koji su žanrovi zastupljeni i u kom procentu. Na primer, plejlista od 10 pesama od kojih je 6 Pop i 4 Rock prikazuje: <code>Pop 60% · Rock 40%</code>. Implementirati kao <strong style="color: var(--teal-light)">deo frontend logike</strong> — bez dodatnih poziva ka serverskoj strani.
+        </p>
+        <p>
+          Potrebno je proći kroz žanrove svih pesama u plejlisti, prebrojati pojavljivanje svakog žanra i izračunati procente. Ako plejlista sadrži pesme samo jednog žanra, prikazuje se oznaka dominantnog žanra (npr. <code>🎸 Rock plejlista</code>).
+        </p>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════════════
+           POGLAVLJE IV — REST API RUTE
+      ═══════════════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje IV</div>
+        <h2 class="section-title">REST API rute</h2>
+        <p>
+          Backend izlaže sledeće HTTP tačke pristupa. Rute označene sa <span class="route-auth" style="display:inline-block; margin:0 4px">🔐 user</span> ili <span class="route-auth" style="display:inline-block; margin:0 4px">🔐 admin</span> zahtevaju validan token u Authorization headeru (middleware na serveru proverava JWT token pre izvršavanja akcije).
+        </p>
+
+        <div class="api-block">
+          <div class="api-block-header">Auth · /api/auth</div>
+          <div class="api-route">
+            <span class="method post">POST</span>
+            <span class="route-path">/register</span>
+            <span class="route-desc">Registracija novog korisnika</span>
+          </div>
+          <div class="api-route">
+            <span class="method post">POST</span>
+            <span class="route-path">/login</span>
+            <span class="route-desc">Prijava — vraća JWT token</span>
+          </div>
+          <div class="api-route">
+            <span class="method post">POST</span>
+            <span class="route-path">/logout</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Beleži odjavu korisnika u audit log</span>
+          </div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Izvođači · /api/artists</div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/</span>
+            <span class="route-desc">Lista svih izvođača (podržava query filtere: genre, country)</span>
+          </div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/:id</span>
+            <span class="route-desc">Detalji izvođača sa listom njegovih pesama</span>
+          </div>
+          <div class="api-route">
+            <span class="method post">POST</span>
+            <span class="route-path">/</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Dodaj novog izvođača u katalog</span>
+          </div>
+          <div class="api-route">
+            <span class="method put">PUT</span>
+            <span class="route-path">/:id</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Izmeni podatke izvođača</span>
+          </div>
+          <div class="api-route">
+            <span class="method delete">DEL</span>
+            <span class="route-path">/:id</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Ukloni izvođača (samo ako nema pesama)</span>
+          </div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Pesme · /api/tracks</div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/</span>
+            <span class="route-desc">Lista svih pesama (filteri: genre, artist_id, release_year)</span>
+          </div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/:id</span>
+            <span class="route-desc">Detalji jedne pesme</span>
+          </div>
+          <div class="api-route">
+            <span class="method post">POST</span>
+            <span class="route-path">/</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Dodaj novu pesmu u katalog</span>
+          </div>
+          <div class="api-route">
+            <span class="method put">PUT</span>
+            <span class="route-path">/:id</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Izmeni podatke pesme</span>
+          </div>
+          <div class="api-route">
+            <span class="method delete">DEL</span>
+            <span class="route-path">/:id</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Ukloni pesmu iz kataloga</span>
+          </div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Praćenje izvođača · /api/following</div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Lista izvođača koje korisnik prati</span>
+          </div>
+          <div class="api-route">
+            <span class="method post">POST</span>
+            <span class="route-path">/:artistId</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Počni pratiti izvođača</span>
+          </div>
+          <div class="api-route">
+            <span class="method delete">DEL</span>
+            <span class="route-path">/:artistId</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Prestani pratiti izvođača</span>
+          </div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Biblioteka · /api/library</div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Sve sačuvane pesme (sortirane po saved_at DESC)</span>
+          </div>
+          <div class="api-route">
+            <span class="method post">POST</span>
+            <span class="route-path">/:trackId</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Sačuvaj pesmu u biblioteku</span>
+          </div>
+          <div class="api-route">
+            <span class="method delete">DEL</span>
+            <span class="route-path">/:trackId</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Ukloni pesmu iz biblioteke</span>
+          </div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Plejliste · /api/playlists</div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Sve plejliste korisnika</span>
+          </div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/:id</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Detalji plejliste sa svim pesmama (sortirano po position)</span>
+          </div>
+          <div class="api-route">
+            <span class="method post">POST</span>
+            <span class="route-path">/</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Kreiranje nove plejliste</span>
+          </div>
+          <div class="api-route">
+            <span class="method put">PUT</span>
+            <span class="route-path">/:id</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Izmena naziva, opisa ili naslovne slike</span>
+          </div>
+          <div class="api-route">
+            <span class="method post">POST</span>
+            <span class="route-path">/:id/tracks</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Dodavanje pesme u plejlistu (mora biti u biblioteci)</span>
+          </div>
+          <div class="api-route">
+            <span class="method put">PUT</span>
+            <span class="route-path">/:id/tracks/reorder</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Promena redosleda pesama (ažurira position)</span>
+          </div>
+          <div class="api-route">
+            <span class="method delete">DEL</span>
+            <span class="route-path">/:id/tracks/:trackId</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Uklanjanje pesme iz plejliste</span>
+          </div>
+          <div class="api-route">
+            <span class="method delete">DEL</span>
+            <span class="route-path">/:id</span>
+            <span class="route-auth">🔐 user</span>
+            <span class="route-desc">Brisanje plejliste</span>
+          </div>
+        </div>
+
+        <div class="api-block">
+          <div class="api-block-header">Admin · /api/admin</div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/users</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Lista svih korisnika sa statistikama</span>
+          </div>
+          <div class="api-route">
+            <span class="method put">PUT</span>
+            <span class="route-path">/users/:id/role</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Promena uloge korisnika</span>
+          </div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/logs</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Pregled evidencije aktivnosti</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════════════
+           POGLAVLJE V — EKRANI APLIKACIJE
+      ═══════════════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje V</div>
+        <h2 class="section-title">Stranice u okviru klijentske aplikacije</h2>
+        <div class="screens-grid">
+          <div class="screen-card" style="--card-color: var(--text-dim)">
+            <div class="screen-role">Javno dostupno</div>
+            <ul class="screen-list">
+              <li>Početna stranica</li>
+              <li>Katalog pesama sa filterima</li>
+              <li>Katalog izvođača</li>
+              <li>Detalji pesme</li>
+              <li>Detalji izvođača</li>
+              <li>Prijava / Registracija</li>
+            </ul>
+          </div>
+          <div class="screen-card" style="--card-color: var(--teal)">
+            <div class="screen-role">Prijavljeni slušalac</div>
+            <ul class="screen-list">
+              <li>Dashboard (pregled aktivnosti)</li>
+              <li>Moji izvođači (praćeni)</li>
+              <li>Moja biblioteka</li>
+              <li>Moje plejliste</li>
+              <li>Detalji plejliste</li>
+              <li>Kreiranje / Izmena plejliste</li>
+            </ul>
+          </div>
+          <div class="screen-card" style="--card-color: var(--accent-amber)">
+            <div class="screen-role">Administrator</div>
+            <ul class="screen-list">
+              <li>Admin Dashboard</li>
+              <li>Upravljanje izvođačima</li>
+              <li>Dodaj / Izmeni izvođača</li>
+              <li>Upravljanje pesmama</li>
+              <li>Dodaj / Izmeni pesmu</li>
+              <li>Upravljanje korisnicima</li>
+              <li>Evidencija aktivnosti</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+      <!-- ═══════════════════════════════════
+           POGLAVLJE VI — PRAVILA VALIDACIJE
+      ═══════════════════════════════════ -->
+      <section class="section">
+        <div class="section-number">Poglavlje VI</div>
+        <h2 class="section-title">Pravila validacije</h2>
+        <p>
+          Celokupna validacija mora biti implementirana <code>troslojno</code>: <code>klijentska validacija</code> (React, TypeScript) za korisničko iskustvo i trenutnu povratnu informaciju; <code>serverska validacija</code> (Express middleware) kao jedini pouzdan bezbednosni sloj koji se ne može zaobići; <code>ograničenja baze podataka</code> (unutar CREATE TABLE SQL upita).
+        </p>
+        <table class="val-table">
+          <thead>
+            <tr>
+              <th>Polje</th>
+              <th>Pravilo</th>
+              <th>Poruka greške</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>username</code></td>
+              <td>3–40 karaktera, samo slova/brojevi/crtica</td>
+              <td>„Korisničko ime nije validno"</td>
+            </tr>
+            <tr>
+              <td><code>email</code></td>
+              <td>Validan email format, jedinstven u bazi</td>
+              <td>„Email je već zauzet"</td>
+            </tr>
+            <tr>
+              <td><code>password</code></td>
+              <td>Min 8 karaktera, jedno veliko slovo, jedan broj</td>
+              <td>„Lozinka ne ispunjava uslove"</td>
+            </tr>
+            <tr>
+              <td><code>artist.name</code></td>
+              <td>Obavezno, 2–100 karaktera</td>
+              <td>„Ime izvođača je obavezno"</td>
+            </tr>
+            <tr>
+              <td><code>artist.genre</code></td>
+              <td>Mora biti jedna od 7 ENUM vrednosti</td>
+              <td>„Izaberite validan žanr"</td>
+            </tr>
+            <tr>
+              <td><code>track.title</code></td>
+              <td>Obavezno, 1–120 karaktera</td>
+              <td>„Naziv pesme je obavezan"</td>
+            </tr>
+            <tr>
+              <td><code>track.duration_sec</code></td>
+              <td>Ceo broj, min 1 sekunda</td>
+              <td>„Trajanje mora biti veće od 0"</td>
+            </tr>
+            <tr>
+              <td><code>track.release_year</code></td>
+              <td>Ceo broj između 1900 i tekuće godine</td>
+              <td>„Unesite validnu godinu izdavanja"</td>
+            </tr>
+            <tr>
+              <td><code>playlist.name</code></td>
+              <td>2–80 karaktera, obavezno</td>
+              <td>„Naziv plejliste je obavezan"</td>
+            </tr>
+            <tr>
+              <td><code>playlist tracks</code></td>
+              <td>Bez duplikata; pesma mora biti u korisnikovoj biblioteci</td>
+              <td>„Pesma već postoji u plejlisti" / „Pesma nije u tvojoj biblioteci"</td>
+            </tr>
+            <tr>
+              <td><code>position</code></td>
+              <td>Ceo broj ≥ 1; jedinstven unutar plejliste</td>
+              <td>„Redosled je neispravan"</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </body>
+</html>
