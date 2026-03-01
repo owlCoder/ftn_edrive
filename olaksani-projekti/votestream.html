@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoteStream — Пројектни задатак</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Syne:wght@400;700;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161d;
+    --border: #1f2430;
+    --accent: #5af2a2;
+    --accent2: #3dd6f5;
+    --accent3: #f5a623;
+    --text: #d4dce8;
+    --muted: #6b7896;
+    --heading: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif', serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 0 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 20px var(--accent);
+  }
+
+  .header-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.1s;
+  }
+
+  h1.main-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 800;
+    color: var(--heading);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.2s;
+  }
+
+  h1.main-title span {
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.35s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  main {
+    padding: 4rem 0;
+  }
+
+  section {
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  section:nth-child(1) { animation-delay: 0.4s; }
+  section:nth-child(2) { animation-delay: 0.5s; }
+  section:nth-child(3) { animation-delay: 0.6s; }
+  section:nth-child(4) { animation-delay: 0.7s; }
+  section:nth-child(5) { animation-delay: 0.75s; }
+  section:nth-child(6) { animation-delay: 0.8s; }
+  section:nth-child(7) { animation-delay: 0.85s; }
+  section:nth-child(8) { animation-delay: 0.9s; }
+  section:nth-child(9) { animation-delay: 0.95s; }
+  section:nth-child(10) { animation-delay: 1.0s; }
+
+  .section-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--heading);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin: 2rem 0 1rem;
+  }
+
+  h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  /* Note/callout boxes */
+  .callout {
+    background: #0a1a12;
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: #a8d8bb;
+    font-size: 0.95rem;
+  }
+
+  .callout.warning {
+    background: #1a1400;
+    border-color: var(--accent3);
+    color: #d4ba7a;
+  }
+
+  /* Architecture table */
+  .arch-grid {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .arch-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1rem;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+
+  .arch-card:hover {
+    border-color: var(--accent);
+  }
+
+  .arch-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(90, 242, 162, 0.08);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+    align-self: start;
+    letter-spacing: 0.05em;
+  }
+
+  /* Flow diagram */
+  .flow-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--accent2);
+    line-height: 2;
+    overflow-x: auto;
+  }
+
+  /* Tech stack table */
+  .tech-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+  }
+
+  .tech-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.5rem 1rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tech-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .tech-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .tech-table tr:hover td {
+    background: var(--surface);
+  }
+
+  /* Code blocks */
+  pre {
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #c9d6e8;
+    margin: 1rem 0;
+  }
+
+  pre .comment { color: var(--muted); }
+  pre .keyword { color: var(--accent2); }
+  pre .string { color: var(--accent); }
+
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85em;
+    background: rgba(90, 242, 162, 0.08);
+    color: var(--accent);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+
+  /* Numbered steps */
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    margin: 1.5rem 0;
+  }
+
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .steps li:last-child {
+    border-bottom: none;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(90, 242, 162, 0.1);
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  /* Bullet list */
+  ul.styled {
+    list-style: none;
+    margin: 1rem 0;
+  }
+
+  ul.styled li {
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    position: relative;
+  }
+
+  ul.styled li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Criteria table */
+  .criteria-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+
+  .criteria-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: var(--surface);
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .criteria-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.93rem;
+  }
+
+  .criteria-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--accent2);
+    white-space: nowrap;
+  }
+
+  .criteria-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* File tree */
+  .file-tree {
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 2;
+  }
+
+  .file-tree .dir { color: var(--accent2); }
+  .file-tree .file { color: var(--text); }
+  .file-tree .file-comment { color: var(--muted); }
+
+  /* Terminal step blocks */
+  .terminal-block {
+    margin: 1.5rem 0;
+  }
+
+  .terminal-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1rem;
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .terminal-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+
+  .terminal-body {
+    background: #050608;
+    border: 1px solid var(--border);
+    border-radius: 0 0 6px 6px;
+    padding: 1rem 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: #a0e8c0;
+    line-height: 1.9;
+  }
+
+  .terminal-body .prompt { color: var(--accent); }
+  .terminal-body .output { color: var(--muted); }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-label">Основе дистрибуираног програмирања · Олакшани пројектни задатак</div>
+    <h1 class="main-title">Vote<span>Stream</span></h1>
+    <p class="subtitle">Дистрибуирани систем за гласање у реалном времену</p>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- 1. О задатку -->
+    <section>
+      <div class="section-number">01 — О задатку</div>
+      <h2>О задатку</h2>
+      <p>VoteStream је дистрибуирани систем за креирање анкета и прикупљање гласова у реалном времену. За разлику од редовних имплементација које користе fullstack веб архитектуру са React фронтом, MySQL базом и JWT аутентификацијом, овај задатак се фокусира на један кључни дистрибуирани концепт — <strong>message queue</strong> и <strong>producer-consumer образац</strong> — имплементиран у Пајтону са минималним веб интерфејсом.</p>
+      <div class="callout">
+        Систем не захтева базу података, корисничке налоге, аутентификацију ни комплексне REST API-је. Резултати гласања чувају се у меморији процеса. Циљ је разумети како поруке путују између компоненти дистрибуираног система.
+      </div>
+    </section>
+
+    <!-- 2. Архитектура -->
+    <section>
+      <div class="section-number">02 — Архитектура система</div>
+      <h2>Архитектура система</h2>
+      <p>Систем се састоји од три одвојене компоненте које раде као засебни <em>Python</em> процеси:</p>
+
+      <div class="arch-grid">
+        <div class="arch-card">
+          <span class="arch-label">Producer</span>
+          <p>Веб сервер који прима гласове од корисника. Сваки глас пакује као поруку и ставља је у ред чекања. Не зна ништа о томе ко ће глас обрадити нити када.</p>
+        </div>
+        <div class="arch-card">
+          <span class="arch-label">Queue</span>
+          <p>Централни ред чекања — засебан процес (налик RabbitMQ) који прима поруке од Producer-а и чува их докле Consumer не преузме. Не зна ништа о гласању.</p>
+        </div>
+        <div class="arch-card">
+          <span class="arch-label">Consumer</span>
+          <p>Процес koji непрекидно слуша queue, преузима поруке, обрађује их (броји гласове) и ажурира резултате. Једино место где се гласови заправо броје.</p>
+        </div>
+      </div>
+
+      <h4>Дијаграм тока поруке кроз систем</h4>
+      <div class="flow-box">
+        [Browser] → POST /vote → [Producer] → Queue → [Consumer] → резултати у меморији<br><br>
+        [Browser] → GET /results ←─────────────────────── [Consumer Web API]
+      </div>
+      <p>Све три компоненте могу се покренути на истој машини (различити портови) или на различитим машинама у мрежи.</p>
+    </section>
+
+    <!-- 3. Технички стек -->
+    <section>
+      <div class="section-number">03 — Технички стек</div>
+      <h2>Технички стек</h2>
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Технологија</th>
+            <th>Улога</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Python 3.10+</td><td>Програмски језик и окружење</td></tr>
+          <tr><td>Flask</td><td>Минималан веб сервер за Producer и Consumer web API (<code>pip install flask</code>)</td></tr>
+          <tr><td>RabbitMQ</td><td>Message broker koji имплементира queue (локална инсталација или Docker)</td></tr>
+          <tr><td>pika</td><td>Python библиотека за комуникацију са RabbitMQ (<code>pip install pika</code>)</td></tr>
+          <tr><td>React / Angular</td><td>Минимални frontend</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 4. Компоненте -->
+    <section>
+      <div class="section-number">04 — Компоненте система</div>
+      <h2>Компоненте система</h2>
+
+      <h3>4.1 Producer (producer.py)</h3>
+      <p>Producer је Flask веб сервер koji слуша на порту <code>5001</code>. Излаже две HTTP руте:</p>
+      <ul class="styled">
+        <li><code>GET /</code> — Враћа HTML страницу са формом за гласање. Форма приказује назив анкете и све опције као radio дугмад.</li>
+        <li><code>POST /vote</code> — Прима глас из форме. Не обрађује глас директно. Креира поруку у JSON формату са пољима <code>poll_id</code>, <code>option</code>, <code>voter_id</code> (насумични UUID) и <code>timestamp</code>. Поруку ставља у RabbitMQ queue под именом <code>votes</code>.</li>
+      </ul>
+      <div class="callout">
+        Producer мора бити отпоран на недоступност queue-а — ако RabbitMQ није покренут, <code>/vote</code> враћа грешку кориснику уместо да сруши сервер. Producer не зна колико гласова је стигло, ко је победио, ни да ли је Consumer уопште жив.
+      </div>
+
+      <h3>4.2 Queue — RabbitMQ</h3>
+      <p>Queue се не имплементира од нуле — користи се RabbitMQ као готов message broker. Студент треба да разуме и демонстрира следеће концепте:</p>
+      <ul class="styled">
+        <li><strong>Queue трајност (durability)</strong> — Queue се декларише са <code>durable=True</code> (преживи рестарт RabbitMQ-а). Поруке се шаљу са <code>delivery_mode=2</code> (persistent) — уписују се на диск пре потврде.</li>
+        <li><strong>Acknowledgment</strong> — Consumer експлицитно потврђује (<code>basic_ack</code>) сваку поруку тек након успешне обраде. Ако Consumer испадне током обраде, RabbitMQ враћа поруку у queue.</li>
+        <li><strong>Prefetch</strong> — Consumer се конфигурише са <code>basic_qos(prefetch_count=1)</code> — преузима само једну поруку одједном, не узима следећу док не потврди претходну.</li>
+      </ul>
+      <div class="callout">
+        Ова три концепта заједно гарантују да ниједан глас неће бити изгубљен чак и ако Consumer падне током обраде.
+      </div>
+
+      <h3>4.3 Consumer (consumer.py)</h3>
+      <p>Consumer је <em>Python</em> процес koji ради две ствари истовремено путем два thread-а:</p>
+      <ul class="styled">
+        <li><strong>Thread 1 — Queue listener:</strong> Непрекидно слуша RabbitMQ queue <code>votes</code>. Када стигне нова порука, парсира JSON, извлачи <code>poll_id</code> и <code>option</code>, повећава бројач у речнику <code>results</code> и шаље <code>basic_ack</code>.</li>
+        <li><strong>Thread 2 — Web API:</strong> Flask сервер на порту <code>5002</code> са једном рутом: <code>GET /results</code> — враћа тренутно стање речника <code>results</code> као JSON. Ову руту позива browser да прикаже резултате.</li>
+      </ul>
+      <p>Приступ речнику <code>results</code> из оба thread-а мора бити заштићен <code>threading.Lock()</code> да не дође до race condition-а при истовременом писању и читању.</p>
+
+      <h3>4.4 Frontend</h3>
+      <p>Једна HTML страница која садржи два дела:</p>
+      <ul class="styled">
+        <li><strong>Форма за гласање</strong> — HTML форма која шаље POST захтев на Producer (<code>http://localhost:5001/vote</code>). Опције гласања могу бити хардкодиране или учитане са Producer endpoint-а при отварању странице.</li>
+        <li><strong>Приказ резултата</strong> — Сваке 2 секунде позива се <code>GET http://localhost:5002/results</code> и ажурира DOM са тренутним бројевима гласова. Приказати као хоризонталне progress barове са постотком.</li>
+      </ul>
+    </section>
+
+    <!-- 5. Ток гласа -->
+    <section>
+      <div class="section-number">05 — Ток гласа кроз систем</div>
+      <h2>Ток једног гласа кроз систем</h2>
+      <ol class="steps">
+        <li>Корисник отвори <code>index.html</code> у претраживачу</li>
+        <li>Кликне на опцију и притисне <strong>Гласај</strong></li>
+        <li>JavaScript шаље <code>POST http://localhost:5001/vote</code> са JSON телом <code>{"poll_id": "anketa1", "option": "opcija_a"}</code></li>
+        <li>Producer пакује поруку и позива <code>channel.basic_publish(exchange='', routing_key='votes', body=json_poruka)</code></li>
+        <li>RabbitMQ прима поруку и смешта је у queue <code>votes</code> на диск (persistent)</li>
+        <li>Consumer-ов listener thread преузима поруку из queue-а</li>
+        <li>Consumer парсира JSON, извршава <code>results["anketa1"]["opcija_a"] += 1</code> под lock-ом</li>
+        <li>Consumer шаље <code>channel.basic_ack(delivery_tag)</code> — потврда да је порука обрађена</li>
+        <li>RabbitMQ брише поруку из queue-а</li>
+        <li>Сваких 2 секунде browser позива <code>GET http://localhost:5002/results</code> и приказује ажуриране бројеве</li>
+      </ol>
+    </section>
+
+    <!-- 6. Структура -->
+    <section>
+      <div class="section-number">06 — Структура пројекта</div>
+      <h2>Структура пројекта</h2>
+      <div class="file-tree">
+        <span class="dir">votestream/</span><br>
+        &nbsp;&nbsp;├── <span class="file">producer.py</span> &nbsp;<span class="file-comment"># Flask сервер, прима гласове, шаље у queue</span><br>
+        &nbsp;&nbsp;├── <span class="file">consumer.py</span> &nbsp;<span class="file-comment"># Queue listener + Flask API за резултате</span><br>
+        &nbsp;&nbsp;├── <span class="file">config.py</span> &nbsp;&nbsp;&nbsp;<span class="file-comment"># Заједничка конфигурација (host, port, queue назив)</span><br>
+        &nbsp;&nbsp;├── <span class="file">index.html</span> &nbsp;&nbsp;<span class="file-comment"># Једнофајлни frontend</span><br>
+        &nbsp;&nbsp;├── <span class="file">requirements.txt</span> <span class="file-comment"># flask, pika</span><br>
+        &nbsp;&nbsp;└── <span class="file">README.md</span> &nbsp;&nbsp;&nbsp;<span class="file-comment"># Упутство за покретање</span>
+      </div>
+    </section>
+
+    <!-- 7. Покретање -->
+    <section>
+      <div class="section-number">07 — Покретање система</div>
+      <h2>Покретање система</h2>
+      <p>Систем се покреће у три одвојена терминал прозора, редом:</p>
+
+      <h4>Корак 1 — Покренути RabbitMQ</h4>
+      <div class="terminal-block">
+        <div class="terminal-header">
+          <span class="terminal-dot dot-r"></span>
+          <span class="terminal-dot dot-y"></span>
+          <span class="terminal-dot dot-g"></span>
+          terminal
+        </div>
+        <div class="terminal-body">
+          <span class="output"># Директно:</span><br>
+          <span class="prompt">$</span> rabbitmq-server<br><br>
+          <span class="output"># или путем Docker-а:</span><br>
+          <span class="prompt">$</span> docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+        </div>
+      </div>
+
+      <h4>Корак 2 — Покренути Consumer</h4>
+      <p>Consumer мора бити покренут пре Producer-а да queue постоји:</p>
+      <div class="terminal-block">
+        <div class="terminal-header">
+          <span class="terminal-dot dot-r"></span>
+          <span class="terminal-dot dot-y"></span>
+          <span class="terminal-dot dot-g"></span>
+          terminal
+        </div>
+        <div class="terminal-body">
+          <span class="prompt">$</span> python consumer.py<br>
+          <span class="output">[✓] Примљен глас: anketa1 → opcija_a</span>
+        </div>
+      </div>
+
+      <h4>Корак 3 — Покренути Producer</h4>
+      <div class="terminal-block">
+        <div class="terminal-header">
+          <span class="terminal-dot dot-r"></span>
+          <span class="terminal-dot dot-y"></span>
+          <span class="terminal-dot dot-g"></span>
+          terminal
+        </div>
+        <div class="terminal-body">
+          <span class="prompt">$</span> python producer.py<br>
+          <span class="output">Producer покренут на http://localhost:5001</span>
+        </div>
+      </div>
+
+      <h4>Корак 4</h4>
+      <p>Отворити <code>index.html</code> у претраживачу и гласати.</p>
+    </section>
+
+    <!-- 8. Одбрана -->
+    <section>
+      <div class="section-number">08 — Одбрана</div>
+      <h2>Шта треба демонстрирати на одбрани</h2>
+      <ul class="styled">
+        <li><strong>Дистрибуираност</strong> — Покренути Consumer и Producer у одвојеним терминалима и показати да раде независно. Угасити Consumer, послати неколико гласова кроз Producer, поново покренути Consumer и показати да су гласови сачувани у queue-у и биће обрађени.</li>
+        <li><strong>Acknowledgment и трајност</strong> — Угасити Consumer током обраде, показати да се глас није изгубио (порука остаје у queue-у докле се не потврди).</li>
+        <li><strong>Realtime приказ</strong> — Отворити frontend у два различита прозора и гласати из једног, показати да се резултати ажурирају у другом без освежавања странице.</li>
+        <li><strong>Race condition заштита</strong> — Објаснити зашто је <code>threading.Lock()</code> неопходан у Consumer-у и шта би се десило без њега.</li>
+      </ul>
+    </section>
+
+    <!-- 9. Ограничења -->
+    <section>
+      <div class="section-number">09 — Ограничења</div>
+      <h2>Ограничења система</h2>
+      <p>Ограничења олакшаног задатка (не треба их решавати):</p>
+      <ul class="styled">
+        <li>Резултати се губе када се Consumer рестартује (нема базе података)</li>
+        <li>Једна анкета је хардкодована у коду (нема CRUD за анкете)</li>
+        <li>Нема аутентификације — исти корисник може гласати више пута</li>
+        <li>Нема хоризонталног скалирања consumer-а (један consumer процес)</li>
+      </ul>
+    </section>
+
+    <!-- 10. Оцењивање -->
+    <section>
+      <div class="section-number">10 — Оцењивање</div>
+      <h2>Критеријуми оцењивања</h2>
+      <table class="criteria-table">
+        <thead>
+          <tr>
+            <th>Критеријум</th>
+            <th>Опис</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Producer ради</td>
+            <td>Flask сервер прима глас и успешно ставља поруку у RabbitMQ</td>
+          </tr>
+          <tr>
+            <td>Consumer ради</td>
+            <td>Listener преузима поруке, броји гласове, потврђује пријем</td>
+          </tr>
+          <tr>
+            <td>Queue трајност</td>
+            <td><code>durable=True</code> и <code>delivery_mode=2</code> исправно конфигурисани</td>
+          </tr>
+          <tr>
+            <td>Acknowledgment</td>
+            <td><code>basic_ack</code> се шаље тек након успешне обраде, не пре</td>
+          </tr>
+          <tr>
+            <td>Thread safety</td>
+            <td><code>threading.Lock()</code> коришћен при приступу <code>results</code> речнику</td>
+          </tr>
+          <tr>
+            <td>Frontend</td>
+            <td>Приказ резултата освежава се аутоматски без reload-а странице</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  VoteStream · Дистрибуирани систем за гласање у реалном времену
+</footer>
+
+</body>
+</html>
