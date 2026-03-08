@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODP — Projektni Zadaci</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080a10;
+      --bg2: #0d1018;
+      --ink: #f0eee8;
+      --ink-mid: #c8c4bc;
+      --ink-dim: #6b7080;
+      --ink-faint: #363c48;
+      --gold: #d4a44c;
+      --gold-light: #e8c070;
+      --gold-pale: rgba(212,164,76,0.12);
+      --red: #e05555;
+      --red-pale: rgba(224,85,85,0.12);
+      --border: rgba(255,255,255,0.07);
+      --border-mid: rgba(255,255,255,0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* ── DECORATIVE BG SHAPES ── */
+    .bg-shape {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-shape-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(212,164,76,0.07) 0%, transparent 70%);
+      top: -200px; right: -200px;
+    }
+
+    .bg-shape-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(224,85,85,0.06) 0%, transparent 70%);
+      bottom: 100px; left: -150px;
+    }
+
+    /* ── WRAPPER ── */
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: relative;
+      z-index: 10;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    .nav-tag {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--ink-faint);
+      letter-spacing: 1px;
+      font-style: italic;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 100px 0 80px;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(52px, 7vw, 96px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -3px;
+      color: var(--ink);
+      margin-bottom: 32px;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      max-width: 520px;
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--ink-dim);
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-item {}
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--ink-faint);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 72px 0 36px;
+      border-top: 1px solid var(--border-mid);
+    }
+
+    .section-head-left {}
+
+    .section-kicker {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-kicker.gold { color: var(--gold); }
+    .section-kicker.red  { color: var(--red); }
+
+    .section-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .section-count {
+      font-family: 'Syne', sans-serif;
+      font-size: 72px;
+      font-weight: 800;
+      letter-spacing: -3px;
+      line-height: 1;
+      opacity: 0.07;
+      color: var(--ink);
+      user-select: none;
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .cards-grid.two-col {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ── CARD ── */
+    .card {
+      display: block;
+      text-decoration: none;
+      border: 1px solid var(--border-mid);
+      border-radius: 16px;
+      padding: 36px 40px;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+      animation: cardIn 0.6s cubic-bezier(0.2, 0, 0, 1) both;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3);
+      border-color: transparent;
+    }
+
+    .card.gold-card:hover  { box-shadow: 0 20px 60px rgba(212,164,76,0.18), 0 4px 16px rgba(212,164,76,0.1); }
+    .card.red-card:hover   { box-shadow: 0 20px 60px rgba(224,85,85,0.18),  0 4px 16px rgba(224,85,85,0.1); }
+    .card.green-card:hover { box-shadow: 0 20px 60px rgba(90,242,162,0.15), 0 4px 16px rgba(90,242,162,0.08); }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.10s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.20s; }
+
+    /* card accent bar */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--card-accent, var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .card:hover::before { transform: scaleX(1); }
+
+    /* card bg glow */
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 100%, var(--card-glow, rgba(200,146,58,0.06)) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .card:hover::after { opacity: 1; }
+
+    .gold-card { --card-accent: var(--gold); --card-glow: rgba(200,146,58,0.07); }
+    .red-card  { --card-accent: var(--red);  --card-glow: rgba(192,57,43,0.07); }
+
+    /* ── CARD CONTENT ── */
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .card-index {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid;
+    }
+
+    .gold-card .card-index {
+      color: var(--gold);
+      border-color: rgba(200,146,58,0.3);
+      background: var(--gold-pale);
+    }
+
+    .red-card .card-index {
+      color: var(--red);
+      border-color: rgba(192,57,43,0.25);
+      background: var(--red-pale);
+    }
+
+    .card-arrow {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border-mid);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-faint);
+      font-size: 15px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .card:hover .card-arrow {
+      border-color: var(--card-accent);
+      color: var(--card-accent);
+      transform: rotate(45deg);
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-dim);
+      line-height: 1.5;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--ink-dim);
+      letter-spacing: 0.3px;
+    }
+
+    /* ── SUPER CARDS (larger) ── */
+    .super-card .card-title { font-size: 32px; }
+
+    .super-card .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 18px;
+    }
+
+    .super-card .card-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .card-features {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--ink-dim);
+      font-weight: 400;
+    }
+
+    .feature-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      font-size: 13px;
+      color: var(--ink-faint);
+      font-style: italic;
+    }
+
+    .footer-right {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .wrap { padding: 0 24px; }
+      .cards-grid.two-col { grid-template-columns: 1fr; }
+      .hero-stats { gap: 28px; }
+      .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .section-count { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-shape bg-shape-1"></div>
+  <div class="bg-shape bg-shape-2"></div>
+
+  <!-- NAV -->
+  <div class="wrap">
+    <nav>
+      <div class="nav-logo">Projektne<span>·</span>Specifikacije</div>
+      <div class="nav-tag">Osnove distribuiranog programiranja</div>
+    </nav>
+  </div>
+
+  <!-- REDOVNI PROJEKTI -->
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-kicker gold">Specifikacije 01</div>
+        <div class="section-name">Redovni Projekti</div>
+      </div>
+      <div class="section-count">04</div>
+    </div>
+
+    <div class="cards-grid two-col">
+
+      <a href="olaksani-projekti/celestia-codex.html" class="card gold-card">
+        <div class="card-top">
+          <span class="card-index">C01</span>
+          <div class="card-arrow">↗</div>
+        </div>
+        <div class="card-title">Celestia Codex</div>
+        <div class="card-subtitle">Sistem za upravljanje herojima i odredima u fantasy svetu</div>
+        <div class="card-tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">JWT</span>
+          <span class="tag">CRUD</span>
+        </div>
+      </a>
+
+      <a href="olaksani-projekti/wavely.html" class="card gold-card">
+        <div class="card-top">
+          <span class="card-index">C02</span>
+          <div class="card-arrow">↗</div>
+        </div>
+        <div class="card-title">Wavely</div>
+        <div class="card-subtitle">Moderna streaming platforma za upravljanje muzikom i plejlistama</div>
+        <div class="card-tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">JWT</span>
+          <span class="tag">3× M:N</span>
+        </div>
+      </a>
+
+      <a href="olaksani-projekti/forgeboard.html" class="card gold-card">
+        <div class="card-top">
+          <span class="card-index">C03</span>
+          <div class="card-arrow">↗</div>
+        </div>
+        <div class="card-title">ForgeBoard</div>
+        <div class="card-subtitle">Platforma za kolekcije i sesije društvenih igara</div>
+        <div class="card-tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">JWT</span>
+        </div>
+      </a>
+
+      <a href="olaksani-projekti/trailsync.html" class="card gold-card">
+        <div class="card-top">
+          <span class="card-index">C04</span>
+          <div class="card-arrow">↗</div>
+        </div>
+        <div class="card-title">Trail Sync</div>
+        <div class="card-subtitle">Platforma za planiranje i praćenje planinarskih ruta</div>
+        <div class="card-tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">JWT</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="wrap">
+    <footer>
+      <div class="footer-left">Osnove distribuiranog programiranja · Projektni zadaci</div>
+      <div class="footer-right">ODP · 2025/26</div>
+    </footer>
+  </div>
+
+</body>
+</html>
