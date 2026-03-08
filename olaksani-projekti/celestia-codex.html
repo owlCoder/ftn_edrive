@@ -827,9 +827,9 @@
         <p> Korisnik ima sledeće mogućnosti u radu sa Squad Builder: </p>
         <ul class="prose-list">
           <li>Kreiranje odreda sa nazivom i izborom tačno 4 heroja iz sopstvene kolekcije</li>
-          <li>Prikaz svih odredu korisnika sa sastavom i elementima heroja</li>
-          <li>Izmena naziva i sastava postojećeg odredu</li>
-          <li>Brisanje odredu</li>
+          <li>Prikaz svih odreda korisnika sa sastavom i elementima heroja</li>
+          <li>Izmena naziva i sastava postojećeg odreda</li>
+          <li>Brisanje odreda</li>
           <li>Implementirani validaciju da isti heroj ne može biti dva puta u istom odredu, a odred mora imati tačno 4 člana — ni manje ni više</li>
           <li>Vizuelni prikaz elementalnih sinergija unutar odreda (objašnjeno u Poglavlju III)</li>
         </ul>
@@ -838,7 +838,7 @@
         <ul class="prose-list">
           <li>Dodavanje novih heroja u globalni katalog: <strong>naziv, element, ilustracija/slika, tip oružja, raritet, region, opis</strong>
           </li>
-          <li>Izmena i brisanje postojećih heroja iz kataloga</li>
+          <li>Izmena i brisanje postojećih heroja iz kataloga (obratiti pažnju ako se heroj nalazi u odredu)</li>
           <li>Pregled liste svih registrovanih korisnika sa njihovim ulogama</li>
           <li>Promena uloge korisnika (npr. promovisanje u admina ili vraćanje na standardnog korisnika)</li>
           <li>Pregled <code>evidencije aktivnosti</code> — sistem automatski beleži ko je, kada i šta uradio u aplikaciji i to čuva u bazi podataka u tabeli <code>audits</code>
@@ -917,7 +917,7 @@
         <div class="concept-grid">
           <div class="concept-card" style="--card-color: var(--accent-cryo)">
             <div class="concept-card-term">Nivo heroja (level)</div>
-            <p>Ceo broj od <strong>1 do 90</strong>. Koliko je igrač unapredio heroja po nivoima. Sa Implementaione strane — numeričko polje sa min/max ograničenjem. Validacija mora odbiti sve van opsega 1–90. </p>
+            <p>Ceo broj od <strong>1 do 90</strong>. Koliko je igrač unapredio heroja po nivoima. Sa Implementacione strane — numeričko polje sa min/max ograničenjem. Validacija mora odbiti sve van opsega 1–90. </p>
           </div>
           <div class="concept-card" style="--card-color: var(--accent-electro)">
             <div class="concept-card-term">Konstelacija (constellation)</div>
@@ -933,7 +933,7 @@
           </div>
         </div>
         <div class="subsection-title">III.3 — Sedam elemenata</div>
-        <p> Element je jedna od sedam kategorija kojima heroj može pripadati. Ovo su izmišljeni nazivi specifični za temu projekta — sa programske strane, to su string konstante u TypeScript-u i <code>ENUM</code> vrednosti u MySQL-u. Svaki element se vizuelno razlikuje bojom i ikonom na frontendu, što zahteva definisanje mape <code>element → boja/ikona</code> u TypeScript kodu: </p>
+        <p> Element je jedna od sedam kategorija kojima heroj može pripadati. Implementaciono, to su <code>string</code>  konstante u TypeScript-u i <code>ENUM</code> vrednosti u MySQL-u. Svaki element se vizuelno razlikuje bojom i ikonicom na frontend-u, što zahteva definisanje mape <code>element → boja/ikona</code> u TypeScript kodu: </p>
         <div class="element-pills">
           <span class="element-pill ep-pyro">🔥 Pyro — Vatra</span>
           <span class="element-pill ep-hydro">💧 Hydro — Voda</span>
@@ -958,7 +958,7 @@
         <p> Potrebno je definisati statički TypeScript objekat koji mapira parove elemenata na naziv sinergije, zatim u Squad Builder komponenti proći kroz elemente izabranih heroja i proveriti da li postoji poklapanje. Predefinisane sinergije: </p>
         <div class="concept-grid">
           <div class="concept-card" style="--card-color: var(--accent-pyro)">
-            <div class="concept-card-term">🔥 Pyro + 💧 Hydros</div>
+            <div class="concept-card-term">🔥 Pyro + 💧 Hydro</div>
             <p>
               <strong style="color:var(--accent-pyro)">Vaporize</strong> — kombinacija vatre i vode. Prikazati kada odred sadrži heroja sa oba ova elementa.
             </p>
@@ -1013,7 +1013,7 @@
           <div class="api-route">
             <span class="method post">POST</span>
             <span class="route-path">/logout</span>
-            <span class="route-auth">🔐 user</span>
+            <span class="route-auth">🔐 user</span> <span class="route-auth">🔐 admin</span>
             <span class="route-desc">Beleži odjavu korisnika u audit</span>
           </div>
         </div>
@@ -1103,12 +1103,17 @@
           </div>
         </div>
         <div class="api-block">
-          <div class="api-block-header">Admin · /api/admin</div>
+          <div class="api-block-header">Admin · /api/users</div>
           <div class="api-route">
             <span class="method get">GET</span>
-            <span class="route-path">/users</span>
+            <span class="route-path">/all</span>
             <span class="route-auth">🔐 admin</span>
             <span class="route-desc">Lista svih korisnika</span>
+          </div>
+          <div class="api-route">
+            <span class="method put">GET</span>
+            <span class="route-path">/users/:id</span>
+            <span class="route-desc">Javni profil korisnika</span>
           </div>
           <div class="api-route">
             <span class="method put">PUT</span>
@@ -1116,11 +1121,14 @@
             <span class="route-auth">🔐 admin</span>
             <span class="route-desc">Promena uloge korisnika</span>
           </div>
+        </div>
+        <div class="api-block">
+          <div class="api-block-header">Admin · /api/audits</div>
           <div class="api-route">
             <span class="method get">GET</span>
             <span class="route-path">/logs</span>
             <span class="route-auth">🔐 admin</span>
-            <span class="route-desc">Pregled evidencije aktivnosti</span>
+            <span class="route-desc">Lista svih zapisa evidencije događaja</span>
           </div>
         </div>
       </section>
@@ -1158,7 +1166,7 @@
           <div class="screen-card" style="--card-color: var(--gold)">
             <div class="screen-role">Administrator</div>
             <ul class="screen-list">
-              <li>Administrativni Dashboard</li>
+              <li>Administrativni panel</li>
               <li>Upravljanje katalogom heroja</li>
               <li>Dodavanje novog heroja</li>
               <li>Upravljanje korisnicima</li>
@@ -1252,7 +1260,7 @@
                   <code>squad_name</code>
                 </td>
                 <td>3–80 karaktera, obavezno</td>
-                <td>„Naziv odredu je obavezan"</td>
+                <td>„Naziv odreda je obavezan"</td>
               </tr>
               <tr>
                 <td>
