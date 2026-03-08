@@ -946,7 +946,7 @@
         <div class="section-number">Poglavlje I</div>
         <h2 class="section-title">Opis projekta</h2>
         <p>
-          <code>NexusHub</code> je distribuirana fullstack web aplikacija za upravljanje timovima i projektima. Aplikacija ima deo koji korisnik vidi i koristi u pretraživaču (<em>frontend</em> — React + TypeScript, deployovan na Vercel), i serverski deo koji radi kao REST API, prihvata zahteve i podatke čuva u MySQL bazi podataka sa replikacijom (<em>backend</em> — Node.js + Express + mysql2).
+          <code>NexusHub</code> je distribuirana fullstack web aplikacija za upravljanje timovima i projektima. Aplikacija ima deo koji korisnik vidi i koristi u pretraživaču (<em>frontend</em> — React + TypeScript), i serverski deo koji radi kao REST API, prihvata zahteve i podatke čuva u MySQL bazi podataka sa replikacijom (<em>backend</em> — Node.js + Express + mysql2).
         </p>
         <div class="callout">
           „NexusHub funkcioniše kao kombinacija Trello-a i Slack-a — korisnik kreira nalog, formira timove, dodaje članove u timove, kreira projekte i dodeljuje zadatke članovima tima. Svaki korisnik može biti u više timova, a svaki tim može imati više aktivnih projekata. Sistem je distribuiran — baza podataka radi u Master-Slave replikaciji sa automatskim failoverom i balansiranjem čitanja između replika."
@@ -1218,9 +1218,9 @@
       ═══════════════════════════ -->
       <section class="section">
         <div class="section-number">Poglavlje IV</div>
-        <h2 class="section-title">Replikacija, Load Balancing i Failover</h2>
+        <h2 class="section-title">Replikacija i Failover</h2>
         <p>
-          Ovo poglavlje opisuje distribuiranu komponentu sistema — upravljanje konekcijama ka MySQL bazi podataka u scenariju sa jednim Master čvorom i dva Slave čvora. Celokupna logika replikacije i failovera implementira se na nivou serverske aplikacije, u posebnom modulu koji se naziva <code>db.ts</code> (ili <code>dbManager.ts</code>).
+         Aplikacija mora biti delimično otporna na otkaze, to se postiže uvođenjem distribuirane komponente sistema — upravljanje konekcijama ka MySQL bazi podataka u scenariju sa jednim Master čvorom i dva Slave čvora. Celokupna logika replikacije i failovera implementira se na nivou serverske aplikacije, u posebnom modulu koji se naziva <code>db.ts</code> (ili <code>dbManager.ts</code>).
         </p>
         <div class="callout amber">
           Ključni princip: <strong>sve operacije pisanja (INSERT, UPDATE, DELETE) uvek idu isključivo na Master</strong>. Operacije čitanja (SELECT) distribuiraju se između dostupnih Slave čvorova radi ravnomerne raspodele opterećenja. Ako su oba Slave čvora nedostupna, čitanje pada na Master kao poslednju liniju odbrane.
@@ -1234,17 +1234,7 @@
           U <code>db.ts</code> modulu definišu se tri odvojena <code>mysql2</code> connection pool-a — po jedan za svaki čvor. Svaki pool ima definisan <code>host</code>, <code>port</code>, <code>user</code>, <code>password</code> i <code>database</code> koji se čitaju iz environment varijabli.
         </p>
 
-        <div class="subsection-title">IV.2 — Load Balancing između Slave čvorova</div>
-        <p>
-          Load balancing implementirati kao <code>Round-Robin</code> algoritam nad listom zdravih Slave čvorova. Modul čuva interni brojač koji pri svakom zahtevu za čitanje bira sledeći Slave u nizu (kružno). Ako je Slave nedostupan (označen kao nezdrav), preskače se i bira sledeći zdravi.
-        </p>
-        <ul class="prose-list">
-          <li>Implementirati funkciju <code>getReadConnection(): Pool</code> koja vraca connection pool slave čvora prema Round-Robin logici</li>
-          <li>Implementirati funkciju <code>getWriteConnection(): Pool</code> koja uvek vraća Master pool</li>
-          <li>Svaki Express route handler mora koristiti ispravnu funkciju — <code>GET</code> rute koriste <code>getReadConnection()</code>, sve ostale koriste <code>getWriteConnection()</code></li>
-        </ul>
-
-        <div class="subsection-title">IV.3 — Health Check sistem</div>
+        <div class="subsection-title">IV.2 — Health Check sistem</div>
         <p>
           Health Check je mehanizam kojim aplikacija periodično proverava da li je svaki čvor baze dostupan i ispravno radi. Implementirati kao <code>setInterval</code> koji se izvršava svakih <strong>10 sekundi</strong> i šalje <code>SELECT 1</code> upit svakom čvoru.
         </p>
@@ -1272,7 +1262,7 @@
           Rezultati health check-a čuvaju se u memoriji servera (TypeScript objekat/Map). Stanje se izlaže kroz poseban <code>GET /api/health</code> endpoint koji Admin panel koristi da bi prikazao tabelu zdravlja čvorova u realnom vremenu.
         </p>
 
-        <div class="subsection-title">IV.4 — Automatski Failover</div>
+        <div class="subsection-title">IV.3 — Automatski Failover</div>
         <p>
           Failover je procedura automatskog prelaska na rezervni čvor kada primarni prestane da radi. U ovom sistemu postoje dva tipa failovera:
         </p>
@@ -1293,7 +1283,7 @@
         <div class="subsection-title">IV.5 — Struktura db.ts modula</div>
         <p>Cela logika replikacije enkapsulirana je u jednom modulu koji ostatak aplikacije uvozi. Modul izvozi:</p>
         <ul class="prose-list">
-          <li><code>getReadConnection()</code> — vraća pool zdravog Slave čvora (Round-Robin), ili Master ako nema Slave-ova</li>
+          <li><code>getReadConnection()</code> — vraća pool zdravog Slave čvora, ili Master ako nema Slave-ova</li>
           <li><code>getWriteConnection()</code> — uvek vraća Master pool</li>
           <li><code>getHealthStatus()</code> — vraća TypeScript objekat sa stanjem svakog čvora (za health endpoint)</li>
           <li><code>startHealthCheck(interval: number)</code> — pokretanje periodičnog health check-a</li>
@@ -1319,13 +1309,13 @@
           <div class="api-block-header">Auth · /api/auth</div>
           <div class="api-route"><span class="method post">POST</span><span class="route-path">/register</span><span class="route-desc">Registracija novog korisnika</span></div>
           <div class="api-route"><span class="method post">POST</span><span class="route-path">/login</span><span class="route-desc">Prijava — vraća JWT token</span></div>
-          <div class="api-route"><span class="method post">POST</span><span class="route-path">/logout</span><span class="route-auth">🔐 user</span><span class="route-desc">Beleži odjavu u audit log</span></div>
-          <div class="api-route"><span class="method get">GET</span><span class="route-path">/me</span><span class="route-auth">🔐 user</span><span class="route-desc">Podaci trenutno prijavljenog korisnika</span></div>
+          <div class="api-route"><span class="method post">POST</span><span class="route-path">/logout</span><span class="route-auth">🔐 user</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Beleži odjavu u audit log</span></div>
         </div>
 
         <div class="api-block">
           <div class="api-block-header">Timovi · /api/teams</div>
           <div class="api-route"><span class="method get">GET</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Timovi kojima korisnik pripada</span></div>
+           <div class="api-route"><span class="method get">GET</span><span class="route-path">/all</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Lista svih timova u sistemu</span></div>
           <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth">🔐 user</span><span class="route-desc">Kreiranje novog tima (korisnik postaje owner)</span></div>
           <div class="api-route"><span class="method get">GET</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Detalji tima sa listom članova</span></div>
           <div class="api-route"><span class="method put">PUT</span><span class="route-path">/:id</span><span class="route-auth">🔐 user</span><span class="route-desc">Izmena podataka tima (samo owner)</span></div>
@@ -1368,6 +1358,7 @@
           <div class="api-route"><span class="method post">POST</span><span class="route-path">/</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Kreiranje novog taga (globalno)</span></div>
           <div class="api-route"><span class="method delete">DEL</span><span class="route-path">/:id</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Brisanje taga</span></div>
         </div>
+        
 
         <div class="api-block">
           <div class="api-block-header">Health · /api/health</div>
@@ -1376,12 +1367,35 @@
           <div class="api-route"><span class="method post">POST</span><span class="route-path">/failover</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Ručno pokretanje failover procedure</span></div>
         </div>
 
+        
         <div class="api-block">
-          <div class="api-block-header">Admin · /api/admin</div>
-          <div class="api-route"><span class="method get">GET</span><span class="route-path">/users</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Lista svih korisnika sa statistikama</span></div>
-          <div class="api-route"><span class="method patch">PATCH</span><span class="route-path">/users/:id/role</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Promena uloge korisnika</span></div>
-          <div class="api-route"><span class="method get">GET</span><span class="route-path">/teams</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Lista svih timova u sistemu</span></div>
-          <div class="api-route"><span class="method get">GET</span><span class="route-path">/logs</span><span class="route-auth admin">⭐ admin</span><span class="route-desc">Kompletni audit log (sa paginacijom)</span></div>
+          <div class="api-block-header">Admin · /api/users</div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/all</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Lista svih korisnika</span>
+          </div>
+          <div class="api-route">
+            <span class="method put">GET</span>
+            <span class="route-path">/users/:id</span>
+            <span class="route-desc">Javni profil korisnika</span>
+          </div>
+          <div class="api-route">
+            <span class="method put">PUT</span>
+            <span class="route-path">/users/:id/role</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Promena uloge korisnika</span>
+          </div>
+        </div>
+        <div class="api-block">
+          <div class="api-block-header">Admin · /api/audits</div>
+          <div class="api-route">
+            <span class="method get">GET</span>
+            <span class="route-path">/logs</span>
+            <span class="route-auth">🔐 admin</span>
+            <span class="route-desc">Lista svih zapisa evidencije događaja (sa paginacijom na serverskoj i klijentskoj strani)</span>
+          </div>
         </div>
       </section>
 
