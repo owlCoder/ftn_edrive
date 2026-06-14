@@ -1,0 +1,107 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Danijel/Desktop/postavke/coder/simulation/modelsim
+Ecoder
+Z1 w1635776390
+Z2 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
+Z3 DPx6 altera 11 dffeas_pack 0 22 dc5N=DKXMMTVYdUQ@D3FA2
+Z4 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
+Z5 DPx6 altera 28 altera_primitives_components 0 22 ca:ehlQAg4;_gVV:^8MAg3
+Z6 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z7 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z8 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z9 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z10 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 0
+R0
+Z11 8C:/Users/Danijel/Desktop/postavke/coder/coder.vhd
+Z12 FC:/Users/Danijel/Desktop/postavke/coder/coder.vhd
+l0
+L9 1
+V<6OWZh[lSMM@V6:c7=PbH2
+!s100 k2@IDP@9B25OZBSV26gK52
+Z13 OV;C;2020.1;71
+31
+Z14 !s110 1635777099
+!i10b 1
+Z15 !s108 1635777099.000000
+Z16 !s90 -reportprogress|300|-93|-work|work|C:/Users/Danijel/Desktop/postavke/coder/coder.vhd|
+Z17 !s107 C:/Users/Danijel/Desktop/postavke/coder/coder.vhd|
+!i113 1
+Z18 o-93 -work work
+Z19 tExplicit 1 CvgOpt 0
+Abehavioral
+R2
+R3
+R4
+R5
+R6
+R7
+R8
+R9
+R10
+DEx4 work 5 coder 0 22 <6OWZh[lSMM@V6:c7=PbH2
+!i122 0
+l20
+L18 57
+VLLgIBnX7kRRS;7F1kC;063
+!s100 GdLV3J_Fi5mc894m]9G^f2
+R13
+31
+R14
+!i10b 1
+R15
+R16
+R17
+!i113 1
+R18
+R19
+Ecoder_tb
+Z20 w1635775382
+R9
+R10
+!i122 1
+R0
+Z21 8C:/Users/Danijel/Desktop/postavke/coder/simulation/modelsim/coder_tb.vhd
+Z22 FC:/Users/Danijel/Desktop/postavke/coder/simulation/modelsim/coder_tb.vhd
+l0
+L4 1
+VI32lhN^[Vfc1H5FDVIge53
+!s100 FSW5eJ=20PZzmWa87;OOj2
+R13
+31
+Z23 !s110 1635777100
+!i10b 1
+Z24 !s108 1635777100.000000
+Z25 !s90 -reportprogress|300|-93|-work|work|C:/Users/Danijel/Desktop/postavke/coder/simulation/modelsim/coder_tb.vhd|
+!s107 C:/Users/Danijel/Desktop/postavke/coder/simulation/modelsim/coder_tb.vhd|
+!i113 1
+R18
+R19
+Abehavioral
+R9
+R10
+DEx4 work 8 coder_tb 0 22 I32lhN^[Vfc1H5FDVIge53
+!i122 1
+l23
+L7 41
+V]VG[56>07BCn:5Ml5VC1<0
+!s100 O94Q3Z?OnQfDEgabYhXY82
+R13
+31
+R23
+!i10b 1
+R24
+R25
+Z26 !s107 C:/Users/Danijel/Desktop/postavke/coder/simulation/modelsim/coder_tb.vhd|
+!i113 1
+R18
+R19

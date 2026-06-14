@@ -1,0 +1,64 @@
+library ieee;
+use ieee.std_logic_1164.all;
+ 
+entity Semafor_tb is
+end Semafor_tb;
+ 
+architecture Test of Semafor_tb is 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+    component Semafor
+    port(	iCLK    : in  std_logic;
+				iRST    : in  std_logic;
+				iOK     : in  std_logic;
+				iHAZ    : in  std_logic;
+				oRED    : out std_logic;
+				oYELLOW : out std_logic;
+				oGREEN  : out std_logic);
+    end component;
+    
+   --Inputs
+   signal iCLK : std_logic := '0';
+   signal iRST : std_logic := '0';
+   signal iOK  : std_logic := '1';
+   signal iHAZ : std_logic := '0';
+  
+ 	--Outputs
+   signal oRED    : std_logic;
+   signal oYELLOW : std_logic;
+	signal oGREEN  : std_logic;
+	
+   -- Clock period definitions
+   constant iCLK_period : time := 10 ns;
+ 
+begin
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: Semafor port map (
+          iCLK => iCLK,
+          iRST => iRST,
+          iOK => iOK,
+          iHAZ => iHAZ,
+          oRED => oRED,
+          oYELLOW => oYELLOW,
+          oGREEN => oGREEN);
+
+   -- Clock process definitions
+   iCLK_process :process
+   begin
+		iCLK <= '0';
+		wait for iCLK_period/2;
+		iCLK <= '1';
+		wait for iCLK_period/2;
+   end process;
+ 
+
+   -- Stimulus process
+   stim_proc: process
+   begin		
+      
+      wait;
+   end process;
+
+END;

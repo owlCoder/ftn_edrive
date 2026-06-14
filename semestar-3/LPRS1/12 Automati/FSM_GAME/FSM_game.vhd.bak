@@ -1,0 +1,23 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.ALL;
+
+entity FSM_game is port ( 
+	iRST  : in  std_logic;
+	iCLK  : in  std_logic;
+	iA	   : in  std_logic_vector(1 downto 0);
+	iB	   : in  std_logic_vector(1 downto 0);
+	oA  	: out std_logic;
+	oB  	: out std_logic
+	);
+end entity;
+
+architecture Behavioral of FSM_game is
+
+	
+	
+begin
+
+
+
+end Behavioral;

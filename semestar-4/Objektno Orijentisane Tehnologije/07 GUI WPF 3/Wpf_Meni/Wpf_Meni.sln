@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_Meni", "Wpf_Meni\Wpf_Meni.csproj", "{32F192FC-6D8E-448F-A4C5-1EC64C0CC930}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32F192FC-6D8E-448F-A4C5-1EC64C0CC930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32F192FC-6D8E-448F-A4C5-1EC64C0CC930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32F192FC-6D8E-448F-A4C5-1EC64C0CC930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32F192FC-6D8E-448F-A4C5-1EC64C0CC930}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04CAD770-7721-4A5C-A1F0-06383DFB2462}
+	EndGlobalSection
+EndGlobal

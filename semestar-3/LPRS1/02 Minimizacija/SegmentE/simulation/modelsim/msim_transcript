@@ -1,0 +1,59 @@
+# Reading pref.tcl
+# do SegmentE_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {D:/FTN_S3/LPRS1/02 Minimizacija/SegmentE/SegmentE.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:23:30 on Oct 30,2021
+# vcom -reportprogress 300 -93 -work work D:/FTN_S3/LPRS1/02 Minimizacija/SegmentE/SegmentE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity segmentE
+# -- Compiling architecture Behavioral of segmentE
+# End time: 21:23:30 on Oct 30,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vcom -93 -work work {D:/FTN_S3/LPRS1/02 Minimizacija/SegmentE/simulation/modelsim/SegmentE_tb.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:23:30 on Oct 30,2021
+# vcom -reportprogress 300 -93 -work work D:/FTN_S3/LPRS1/02 Minimizacija/SegmentE/simulation/modelsim/SegmentE_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity segmentE_tb
+# -- Compiling architecture Test of segmentE_tb
+# End time: 21:23:30 on Oct 30,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs="+acc"  SegmentE_tb
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=""+acc"" SegmentE_tb 
+# Start time: 21:23:30 on Oct 30,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.segmente_tb(test)
+# Loading work.segmente(behavioral)
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+run
+restart -f
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# End time: 21:27:31 on Oct 30,2021, Elapsed time: 0:04:01
+# Errors: 0, Warnings: 0

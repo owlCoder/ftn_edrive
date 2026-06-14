@@ -1,0 +1,18 @@
+Fitter Status : Successful - Fri Oct 29 11:44:27 2021
+Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Revision Name : SegmentA
+Top-level Entity Name : segmentA
+Family : MAX 10
+Device : 10M16SAU169I7G
+Timing Models : Final
+Total logic elements : 2 / 15,840 ( < 1 % )
+    Total combinational functions : 2 / 15,840 ( < 1 % )
+    Dedicated logic registers : 0 / 15,840 ( 0 % )
+Total registers : 0
+Total pins : 5 / 130 ( 4 % )
+Total virtual pins : 0
+Total memory bits : 0 / 562,176 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 90 ( 0 % )
+Total PLLs : 0 / 1 ( 0 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 1 ( 0 % )

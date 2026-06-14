@@ -1,0 +1,77 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "oDONE",
+					"strict" : false
+				},
+				{
+					"name" : "oTEMP[1]",
+					"strict" : false
+				},
+				{
+					"name" : "oTEMP[2]",
+					"strict" : false
+				},
+				{
+					"name" : "oTEMP[3]",
+					"strict" : false
+				},
+				{
+					"name" : "oTEMP[4]",
+					"strict" : false
+				},
+				{
+					"name" : "oTEMP[5]",
+					"strict" : false
+				},
+				{
+					"name" : "oTEMP[6]",
+					"strict" : false
+				},
+				{
+					"name" : "oTEMP[7]",
+					"strict" : false
+				},
+				{
+					"name" : "oTIME[0]",
+					"strict" : false
+				},
+				{
+					"name" : "oTIME[1]",
+					"strict" : false
+				},
+				{
+					"name" : "oTIME[2]",
+					"strict" : false
+				},
+				{
+					"name" : "oTIME[3]",
+					"strict" : false
+				},
+				{
+					"name" : "oTIME[4]",
+					"strict" : false
+				},
+				{
+					"name" : "oTIME[5]",
+					"strict" : false
+				},
+				{
+					"name" : "iRST",
+					"strict" : false
+				},
+				{
+					"name" : "iTOAST",
+					"strict" : false
+				},
+				{
+					"name" : "iCLK",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,72 @@
+# Reading pref.tcl
+# do AutomatskaGaraznaKapija_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying E:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {C:/Users/Danijel/Desktop/AutomatskaGaraznaKapija/AutomatskaGaraznaKapija.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 20:44:19 on Jan 08,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/Danijel/Desktop/AutomatskaGaraznaKapija/AutomatskaGaraznaKapija.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity AutomatskaGaraznaKapija
+# -- Compiling architecture arch of AutomatskaGaraznaKapija
+# End time: 20:44:19 on Jan 08,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vcom -93 -work work {C:/Users/Danijel/Desktop/AutomatskaGaraznaKapija/AutomatskaGaraznaKapija_tb.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 20:44:20 on Jan 08,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/Danijel/Desktop/AutomatskaGaraznaKapija/AutomatskaGaraznaKapija_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity AutomatskaGaraznaKapija_tb
+# -- Compiling architecture beh of AutomatskaGaraznaKapija_tb
+# End time: 20:44:20 on Jan 08,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs="+acc"  AutomatskaGaraznaKapija_tb
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=""+acc"" AutomatskaGaraznaKapija_tb 
+# Start time: 20:44:20 on Jan 08,2022
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.automatskagaraznakapija_tb(beh)
+# Loading work.automatskagaraznakapija(arch)
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run 2 us
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /automatskagaraznakapija_tb/uut
+add wave -position end  sim:/automatskagaraznakapija_tb/uut/sCNT_T
+add wave -position end  sim:/automatskagaraznakapija_tb/uut/sCNT
+add wave -position end  sim:/automatskagaraznakapija_tb/uut/sSTATE
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /automatskagaraznakapija_tb/uut
+# End time: 21:05:42 on Jan 08,2022, Elapsed time: 0:21:22
+# Errors: 0, Warnings: 1

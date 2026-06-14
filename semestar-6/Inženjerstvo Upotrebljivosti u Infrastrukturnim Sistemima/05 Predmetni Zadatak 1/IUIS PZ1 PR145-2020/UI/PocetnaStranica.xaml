@@ -1,0 +1,68 @@
+﻿<Window x:Class="UI.PocetnaStranica"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Početna Stranica" Height="800" Width="1200">
+    <Window.Background>
+        <ImageBrush ImageSource="/resursi/main.png" />
+    </Window.Background>
+    <Border Margin="50" Background="White" BorderBrush="White" BorderThickness="1,1,1,1" CornerRadius="10">
+        <Grid Margin="20" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.45*"></RowDefinition>
+                <RowDefinition Height="0*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button Name="DodajBtn" Margin="40,-140,0,0" Click="DodajBtn_Click" Grid.Row="2" Grid.Column="0" FontSize="24" Content="   DODAVANJE   " Height="45" HorizontalAlignment="Left"/>
+            <Button Name="BrisanjeBtn" Click="BrisanjeBtn_Click" Grid.Row="2" HorizontalAlignment="Left" Margin="230,-140,0,0" Grid.Column="0" FontSize="24" Content="  BRISANJE ODABRANIH " Grid.ColumnSpan="2" Height="45"/>
+
+            <Label Grid.Row="0" Grid.Column="0" x:Name="welcomeMessage" Grid.ColumnSpan="2" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, -80, 0, 0" FontSize="26" FontWeight="Bold" FontFamily="Trebuchet MS" />
+            <Button Grid.Row="0" Grid.Column="0" x:Name="LogOutBtn" Click="LogOutBtn_Click" Content="  IZLAZ  " FontSize="22" Height="44" Width="150" FontWeight="SemiBold" Grid.ColumnSpan="2" Margin="810, 0, 0, 0" FontFamily="Trebuchet MS" />
+
+            <DataGrid Name="Automobili" Margin="40,-60,40,0" SelectionUnit="FullRow" FontSize="15" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" BorderThickness="0" FontWeight="SemiBold" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" CanUserSortColumns="False" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="6">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Slika" Width="100" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Slika}"  Width="80" Height="80" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridHyperlinkColumn Header="Hiperlink" IsReadOnly="True" Binding="{Binding Hiperlink}" Width="150">
+                        <DataGridHyperlinkColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <EventSetter Event="Hyperlink.Click" Handler="OnHyperlinkClick" />
+                            </Style>
+                        </DataGridHyperlinkColumn.ElementStyle>
+                    </DataGridHyperlinkColumn>
+                    <DataGridTextColumn Header="Datum" IsReadOnly="True" Binding="{Binding Datum}" Width="160"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Model auta" IsReadOnly="True" Binding="{Binding ModelAuta}" Width="150"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Pogon" IsReadOnly="True" Binding="{Binding Pogon}" Width="150"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Godina" IsReadOnly="True" Binding="{Binding GodinaProizvodnje}" Width="80"></DataGridTextColumn>
+                    <DataGridCheckBoxColumn Header="  Briši?" Width="80" IsReadOnly="False" Binding="{Binding ZaBrisanje}" />
+                    <DataGridTemplateColumn Header="Opcija" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Button Name="PregledBtn" Click="PregledBtn_Click" Content="  VIŠE  " FontSize="17" Height="30" FontWeight="SemiBold" Margin="10, 0, 10, 8" FontFamily="Trebuchet MS" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,113 @@
+﻿<Window x:Class="Zadatak_01_Studenti.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_01_Studenti"
+        mc:Ignorable="d"
+        Title="Zadatak 1 | Studenti" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TabControl Grid.Row="0" Grid.Column="0">
+            <TabItem Header="POGLEDAJ SVE" FontSize="14">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Row="0" Grid.Column="0" x:Name="listaStudenata" IsReadOnly="True" GridLinesVisibility="Horizontal" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ime" Binding="{Binding Path = Ime}" Width="*"/>
+                            <DataGridTextColumn Header="Prezime" Binding="{Binding Path = Prezime}" Width="*"/>
+                            <DataGridTextColumn Header="Broj indeksa" Binding="{Binding Path = Indeks}" Width="2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="DODAJ NOVOG" FontSize="14">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="154*"></ColumnDefinition>
+                        <ColumnDefinition Width="72*"></ColumnDefinition>
+                        <ColumnDefinition Width="389*"/>
+                        <ColumnDefinition Width="154*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="1" Content="DODAVANJE NOVOG STUDENTA" HorizontalAlignment="Center" Padding="20" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2" Margin="57.4,0,57.4,74" Grid.RowSpan="2"></Label>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Ime: " FontSize="18" Margin="20.4,20.4,19.4,19" Grid.ColumnSpan="2"></TextBlock>
+                    <TextBox Grid.Row="1" Grid.Column="2" x:Name="ime" Margin="58.445,25.4,49.4,24" FontSize="18"></TextBox>
+
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Prezime: " FontSize="18" Margin="20.4,21,19.4,19.4" Grid.ColumnSpan="2"></TextBlock>
+                    <TextBox Grid.Row="2" Grid.Column="2" x:Name="prezime" Margin="58.445,26,49.4,24.4" FontSize="18"></TextBox>
+
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Br. Indeksa: " FontSize="18" Margin="20.4,19.6,19.4,20" Grid.ColumnSpan="2"></TextBlock>
+                    <TextBox Grid.Row="3" Grid.Column="2" x:Name="indeks" Margin="58.445,24.6,49.4,25" FontSize="18"></TextBox>
+
+                    <Button Grid.Row="4" Grid.Column="2" Click="dodavanjeNovog_Click" x:Name="dodavanjeNovog" HorizontalAlignment="Right" Margin="0,10,0.4,29.6" Width="150" FontSize="18" Content="Dodaj"></Button>
+                    <Button Grid.Row="4" Grid.Column="1" x:Name="ocistiPolja" HorizontalAlignment="left" Click="ocistiPolja_Click" Margin="20.4,10,0,29.6" Width="150" FontSize="18" Content="Očisti polja" Grid.ColumnSpan="2"></Button>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="IZMENI" FontSize="14">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Ime :" Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="18"/>
+                    <TextBlock Text="Prezime :" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="18" />
+                    <TextBlock Text="Broj indeksa :" Grid.Row="3" Grid.Column="2" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="18"/>
+                    <TextBox x:Name="novoIme" Text="{Binding Ime}" Padding ="2" Grid.Row="1" Grid.Column="3" VerticalAlignment="Top" FontSize="18"/>
+                    <TextBox x:Name="novoPrezime" Text="{Binding Prezime}" Padding ="2" Grid.Row="2" Grid.Column="3" FontSize="18" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                    <TextBox x:Name="noviIndeks" Text="{Binding Indeks}" Padding ="2" Grid.Row="3" Grid.Column="3" FontSize="18" VerticalAlignment="Top" TextWrapping="Wrap"/>
+
+                    <Button x:Name="btnIzmeni" Click="btnIzmeni_Click" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Height="25" Content="Izmeni" Grid.Column="3" Grid.Row="4"/>
+                    <Button x:Name="btnObrisi" Click="btnObrisi_Click" FontSize="18"
+                         VerticalAlignment="Center" HorizontalAlignment="Right" Height="25" Content="Obriši" Grid.Column="3" Grid.Row="4" Width="100"/>
+                    
+                    <ListBox x:Name="lbStudenti" SelectionChanged="lbStudenti_SelectionChanged" Grid.RowSpan="6">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Indeks}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

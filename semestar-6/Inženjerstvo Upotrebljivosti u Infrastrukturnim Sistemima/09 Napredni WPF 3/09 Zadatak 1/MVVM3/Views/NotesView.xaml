@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="MVVM3.Views.NotesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:MVVM3.Views"
+             xmlns:viewModel="clr-namespace:MVVM3.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="850">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="550"/>
+        </Grid.ColumnDefinitions>
+        <ListView ItemsSource="{Binding Path=Notes}"
+                  Grid.Column="0"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  Margin="10,10,0,10"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  SelectedItem="{Binding SelectedNote}"
+                  Width="280">
+            <ListView.Resources>
+                <ControlTemplate x:Key="SelectedTemplate" 
+                                 TargetType="ListViewItem">
+                    <Border CornerRadius="10" 
+                            Height="120" 
+                            Width ="250"
+                            Margin="0,0,0,2">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource GradientColorOne}"/>
+                        </Border.Background>
+                        <StackPanel>
+                            <StackPanel Orientation="Vertical" 
+                                        Margin="10">
+                                <TextBlock Text="{Binding Path=Title, Mode=OneWay}" 
+                                           TextWrapping="Wrap" 
+                                           FontSize="14" 
+                                           FontWeight="Bold" 
+                                           Foreground="{StaticResource UIAccentColor}"/>
+                                <TextBlock Text="{Binding Path=ShortDescription, Mode=OneWay}" 
+                                           TextWrapping="Wrap" 
+                                           Foreground="{StaticResource UIAccentColor}"/>
+                            </StackPanel>
+                            <StackPanel Margin="10" 
+                                        HorizontalAlignment="Right" 
+                                        Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=DateTimeString, Mode=OneWay}" 
+                                           FontStyle="Italic" 
+                                           Foreground="{StaticResource UIAccentColor}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border CornerRadius="10" 
+                                        Height="120" 
+                                        Width ="250"  
+                                        Margin="2">
+                                    <Border.Background>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="{StaticResource GradientColorOne}"
+                                      Offset="0.1" />
+                                            <GradientStop Color="{StaticResource GradientColorTwo}"
+                                      Offset="0.5" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Vertical"
+                                                    Margin="10">
+                                            <TextBlock Text="{Binding Path=Title, Mode=OneWay}"
+                                                       TextWrapping="Wrap"
+                                                       FontSize="14"
+                                                       FontWeight="Bold"
+                                                       Foreground="{StaticResource UIAccentColor}"/>
+                                            <TextBlock Text="{Binding Path=ShortDescription, Mode=OneWay}"
+                                                       TextWrapping="Wrap"
+                                                       Foreground="{StaticResource UIAccentColor}"/>
+                                        </StackPanel>
+                                        <StackPanel Margin="10" 
+                                                    HorizontalAlignment="Right"
+                                                    Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=DateTimeString, Mode=OneWay}"
+                                                       FontStyle="Italic"
+                                                       Foreground="{StaticResource UIAccentColor}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected"
+                                           Value="true" />
+                                <Condition Property="Selector.IsSelectionActive" 
+                                           Value="true" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Template" 
+                                    Value="{StaticResource SelectedTemplate}"/>
+                        </MultiTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction 
+				                    Command="{Binding ShowNoteCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListView>
+        <Border Grid.Column="1" 
+                Margin="10" 
+                CornerRadius="10" 
+                VerticalAlignment="Stretch" 
+                Background="Transparent"
+                BorderBrush="{StaticResource UIAccentColor}"
+                BorderThickness="1"
+                Visibility="{Binding ShowNoteDetails, UpdateSourceTrigger=PropertyChanged}">
+            <StackPanel Margin="5">
+                <TextBlock Text="{Binding Path=SelectedNote.Title, Mode=OneWay}"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource UIAccentColor}"/>
+                <TextBlock Text="{Binding Path=SelectedNote.DateTimeString, Mode=OneWay}"
+                           FontSize="14"
+                           FontStyle="Italic"
+                           Foreground="{StaticResource UIAccentColor}"
+                           Margin="2,10,0,0"/>
+                <TextBlock Text="{Binding Path=SelectedNote.Description, Mode=OneWay}"
+                           TextWrapping="Wrap"
+                           FontSize="14"
+                           Foreground="{StaticResource UIAccentColor}"
+                           Margin="2,10,0,0"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

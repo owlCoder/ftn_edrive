@@ -1,0 +1,14 @@
+D:\NUnit Testiranje\OsobaTest\bin\Release\OsobaTest.dll
+D:\NUnit Testiranje\OsobaTest\bin\Release\OsobaTest.pdb
+D:\NUnit Testiranje\OsobaTest\bin\Release\Common.dll
+D:\NUnit Testiranje\OsobaTest\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\NUnit Testiranje\OsobaTest\bin\Release\nunit.framework.dll
+D:\NUnit Testiranje\OsobaTest\bin\Release\Osoba.dll
+D:\NUnit Testiranje\OsobaTest\bin\Release\Common.pdb
+D:\NUnit Testiranje\OsobaTest\bin\Release\Osoba.pdb
+D:\NUnit Testiranje\OsobaTest\bin\Release\nunit.framework.xml
+D:\NUnit Testiranje\OsobaTest\obj\Release\OsobaTest.csproj.AssemblyReference.cache
+D:\NUnit Testiranje\OsobaTest\obj\Release\OsobaTest.csproj.CoreCompileInputs.cache
+D:\NUnit Testiranje\OsobaTest\obj\Release\OsobaTest.csproj.CopyComplete
+D:\NUnit Testiranje\OsobaTest\obj\Release\OsobaTest.dll
+D:\NUnit Testiranje\OsobaTest\obj\Release\OsobaTest.pdb

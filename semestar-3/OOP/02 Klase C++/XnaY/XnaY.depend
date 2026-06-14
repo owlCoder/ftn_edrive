@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1635434447 source:/home/danijel/Desktop/XnaY/main.cpp
+	"xnay.hpp"
+
+1635434652 /home/danijel/Desktop/XnaY/xnay.hpp
+	<iostream>
+	<cmath>
+
+1635434782 source:/home/danijel/Desktop/XnaY/xnay.cpp
+	"xnay.hpp"
+

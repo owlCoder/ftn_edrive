@@ -1,0 +1,100 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/simulation/modelsim
+Elprs1_homework2
+Z1 w1637504332
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 0
+R0
+Z6 8C:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/LPRS1_Homework2_PR_055_2020_Solution/lprs1_homework2.vhd
+Z7 FC:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/LPRS1_Homework2_PR_055_2020_Solution/lprs1_homework2.vhd
+l0
+L6 1
+V94F7Yjm?=5Dm2?QVofgai2
+!s100 A9V>0ke7UacBod4jdoN<Z2
+Z8 OV;C;2020.1;71
+31
+Z9 !s110 1637507239
+!i10b 1
+Z10 !s108 1637507239.000000
+Z11 !s90 -reportprogress|300|-93|-work|work|C:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/LPRS1_Homework2_PR_055_2020_Solution/lprs1_homework2.vhd|
+Z12 !s107 C:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/LPRS1_Homework2_PR_055_2020_Solution/lprs1_homework2.vhd|
+!i113 1
+Z13 o-93 -work work
+Z14 tExplicit 1 CvgOpt 0
+Aarch
+R2
+R3
+R4
+R5
+Z15 DEx4 work 15 lprs1_homework2 0 22 94F7Yjm?=5Dm2?QVofgai2
+!i122 0
+l37
+L20 110
+VE[W4H][=H0gOIjQnLBa9>3
+!s100 kXz<CNQLGz=j_Sa4=HDzb0
+R8
+31
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Elprs1_homework2_tb
+Z16 w1637151618
+R4
+R5
+!i122 1
+R0
+Z17 8C:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/LPRS1_Homework2_PR_055_2020_Solution/lprs1_homework2_tb.vhd
+Z18 FC:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/LPRS1_Homework2_PR_055_2020_Solution/lprs1_homework2_tb.vhd
+l0
+L7 1
+VOl:PDf1l<flk<6F6^j3>^3
+!s100 VXDGmQiYCddL:hdKi23?F0
+R8
+31
+Z19 !s110 1637507240
+!i10b 1
+R10
+Z20 !s90 -reportprogress|300|-93|-work|work|C:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/LPRS1_Homework2_PR_055_2020_Solution/lprs1_homework2_tb.vhd|
+!s107 C:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/LPRS1_Homework2_PR_055_2020_Solution/lprs1_homework2_tb.vhd|
+!i113 1
+R13
+R14
+Aarch
+R2
+R3
+R15
+R4
+R5
+DEx4 work 18 lprs1_homework2_tb 0 22 Ol:PDf1l<flk<6F6^j3>^3
+!i122 1
+l24
+L10 105
+VFIiKGXUDN__cS5YVHiO8V1
+!s100 mn684_S4US>dBV_?nLN5^1
+R8
+31
+R19
+!i10b 1
+R10
+R20
+Z21 !s107 C:/Users/Danijel/Desktop/LPRS1_Homework2_PR_055_2020/LPRS1_Homework2_PR_055_2020_Solution/lprs1_homework2_tb.vhd|
+!i113 1
+R13
+R14

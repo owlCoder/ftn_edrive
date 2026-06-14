@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+@using Vezbe05.Models;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register User</title>
+</head>
+<body>
+    @{
+        User u = (User)Session["USER"];
+
+    }
+    @if (u != null && u.LoggedIn)
+    {
+        <p>Hello @u.Username</p>
+        <p>You currently logged in. Do you wish to logout?</p>
+        <a href="..Index.cshtml?message=LoggedOut">Logout</a>
+    }
+    else
+    {
+        <h2>Register</h2>
+        <form action="../Views/Home.cshtml" method="post">
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td><input type="text" name="username" /></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password" /></td>
+                </tr>
+                <tr>
+                    <td>Role:</td>
+                    <td>
+                        <input list="roles" name="type" />
+                        <datalist id="roles">
+                            <option value="ADMINISTRATOR"></option>
+                            <option value="MODERATOR"></option>
+                            <option value="GUEST"></option>
+                        </datalist>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Register" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    }
+    </body>
+</html>

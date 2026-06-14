@@ -1,0 +1,16 @@
+|SegmentG
+iB0 => sS1.IN0
+iB0 => sS0.IN0
+iB1 => sS0.IN1
+iB1 => sS4.IN0
+iB1 => sS2.IN1
+iB1 => sS3.IN1
+iB2 => sS3.IN0
+iB2 => sS2.IN0
+iB2 => sS4.IN1
+iB3 => sS1.IN1
+iB3 => sS2.IN1
+iB3 => sS3.IN1
+oY << oY.DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadatak 2</title>
+    <style>
+        .bg-blue-800
+        {
+            color: #124191;
+        }
+
+        table
+        {
+            background-color: lightgray;
+            border: gray 1px solid;
+            
+        }
+    </style>
+</head>
+<body>
+    <h2 class="bg-blue-800">Produženje registracije</h2>
+
+    <p>Na ovoj stranici možete obaviti produženje registracije Vašeg automobila.
+        Molimo Vas da popunite sledeći formular.
+    </p>
+
+    <table border="1">
+        <tr>
+            <th colspan="2" class="bg-blue-800">Produženje registracije</th>
+        </tr>
+        <tr>
+            <td>Ime:</td>
+            <td>
+                <input name="ime" id="ime" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Prezime:</td>
+            <td>
+                <input name="prezime" id="prezime" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>JMBG:</td>
+            <td>
+                <input name="jmbg" id="jmbg" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Marka vozila: </td>
+            <td>
+                <select id="marka">
+                    <option id="1">Mercedes</option>
+                    <option id="2">Peugeot</option>
+                    <option id="3">Renault</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Tip vozila:</td>
+            <td>
+                <input name="tv" id="tv" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td>Registarska oznaka:</td>
+            <td>
+                <input name="ro" id="ro" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input class="dugme" type="button" id="send" value="Pošalji" />
+            </td>
+        </tr>
+    </table>
+
+    <p>U gornjem combo box-u kao stavke nalaze se sledeće vrednosti:
+        <em>Mercedes</em>, <em>Peugeot</em> i <em>Renault</em>.
+    </p>
+</body>
+</html>

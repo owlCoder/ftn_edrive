@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js", 
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/api/user/create", "dest": "index.js" },
+    { "src": "/api/user/newAccount", "dest": "index.js" },
+    { "src": "/api/user/getById", "dest": "index.js" },
+    { "src": "/api/user/getRoleByUid", "dest": "index.js" },
+    { "src": "/api/user/get", "dest": "index.js" },
+    { "src": "/api/user/updatePicture", "dest": "index.js" },
+    { "src": "/api/user/update", "dest": "index.js" },
+    { "src": "/api/user/update/admin", "dest": "index.js" },
+    { "src": "/api/user/delete", "dest": "index.js" },
+    { "src": "/api/user/delete/guid", "dest": "index.js" },
+    { "src": "/api/roles/get", "dest": "index.js" },
+    { "src": "/api/products/get", "dest": "index.js" },
+    { "src": "/api/products/getProductsPerSellerUid", "dest": "index.js" },
+    { "src": "/api/products/create", "dest": "index.js" },
+    { "src": "/api/products/update", "dest": "index.js" },
+    { "src": "/api/products/delete", "dest": "index.js" },
+    { "src": "/api/orders/create", "dest": "index.js" },
+    { "src": "/api/orders/getOrdersPerBuyer", "dest": "index.js" },
+    { "src": "/api/orders/get", "dest": "index.js" },
+    { "src": "/api/genres/get", "dest": "index.js" },
+    { "src": "/api/audits/create", "dest": "index.js" },
+    { "src": "/api/audits/get", "dest": "index.js" },
+    { "src": "/(.*)", "dest": "index.js" }
+  ]
+}

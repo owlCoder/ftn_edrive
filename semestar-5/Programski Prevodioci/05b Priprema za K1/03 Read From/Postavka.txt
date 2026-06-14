@@ -1,0 +1,58 @@
+KOLOKVIJUM 1
+
+Proširiti miniC gramatiku read data iskazom u sledećem obliku:
+	read <id> from
+	data <const1> [ , <const2>, <const3>, ... , <constN> ]
+	do <stm> ;
+gde je:
+	<id> - promenljiva ili parametar
+	<constN> - konstanta (literal)
+	<stm> - iskaz
+
+U data sekciji može biti zadata jedna konstanta ili više konstanti odvojenih zarezom.
+Mora postojati bar jedna data sekcija u jednom read data iskazu, a moze i više.
+
+Semantičke provere koje je potrebno sprovesti:
+1. <id> mora biti prethodno deklarisan
+2. tip <id> i tip svih konstanti <constN> mora biti isti
+
+Primer:
+	read x from
+	data 1,2,3,4
+	data 5,6
+	do y = y + x;
+
+///////////////////////////////////////// REŠENJE ////////////////////////////////////
+read_statement
+  : _READ _ID
+  {
+      // 1. sem. provera: id mora prethodno biti deklarisan
+      int idx = lookup_symbol($2, VAR|PAR);
+      if(idx == NO_INDEX)
+        err("read varible must be defined before use");
+
+      read_var_type = get_type(idx);
+
+  } _FROM
+    data_statement
+    _DO statement
+  ;
+
+data_statement
+  : _DATA data_part
+  | data_statement _DATA data_part
+  ;
+
+data_part
+  : literal
+  {
+      // 2. sem. provera da li su sve konstante istog tipa kao promenljiva
+      if(read_var_type != get_type($1))
+        err("'%s' and variable must be the same types!", get_name($1));
+  }
+  | data_part _COMMA literal
+  {
+      if(read_var_type != get_type($3))
+        err("'%s' and variable must be the same types!", get_name($3));
+  }
+  ;

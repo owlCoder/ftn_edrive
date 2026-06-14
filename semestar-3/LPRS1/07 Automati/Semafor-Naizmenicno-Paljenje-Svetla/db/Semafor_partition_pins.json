@@ -1,0 +1,37 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "oRED",
+					"strict" : false
+				},
+				{
+					"name" : "oYELLOW",
+					"strict" : false
+				},
+				{
+					"name" : "oGREEN",
+					"strict" : false
+				},
+				{
+					"name" : "iOK",
+					"strict" : false
+				},
+				{
+					"name" : "iHAZ",
+					"strict" : false
+				},
+				{
+					"name" : "iCLK",
+					"strict" : false
+				},
+				{
+					"name" : "iRST",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

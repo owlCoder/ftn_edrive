@@ -1,0 +1,142 @@
+﻿<Window x:Class="Biblioteka.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+       Title="Biblioteka | Predmetni Projekat 2021/22" Height="600" Width="1100" Icon="Slike/ikonica.ico" WindowStartupLocation="CenterScreen">
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Slike/bg.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- PADAJUĆI MENI -->
+        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
+            <Menu DockPanel.Dock="Top" Background="#fff" Foreground="Black" >
+                
+                <!-- Meni za biblioteke -->
+                <MenuItem Header = "Biblioteke" FontSize="16" FontWeight="Medium">
+                    <MenuItem.Icon>
+                        <Image Source="/Slike/biblioteka.png"></Image>
+                    </MenuItem.Icon>
+                    <MenuItem Header = "Dodavanje biblioteke" Name="dodajBibliotekuStrana" Click="dodajBibliotekuStrana_Click" HorizontalAlignment = "Left" Width = "300" >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/dodaj.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Izmena podataka o biblioteci" Name="izmenaBiblioteke" Click="izmenaBiblioteke_Click" HorizontalAlignment = "Left" Width = "300"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/izmena.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Brisanje biblioteke" Name="brisanjeBiblioteke" Click="brisanjeBiblioteke_Click" HorizontalAlignment = "Left" Width = "300"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/minus.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Pregled knjiga po biblioteci" Name="pregledSvihBiblioteki" Click="pregledSvihBiblioteki_Click" HorizontalAlignment = "Left" Width = "300"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/pregled.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Pregled korisnika po biblioteci" Name="pregledKorinsikaPoBiblioteci" Click="pregledKorinsikaPoBiblioteci_Click" HorizontalAlignment = "Left" Width = "305"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/korisnik.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+
+                <!-- Meni za korisnike -->
+                <MenuItem Header = "Korisnici" FontSize="16" FontWeight="Medium">
+                    <MenuItem.Icon>
+                        <Image Source="/Slike/korisnik.png"></Image>
+                    </MenuItem.Icon>
+                    <MenuItem Header = "Dodavanje korisnika" Name="dodajKorisnika" Click="dodajKorisnika_Click" HorizontalAlignment = "Left" Width = "300" >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/dodaj.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Izmena podataka o korisniku" Name="izmeniKorisnika" Click="izmeniKorisnika_Click" HorizontalAlignment = "Left" Width = "300"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/izmena.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Brisanje korisnika" Name="brisanjeKorisnika" Click="brisanjeKorisnika_Click" HorizontalAlignment = "Left" Width = "300"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/minus.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Pregled korisnika" Name="pregledSvihKorinsika" Click="pregledSvihKorinsika_Click" HorizontalAlignment = "Left" Width = "300"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/pregled.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Učlani korisnika u biblioteku" Name="uclaniKorisnika" Click="uclaniKorisnika_Click" HorizontalAlignment = "Left" Width = "300"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/uclani.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+
+                <!-- Meni za knjige -->
+                <MenuItem Header = "Knjige" FontSize="16" FontWeight="Medium">
+                    <MenuItem.Icon>
+                        <Image Source="/Slike/knjiga.png"></Image>
+                    </MenuItem.Icon>
+                    <MenuItem Header = "Dodavanje knjige" HorizontalAlignment = "Left" Width = "300" Name="dodajKnjigu" Click="dodajKnjigu_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/dodaj.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Izmena podataka o knjizi" HorizontalAlignment = "Left" Width = "300" Name="izmeniKnjigu" Click="izmeniKnjigu_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/izmena.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Brisanje knjige" HorizontalAlignment = "Left" Width = "300"  Name="brisanjeKnjige" Click="brisanjeKnjige_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/minus.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Pregled knjiga" HorizontalAlignment = "Left" Width = "300"  Name="pregledSvihKnjiga" Click="pregledSvihKnjiga_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/pregled.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Pozajmi knjigu iz biblioteke" Name="pozajmiKnjigu" Click="pozajmiKnjigu_Click" HorizontalAlignment = "Left" Width = "300"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/pozajmi.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header = "Dodaj knjigu u biblioteku" Name="dodajKnjiguUBiblioteku" Click="dodajKnjiguUBiblioteku_Click" HorizontalAlignment = "Left" Width = "300"  >
+                        <MenuItem.Icon>
+                            <Image Source="/Slike/dodaj.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+
+                <!-- O programu -->
+                <MenuItem Header = "O Programu" FontSize="16" FontWeight="Medium" Name="oprogramu" Click="oprogramu_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Slike/about.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <!-- Izbor stranice koja se prikazuje, inicijalno je to Pocetna.xaml -->
+        <Frame x:FieldModifier="public" Name="aktivnost" NavigationUIVisibility="Hidden" Grid.Row="1" Source="Program/Pocetna.xaml" Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4"/>
+    </Grid>
+
+</Window>

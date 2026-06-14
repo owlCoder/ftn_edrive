@@ -1,0 +1,62 @@
+<html lang="sr">
+   <head>
+      <title>SOV 1 - Dodavanje porudzbine</title>
+   </head>
+   <body>
+      <h1>Dodaj novu porudzbinu</h1>
+      <form action="dodaj">
+         <table>
+            <tr>
+               <td><label>Kod porudzbine: </label></td>
+               <td><input type="text" name="kod" required /></td>
+            </tr>
+            <tr>
+               <td><label>Adresa: </label></td>
+               <td><input type="text" name="adresa" required /></td>
+            </tr>
+            <tr>
+               <td><label>Broj telefona: </label></td>
+               <td><input type="text" name="telefon" required /></td>
+            </tr>
+            <tr>
+               <td><label>Izaberite proizvod: </label></td>
+               <td>
+                  <select name="proizvod" required>
+                     <option value="Burger">Burger</option>
+                     <option value="Pizza">Pizza</option>
+                     <option value="Palacinka">Palacinka</option>
+                     <option value="Sendvic">Sendvic</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td><label>Nacin placanja: </label></td>
+               <td>
+                  <select name="placanje" required>
+                     <option value="Gotovina">Gotovina</option>
+                     <option value="Kartica">Kartica</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td><input type="submit" value="Dodaj" /></td>
+            </tr>
+         </table>
+      </form>
+
+      <form action="pretraga">
+         <table>
+            <tr>
+               <td colspan="2"><h3>Pretraga porudzbina:</h3></td>
+            </tr>
+            <tr>
+               <td>Kod: </td>
+               <td><input type="text" name="kod" /></td>
+            </tr>
+            <tr>
+               <td><input type="submit" value="Pretrazi" /></td>
+            </tr>
+         </table>
+      </form>
+   </body>
+</html>

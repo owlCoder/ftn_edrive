@@ -1,0 +1,38 @@
+﻿<Window x:Class="Apoteka_OOT.Apoteka_Prozori.izmeni_apoteku"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Apoteka_OOT.Apoteka_Prozori"
+        mc:Ignorable="d"
+        Title="Izmeni Apoteku" Height="400" Width="600" WindowStartupLocation="CenterScreen" Background="#FF96C9FF" ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Content="Naziv apoteke: " Grid.Row="0" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Name="naziv" Grid.Row="0" Grid.Column="1" Margin="20" FontSize="16" FontWeight="Bold"></TextBox>
+
+        <Label Content="Adresa apoteke: " Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Name="adresa" Grid.Row="1" Grid.Column="1" Margin="20" FontSize="16" FontWeight="Bold"></TextBox>
+
+        <Label Content="Godina osnivanja apoteke: " Grid.Row="2" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Name="godina" Grid.Row="2" Grid.Column="1" Margin="20" FontSize="16" FontWeight="Bold"></TextBox>
+
+        <Label Content="Slika apoteke: " Grid.Row="3" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <Image Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="profilna_slika" Source="/Img/placeholder.png" Height="50" Width="50" Margin="20 0 0 0"/>
+        <Button Name="slika" Click="slika_Click" Grid.Row="3" Grid.Column="1" Margin="20" Content="ODABIR SLIKE" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right"></Button>
+
+        <Button Name="izmena_podataka_o_apoteci" Click="izmena_podataka_o_apoteci_Click" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="20" Content="IZMENA INFORMACIJA O APOTECI" FontSize="16" FontWeight="Bold"></Button>
+
+    </Grid>
+</Window>

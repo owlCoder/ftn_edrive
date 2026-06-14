@@ -1,0 +1,23 @@
+<html>
+    <body>
+       <script type="text/javascript">
+             function Person(firstName, lastName, age){
+                this.firstName=firstName;
+                this.lastName=lastName;
+                this.age=age;
+              };
+
+              Person.prototype.fullName=function(){
+                  return this.firstName+" "+this.lastName;
+              }
+              var person1=new Person("Pera", "Peric",23);
+              var person2=new Person("Mika", "Mikic",24);
+
+             console.log("Ime prvog korisnika je "+person1.firstName);
+             console.log("Ime drugog korisnika je "+person2.firstName);
+             console.log("Puno ime prvog korisnika je "+person1.fullName());
+             console.log("Puno ime drugog korisnika je "+person2.fullName());
+        </script>
+    </body>
+</html>
+

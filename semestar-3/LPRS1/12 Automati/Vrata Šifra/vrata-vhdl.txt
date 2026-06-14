@@ -1,0 +1,293 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.ALL;
+
+entity drugi is port ( 
+	iRST  : in  std_logic;
+	iCLK  : in  std_logic;
+	iNEW_REQ	: in  std_logic;
+	iCODE   : in  std_logic_vector(3 downto 0);
+	oSTATUS : out std_logic;
+	oWARNING  	: out std_logic
+	);
+end entity;
+
+architecture Behavioral of drugi is
+
+	type tSTATE is (IDLE, CHECK_REQUEST, FIRST, SECOND, THIRD, FOURTH, PAUSE, UNLOCK, WARNING);
+	signal sSTATE, sNEXT_STATE : tSTATE;
+
+	signal sIDLE_CNT : std_logic_vector(2 downto 0);
+	signal sIDLE_EN, sIDLE_TC : std_logic;
+	
+	signal sNEXT_EN, sNEXT_TC : std_logic;
+	signal sNEXT_CNT : std_logic_vector(3 downto 0);
+	
+	signal sUNLOCK_CNT : std_logic_vector(4 downto 0);
+	signal sUNLOCK_TC, sUNLOCK_EN: std_logic;
+	
+	signal sCODE_NUM : std_logic_vector(1 downto 0);
+	signal sCODE_EN : std_logic;
+
+begin
+	
+	process(iCLK, iRST)begin
+		if(iRST = '1')then
+			sIDLE_CNT <= "000";
+		elsif(rising_edge(iCLK))then
+			if(sIDLE_EN = '1')then
+				if(sIDLE_CNT = "100")then
+					sIDLE_CNT <= "000";
+				else
+					sIDLE_CNT <= sIDLE_CNT + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	sIDLE_TC <= '1' when sIDLE_CNT = "100" else '0';
+	
+	process(iCLK, iRST)begin
+		if(iRST = '1')then
+			sNEXT_CNT <= "0000";
+		elsif(rising_edge(iCLK))then
+			if(sNEXT_EN = '1')then
+				if(sNEXT_CNT = "1001")then
+					sNEXT_CNT <= "0000";
+				else
+					sNEXT_CNT <= sNEXT_CNT + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	sNEXT_TC <= '1' when sNEXT_CNT = "1001" else '0';
+	
+	--11101
+	
+	process(iCLK, iRST)begin
+		if(iRST = '1')then
+			sUNLOCK_CNT <= "00000";
+		elsif(rising_edge(iCLK))then
+			if(sUNLOCK_EN = '1')then
+				if(sUNLOCK_CNT = "11101")then
+					sUNLOCK_CNT <= "00000";
+				else
+					sUNLOCK_CNT <= sUNLOCK_CNT + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	sUNLOCK_TC <= '1' when sUNLOCK_CNT = "11101" else '0';
+	
+	
+	process(iCLK, iRST)begin
+		if(iRST = '1')then
+			sCODE_NUM <= "00";		--"interni" a takodje i izlazni signal
+		elsif(rising_edge(iCLK))then
+			if(sCODE_EN = '1')then
+				if(sCODE_NUM = "11")then
+					sCODE_NUM <= "00";
+				else
+					sCODE_NUM <= sCODE_NUM + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+
+	process(iCLK, iRST)begin
+		if(iRST = '1')then
+			sNEW_REQ <= '0';
+		elsif(rising_edge(iCLK))then
+			if(iNEW_REQ = '1')then
+				sNEW_REQ <= '1';
+			elsif(sCLEAR = '1')then
+				sNEW_REQ <= '0';
+			end if;
+		end if;
+	end process;
+	
+	
+	--FSM
+	
+	--NEXT_STATE
+	--proces sledeceg stanja
+	process(iCLK, iRST)begin
+		if(iRST = '1')then
+			sSTATE <= IDLE;
+		else
+			sSTATE <= sNEXT_STATE;
+		end if;
+	end process;
+	
+	--FSM f.ija prelaza stanja
+	process(sSTATE)begin
+		case(sSTATE)is
+			when IDLE =>
+							if(sREQ_TC = '1')then
+								sNEXT_STATE <= CHECK_REQUEST;
+							else
+								sNEXT_STATE <= IDLE;
+							end if;
+							
+			when CHECK_REQUEST =>
+							if(sNEW_REQ = '1')then
+								sNEXT_STATE <= FIRST;
+							else
+								sNEXT_STATE <= IDLE;
+							end if;
+			
+			when FIRST =>
+							if(sCODE_OK = '1')then
+								sNEXT_STATE <= PAUSE;
+							else
+								sNEXT_STATE <= WARNING;
+							end if;
+							
+			when SECOND =>
+							if(sCODE_OK = '1')then
+								sNEXT_STATE <= PAUSE;
+							else
+								sNEXT_STATE <= WARNING;
+							end if;
+							
+			when THIRD =>
+							if(sCODE_OK = '1')then
+								sNEXT_STATE <= PAUSE;
+							else
+								sNEXT_STATE <= WARNING;
+							end if;
+							
+			when FOURTH =>
+							if(sCODE_OK = '1')then
+								sNEXT_STATE <= UNLOCK;
+							else
+								sNEXT_STATE <= WARNING;
+							end if;
+							
+			when UNLOCK =>
+							if(sUNLOCK_TC = '1')then
+								sNEXT_STATE <= IDLE;
+							end if;
+							
+			when WARNING =>
+							sNEXT_STATE <= IDLE;
+							
+			when PAUSE =>
+							if(sNEXT_TC = '1')then
+								if(sCODE_NUM = "01")then
+									sNEXT_STATE <= SECOND;
+								elsif(sCODE_NUM = "10")then
+									sNEXT_STATE <= THIRD;
+								elsif(sCODE_NUM = "11")then
+									sNEXT_STATE <= FOURTH;
+								end if;
+							end if;
+		end case;
+	end process;
+	
+	
+	--Funkcija izlaza
+	
+	process(iCLK, iRST)begin
+		if(iRST = '1')then
+			sCLEAR <= '0';
+			sIDLE_EN <= '0';
+			sNEXT_EN <= '0';
+			sUNLOCK_EN <= '0';
+			sCODE_EN <= '0';
+			oSTATUS <= '0';
+			oWARNING <= '0';
+		elsif(rising_edge(iCLK))then
+			case(sSTATE)is
+				when IDLE =>
+								sCLEAR <= '0';
+								sIDLE_EN <= '1';
+								sNEXT_EN <= '0';
+								sUNLOCK_EN <= '0';
+								sCODE_EN <= '0';
+								oSTATUS <= '0';
+								oWARNING <= '0';
+								
+				when CHECK_REQUEST =>
+								sCLEAR <= '0';
+								sIDLE_EN <= '0';
+								sNEXT_EN <= '0';
+								sUNLOCK_EN <= '0';
+								sCODE_EN <= '0';
+								oSTATUS <= '0';
+								oWARNING <= '0';
+								
+				when FIRST =>
+								sCLEAR <= '0';
+								sIDLE_EN <= '0';
+								sNEXT_EN <= '0';
+								sUNLOCK_EN <= '0';
+								sCODE_EN <= '1';
+								oSTATUS <= '0';
+								oWARNING <= '0';
+								
+				when PAUSE =>
+								sCLEAR <= '0';
+								sIDLE_EN <= '0';
+								sNEXT_EN <= '1';
+								sUNLOCK_EN <= '0';
+								sCODE_EN <= '0';
+								oSTATUS <= '0';
+								oWARNING <= '0';
+								
+				when SECOND =>
+								sCLEAR <= '0';
+								sIDLE_EN <= '0';
+								sNEXT_EN <= '0';
+								sUNLOCK_EN <= '0';
+								sCODE_EN <= '1';
+								oSTATUS <= '0';
+								oWARNING <= '0';
+								
+				when THIRD =>
+								sCLEAR <= '0';
+								sIDLE_EN <= '0';
+								sNEXT_EN <= '0';
+								sUNLOCK_EN <= '0';
+								sCODE_EN <= '1';
+								oSTATUS <= '0';
+								oWARNING <= '0';
+								
+				when FOURTH =>
+								sCLEAR <= '0';
+								sIDLE_EN <= '0';
+								sNEXT_EN <= '0';
+								sUNLOCK_EN <= '0';
+								sCODE_EN <= '0';
+								oSTATUS <= '0';
+								oWARNING <= '0';
+								
+				when WARNING =>
+								sCLEAR <= '1';
+								sIDLE_EN <= '0';
+								sNEXT_EN <= '0';
+								sUNLOCK_EN <= '0';
+								sCODE_EN <= '0';
+								oWARNING <= '1';
+								oSTATUS <= '0';
+								
+				when UNLOCK =>
+								sCLEAR <= '1';
+								sIDLE_EN <= '0';
+								sNEXT_EN <= '0';
+								sUNLOCK_EN <= '1';
+								sCODE_EN <= '0';
+								oSTATUS <= '1';
+								oWARNING <= '0';
+			end case;
+		end if;
+	end process;
+	
+	
+	
+end Behavioral;
+
+

@@ -1,0 +1,92 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/danijel/Desktop/toster/simulation/modelsim
+Etoster
+Z1 w1643900438
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z6 8/home/danijel/Desktop/toster/Toster.vhd
+Z7 F/home/danijel/Desktop/toster/Toster.vhd
+l0
+L5
+VMan0cb3m?AM2M3aLkCCIY0
+!s100 _9P`akgzoj;JmZ5UhUQ782
+Z8 OV;C;10.5b;63
+31
+Z9 !s110 1643901731
+!i10b 1
+Z10 !s108 1643901731.000000
+Z11 !s90 -reportprogress|300|-93|-work|work|/home/danijel/Desktop/toster/Toster.vhd|
+Z12 !s107 /home/danijel/Desktop/toster/Toster.vhd|
+!i113 1
+Z13 o-93 -work work
+Z14 tExplicit 1 CvgOpt 0
+Aarch
+R2
+R3
+R4
+R5
+DEx4 work 6 toster 0 22 Man0cb3m?AM2M3aLkCCIY0
+l28
+L15
+VmO1VcZg[?XV6ckbgg<QNZ1
+!s100 o6>LD`:`TRO_BH4=:o6L:2
+R8
+31
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Etoster_tb
+Z15 w1643901655
+R4
+R5
+R0
+Z16 8/home/danijel/Desktop/toster/Toster_tb.vhd
+Z17 F/home/danijel/Desktop/toster/Toster_tb.vhd
+l0
+L4
+VC0kUYJgA3D_=nWk@N`1AX1
+!s100 k2bX3[hi4_08LUPPX>NV`1
+R8
+31
+R9
+!i10b 1
+R10
+Z18 !s90 -reportprogress|300|-93|-work|work|/home/danijel/Desktop/toster/Toster_tb.vhd|
+Z19 !s107 /home/danijel/Desktop/toster/Toster_tb.vhd|
+!i113 1
+R13
+R14
+Atest
+R4
+R5
+DEx4 work 9 toster_tb 0 22 C0kUYJgA3D_=nWk@N`1AX1
+l27
+L7
+VJjCXKozkblzl`4i_TCcmk2
+!s100 f]k;D:[CJYJDXlo3eBBe?2
+R8
+31
+R9
+!i10b 1
+R10
+R18
+R19
+!i113 1
+R13
+R14

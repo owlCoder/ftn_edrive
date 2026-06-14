@@ -1,0 +1,27 @@
+﻿<Window x:Class="Zadatak4.DodavanjeKategorije"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak4"
+        mc:Ignorable="d"
+        Title="DodavanjeKategorije" Height="200" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Dodavanje nove kategorije" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Naziv:"></TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Padding="2" Name="txtNaziv"></TextBox>
+        <Button Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="25" Content="Dodaj" Click="Dodaj_Click"></Button>
+    </Grid>
+</Window>

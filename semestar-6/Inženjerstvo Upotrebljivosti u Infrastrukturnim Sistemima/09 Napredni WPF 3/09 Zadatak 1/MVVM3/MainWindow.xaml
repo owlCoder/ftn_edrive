@@ -1,0 +1,167 @@
+﻿<Window x:Class="MVVM3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:MVVM3"
+        xmlns:views="clr-namespace:MVVM3.Views"
+        xmlns:viewModel="clr-namespace:MVVM3.ViewModel"
+        mc:Ignorable="d"
+        Name="MainWindowRef"
+        Title="MainWindow"
+        Height="600"
+        Width="900"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:NotesViewModel}">
+            <views:NotesView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <views:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AddNoteViewModel}">
+            <views:AddNoteView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Border Background="{StaticResource UIPrimaryColor}"
+                CornerRadius="25"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="550"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="500"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Notes App"
+                       Foreground="{StaticResource UIAccentColor}"
+                       FontSize="35"
+                       Margin="20,0,0,0"
+                       Visibility="{Binding WindowTitleVisibility}"/>
+            <Border Grid.Row="2"
+                    Grid.ColumnSpan="3"
+                    CornerRadius="0,0,25,25">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{StaticResource GradientColorOne}"
+                                      Offset="0.1" />
+                        <GradientStop Color="{StaticResource GradientColorTwo}"
+                                      Offset="0.4" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <!--// Dock Bar //-->
+            <Grid Grid.Row="0"
+                  Grid.Column="1">
+                <Border Margin="0,0,50,0"
+                        Background="{StaticResource UISecondaryColor}"
+                        CornerRadius="0,0,25,25">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <!--// Home //-->
+                        <Button Grid.Column="1"
+                                x:Name="home"
+                                Style="{StaticResource DockBtnStyle}"
+                                Command="{Binding NavCommand}"
+                                CommandParameter="home">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Assets/home.png"
+                                            Stretch="Uniform"/>
+                            </Button.Background>
+                            <Popup Width="50"
+                                   PlacementTarget="{Binding ElementName=home}"
+                                   IsOpen="{Binding ElementName=home, Path=IsMouseOver, Mode=OneWay}"
+                                   Style="{StaticResource PopupStyle}">
+                                <Grid>
+                                    <Border Style="{StaticResource border}">
+                                        <TextBlock Text="Home"
+                                                   Style="{StaticResource PopupText}" />
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Button>
+                        <!--// List //-->
+                        <Button Grid.Column="2"
+                                x:Name="list"
+                                Style="{StaticResource DockBtnStyle}"
+                                Command="{Binding NavCommand}"
+                                CommandParameter="list">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Assets/view.png"
+                                            Stretch="Uniform"/>
+                            </Button.Background>
+                            <Popup Width="50"
+                                   PlacementTarget="{Binding ElementName=list}"
+                                   IsOpen="{Binding ElementName=list, Path=IsMouseOver, Mode=OneWay}"
+                                   Style="{StaticResource PopupStyle}">
+                                <Grid>
+                                    <Border Style="{StaticResource border}">
+                                        <TextBlock Text="List"
+                                                   Style="{StaticResource PopupText}" />
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Button>
+                        <!--// List //-->
+                        <Button Grid.Column="3"
+                                x:Name="add"
+                                Style="{StaticResource DockBtnStyle}"
+                                Command="{Binding NavCommand}"
+                                CommandParameter="add">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Assets/add.png"
+                                            Stretch="Uniform"/>
+                            </Button.Background>
+                            <Popup Width="50"
+                                   PlacementTarget="{Binding ElementName=add}"
+                                   IsOpen="{Binding ElementName=add, Path=IsMouseOver, Mode=OneWay}"
+                                   Style="{StaticResource PopupStyle}">
+                                <Grid>
+                                    <Border Style="{StaticResource border}">
+                                        <TextBlock Text="Add"
+                                                   Style="{StaticResource PopupText}" />
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Button>
+                    </Grid>
+                </Border>
+            </Grid>
+            <ContentControl Grid.Row="1" 
+                    Grid.Column="0" 
+                    Grid.ColumnSpan="3"
+                    Content="{Binding CurrentViewModel}"/>
+
+            <!--// Exit Button //-->
+            <Button x:Name="ExitBtn"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Margin="0,0,5,0"
+                    Style="{StaticResource CloseBtnStyle}"
+                    Command="{Binding CloseWindowCommand}"
+                    CommandParameter="{Binding ElementName=MainWindowRef}">
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

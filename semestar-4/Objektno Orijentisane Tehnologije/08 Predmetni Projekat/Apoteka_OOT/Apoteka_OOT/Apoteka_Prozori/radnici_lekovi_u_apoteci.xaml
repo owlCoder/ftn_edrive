@@ -1,0 +1,76 @@
+﻿<Window x:Class="Apoteka_OOT.Apoteka_Prozori.radnici_lekovi_u_apoteci"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Apoteka_OOT.Apoteka_Prozori"
+        mc:Ignorable="d"
+        Title="Spisak Lekova i Radnika U Apoteci" Height="550" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FF96C9FF">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="0.4*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="LISTA RADNIKA" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="10 0 0 0"></Label>
+        <Label Grid.Row="0" Grid.Column="1" Content="LISTA LEKOVA" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="10 0 0 0"></Label>
+
+        <!-- RADNICI -->
+        <!-- LIST BOX KOJI PRIKAZUJE SVE DODATE RADNIKE (NE PRIPADAJU NIJEDNOJ APOTECI) -->
+        <TextBox x:Name="pretraga_radnika" Grid.Row="1" Grid.Column="0" Margin="9 0 0 5" FontSize="16" FontWeight="Bold" TextChanged="pretraga_radnika_TextChanged"></TextBox>
+        <ListBox Margin="10 0 0 0" Name="svi_radnici" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" FontSize="16" FontWeight="Bold" SelectionChanged="svi_radnici_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Ime}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding Prezime}"/>
+                        <TextBlock Text=" ("/>
+                        <TextBlock Text="{Binding DatumPocetkaRada}"/>
+                        <TextBlock Text=")"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ComboBox Name="odabrani_radnik" Grid.Column="0" Grid.Row="6" Margin="5" FontSize="16" FontWeight="Bold" IsEnabled="True">
+            <ComboBoxItem Content="IZMENI RADNIKA U APOTECI"></ComboBoxItem>
+            <ComboBoxItem Content="OBRIŠI RADNIKA IZ APOTEKE"></ComboBoxItem>
+        </ComboBox>
+        <Button Grid.Column="0" Grid.Row="7" Margin="5" Name="operacije_sa_radnikom" FontSize="18" Click="operacije_sa_radnikom_Click" FontWeight="Bold" Content="POKRENI ODABRANO" IsEnabled="True"></Button>
+
+        <!-- LEKOVE -->
+        <!-- LIST BOX KOJI PRIKAZUJE SVE DODATE LEKOVE (NE PRIPADAJU NIJEDNOJ APOTECI) -->
+        <TextBox x:Name="pretraga_lekova" Grid.Row="1" Grid.Column="1" Margin="9 0 0 5" FontSize="16" FontWeight="Bold" TextChanged="pretraga_lekova_TextChanged"></TextBox>
+        <ListBox Margin="10 0 0 0" Name="svi_lekovi" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" FontSize="16" FontWeight="Bold" SelectionChanged="svi_lekovi_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Naziv}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding Kolicina}"/>
+                        <TextBlock Text=" ("/>
+                        <TextBlock Text="{Binding DatumProizvodnje}"/>
+                        <TextBlock Text=")"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ComboBox Name="odabrani_lek" Grid.Column="1" Grid.Row="6" Margin="5" FontSize="16" FontWeight="Bold" IsEnabled="True">
+            <ComboBoxItem Content="IZMENI LEK U APOTECI"></ComboBoxItem>
+            <ComboBoxItem Content="OBRIŠI LEK IZ APOTEKE"></ComboBoxItem>
+        </ComboBox>
+        <Button Grid.Column="1" Grid.Row="7" Margin="5" Name="operacije_sa_lekom" Click="operacije_sa_lekom_Click" FontSize="18" FontWeight="Bold" Content="POKRENI ODABRANO" IsEnabled="True"></Button>
+    </Grid>
+</Window>

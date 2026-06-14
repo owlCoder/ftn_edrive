@@ -1,0 +1,58 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity automat_tb is
+end entity;
+
+architecture beh of automat_tb is
+	component Automat
+		port(
+			iCLK		: in  std_logic;
+			inRST		: in  std_logic;
+			oRE		: out std_logic;
+			oYE		: out std_logic;
+			oGR		: out std_logic
+			
+		);
+	end component;
+	
+	-- ULAZI
+	signal sCLK    : std_logic := '0';
+	signal sRST    : std_logic := '1';
+	
+	-- IZLAZI
+	signal sRE     : std_logic;
+	signal sYE     : std_logic;
+	signal sGR		: std_logic;
+	
+	constant iCLK_period : time := 10 ns;
+	
+begin
+	uut: Automat port map(
+		iCLK 		=> sCLK,
+		inRST		=> sRST,
+		oRE		=> sRE,
+		oYE		=> sYE,
+		oGR		=> sGR
+	);
+	
+   iCLK_process :process
+   begin
+		sCLK <= '0';
+		wait for iCLK_period/2;
+		sCLK <= '1';
+		wait for iCLK_period/2;
+   end process;
+ 
+   stim_proc: process
+	begin
+		-- Test cases
+		sRST <= '0';
+		wait for iCLK_period;
+		sRST <= '1';
+
+		wait;
+	end process;
+end architecture;
+	

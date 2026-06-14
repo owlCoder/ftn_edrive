@@ -1,0 +1,10 @@
+﻿Lekovita|Puskinova 22|2001|/Img/ap1.png
+Benu|Nova 33|1900|/Img/ap2.png
+Not FTN|Futoska 43|1856|/Img/ap3.png
+Dr. Max|Puskinova 1|2011|/Img/ap4.png
+Benu|Nova 33|1900|/Img/ap2.png
+Not PMF|Gramska 43|1941|/Img/ap3.png
+New Old Apoteka|Puskinova 12|2021|/Img/ap1.png
+Nebu|Nova 34|1990|/Img/ap2.png
+Rupie|Alekse Santica 4|2001|/Img/ap3.png
+Manivita|Puskinova 2|2001|/Img/ap1.png

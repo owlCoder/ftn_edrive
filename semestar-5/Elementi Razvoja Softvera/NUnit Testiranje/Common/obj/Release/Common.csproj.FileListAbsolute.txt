@@ -1,0 +1,5 @@
+D:\NUnit Testiranje\Common\bin\Release\Common.dll
+D:\NUnit Testiranje\Common\bin\Release\Common.pdb
+D:\NUnit Testiranje\Common\obj\Release\Common.csproj.CoreCompileInputs.cache
+D:\NUnit Testiranje\Common\obj\Release\Common.dll
+D:\NUnit Testiranje\Common\obj\Release\Common.pdb

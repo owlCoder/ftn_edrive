@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1651328718 source:/home/asistenti/aleksandar_andrejevic/os/12-Disk/multiprocesor-dma/main.cpp
+	<vector>
+	<thread>
+	"memorija.h"
+	"magistrala.h"
+	"naredba.h"
+
+1653327895 /home/asistenti/aleksandar_andrejevic/os/12-Disk/multiprocesor-dma/memorija.h
+	<mutex>
+
+1653330108 /home/asistenti/aleksandar_andrejevic/os/12-Disk/multiprocesor-dma/magistrala.h
+	"dijagnostika.h"
+	<condition_variable>
+
+1651328718 /home/asistenti/aleksandar_andrejevic/os/12-Disk/multiprocesor-dma/dijagnostika.h
+	<iostream>
+	<mutex>
+
+1647081766 /home/asistenti/aleksandar_andrejevic/os/12-Disk/multiprocesor-dma/naredba.h
+

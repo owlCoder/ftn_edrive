@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1635355960 source:/home/danijel/Desktop/Pravougaonik/main.cpp
+	<iostream>
+
+1635356328 source:/home/danijel/Desktop/Pravougaonik/Pravougaonik.cpp
+	"Pravougaonik.hpp"
+
+1635356349 /home/danijel/Desktop/Pravougaonik/Pravougaonik.hpp
+	<iostream>
+

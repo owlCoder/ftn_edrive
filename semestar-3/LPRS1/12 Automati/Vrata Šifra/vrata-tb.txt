@@ -1,0 +1,26 @@
+iRST <= '1';
+wait for 2*iCLK_PERIOD;
+iRST <= '0';
+
+iNEW_REQ <= '1';
+wait for iCLK_PERIOD;
+iNEW_REQ <= '0';
+
+iCODE <= "0010";		--2
+wait for 9*ICLK_PERIOD;
+iCODE <= "0011";		--3
+wait for 9*ICLK_PERIOD;
+iCODE <= "0100";		--4
+wait for 9*iCLK_PERIOD;
+iCODE <= "0111";
+wait for 29*iCLK_PERIOD; --cekanje na unlock period da prodje
+
+wait for 20*iCLK_PERIOD; --random vreme izmedju pojavljivanja 2 osobe
+
+iNEW_REQ <= '1';
+wait for iCLK_PERIOD;
+iNEW_REQ <= '0';
+
+iCODE <= "0001";		--unet pogresan broj
+
+

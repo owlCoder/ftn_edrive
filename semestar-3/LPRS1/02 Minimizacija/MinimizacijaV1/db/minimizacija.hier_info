@@ -1,0 +1,10 @@
+|minimizacija
+iB0 => sS2.IN0
+iB0 => sS0.IN0
+iB1 => sS2.IN1
+iB1 => sS0.IN1
+iB1 => sS1.IN0
+iB2 => sS1.IN1
+oY << oY.DB_MAX_OUTPUT_PORT_TYPE
+
+

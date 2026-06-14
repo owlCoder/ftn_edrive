@@ -1,0 +1,9 @@
+D:\NUnit Testiranje\Osoba\bin\Release\Osoba.dll
+D:\NUnit Testiranje\Osoba\bin\Release\Osoba.pdb
+D:\NUnit Testiranje\Osoba\bin\Release\Common.dll
+D:\NUnit Testiranje\Osoba\bin\Release\Common.pdb
+D:\NUnit Testiranje\Osoba\obj\Release\Osoba.csproj.AssemblyReference.cache
+D:\NUnit Testiranje\Osoba\obj\Release\Osoba.csproj.CoreCompileInputs.cache
+D:\NUnit Testiranje\Osoba\obj\Release\Osoba.csproj.CopyComplete
+D:\NUnit Testiranje\Osoba\obj\Release\Osoba.dll
+D:\NUnit Testiranje\Osoba\obj\Release\Osoba.pdb

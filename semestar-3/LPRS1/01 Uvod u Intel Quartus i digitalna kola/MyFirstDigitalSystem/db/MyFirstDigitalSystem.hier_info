@@ -1,0 +1,6 @@
+|MyFirstDigitalSystem
+iA => sS.IN0
+iB => sS.IN1
+oY <= sS.DB_MAX_OUTPUT_PORT_TYPE
+
+

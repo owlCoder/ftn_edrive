@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1492669728 source:/mnt/c/Users/Danijel/Desktop/OS/09_Procesi/multiprocesor/main.cpp
+	<vector>
+	<thread>
+	"memorija.h"
+
+1650215825 /mnt/c/Users/Danijel/Desktop/OS/09_Procesi/multiprocesor/memorija.h
+	<mutex>
+	<condition_variable>
+	"dijagnostika.h"
+
+1492607070 /mnt/c/Users/Danijel/Desktop/OS/09_Procesi/multiprocesor/dijagnostika.h
+	<iostream>
+

@@ -1,0 +1,70 @@
+# depslib dependency file v1.0
+1650291030 source:c:\users\danijel\desktop\arduinosimv11\main.cpp
+	<arduinoSimulator.h>
+
+1634285918 c:\users\danijel\desktop\arduinosimv11\include\arduinosimulator.h
+	<windows.h>
+	<arduinoPlatform.h>
+
+1651741676 c:\users\danijel\desktop\arduinosimv11\include\arduinoplatform.h
+	"windows.h"
+
+1651743372 source:c:\users\danijel\desktop\arduinosimv11\src\arduinoplatform.cpp
+	"arduinoPlatform.h"
+	"windows.h"
+	<time.h>
+	<demo.h>
+	<serial.h>
+
+1634202884 c:\users\danijel\desktop\arduinosimv11\include\demo.h
+
+1650291846 c:\users\danijel\desktop\arduinosimv11\include\serial.h
+	"Windows.h"
+
+1643023208 source:c:\users\danijel\desktop\arduinosimv11\src\arduinosimulator.cpp
+	"arduinoSimulator.h"
+	"arduinoPlatform.h"
+	"tasks.h"
+	"interrupts.h"
+	"serial.h"
+	"GUI.h"
+	"demo.h"
+
+1650293630 c:\users\danijel\desktop\arduinosimv11\include\tasks.h
+
+1652773546 c:\users\danijel\desktop\arduinosimv11\include\interrupts.h
+
+1643021042 c:\users\danijel\desktop\arduinosimv11\include\gui.h
+	<arduinoPlatform.h>
+	<windows.h>
+
+1643023972 source:c:\users\danijel\desktop\arduinosimv11\src\gui.cpp
+	"GUI.h"
+	"arduinoPlatform.h"
+	"serial.h"
+	<math.h>
+
+1652773536 source:c:\users\danijel\desktop\arduinosimv11\src\interrupts.cpp
+	"interrupts.h"
+	"arduinoPlatform.h"
+	"windows.h"
+	"stdio.h"
+
+1652776048 source:c:\users\danijel\desktop\arduinosimv11\src\pwm.cpp
+	"pwm.h"
+	<math.h>
+	<tasks.h>
+	<arduinoPlatform.h>
+
+1652773076 c:\users\danijel\desktop\arduinosimv11\include\pwm.h
+
+1650291978 source:c:\users\danijel\desktop\arduinosimv11\src\serial.cpp
+	"serial.h"
+	"windowsx.h"
+
+1650293786 source:c:\users\danijel\desktop\arduinosimv11\src\tasks.cpp
+	"tasks.h"
+	"arduinoPlatform.h"
+	"stdio.h"
+	"windows.h"
+

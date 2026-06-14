@@ -1,0 +1,92 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/danijel/Desktop/lab5_postavke/Automat-pomerac/simulation/modelsim
+Eautomat
+Z1 w1638181535
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z6 8/home/danijel/Desktop/lab5_postavke/Automat-pomerac/automat.vhd
+Z7 F/home/danijel/Desktop/lab5_postavke/Automat-pomerac/automat.vhd
+l0
+L5
+V`cBbMID<9>I7XR?<CiZ`83
+!s100 c<<n6I890Q[bjFK;gzLg;0
+Z8 OV;C;10.5b;63
+31
+Z9 !s110 1638181970
+!i10b 1
+Z10 !s108 1638181970.000000
+Z11 !s90 -reportprogress|300|-93|-work|work|/home/danijel/Desktop/lab5_postavke/Automat-pomerac/automat.vhd|
+Z12 !s107 /home/danijel/Desktop/lab5_postavke/Automat-pomerac/automat.vhd|
+!i113 1
+Z13 o-93 -work work
+Z14 tExplicit 1 CvgOpt 0
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 7 automat 0 22 `cBbMID<9>I7XR?<CiZ`83
+l21
+L16
+V1S31TZO^kQaJ;Q`IRD6FI0
+!s100 AmKcAkLhKj7WO9=YMh=1K3
+R8
+31
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Eautomat_tb
+Z15 w1638181896
+R4
+R5
+R0
+Z16 8/home/danijel/Desktop/lab5_postavke/Automat-pomerac/simulation/modelsim/automat_tb.vhd
+Z17 F/home/danijel/Desktop/lab5_postavke/Automat-pomerac/simulation/modelsim/automat_tb.vhd
+l0
+L4
+ViNmF=mV9FZfV6eXZf2SXW2
+!s100 58h`Cz7=6@eYbV<PEncY@3
+R8
+31
+R9
+!i10b 1
+R10
+Z18 !s90 -reportprogress|300|-93|-work|work|/home/danijel/Desktop/lab5_postavke/Automat-pomerac/simulation/modelsim/automat_tb.vhd|
+Z19 !s107 /home/danijel/Desktop/lab5_postavke/Automat-pomerac/simulation/modelsim/automat_tb.vhd|
+!i113 1
+R13
+R14
+Atest
+R4
+R5
+DEx4 work 10 automat_tb 0 22 iNmF=mV9FZfV6eXZf2SXW2
+l31
+L7
+VU4IMCUM3hdT4e@R]Gh]Y]0
+!s100 KhoXLf8`a5hcF0Y`]o<]42
+R8
+31
+R9
+!i10b 1
+R10
+R18
+R19
+!i113 1
+R13
+R14

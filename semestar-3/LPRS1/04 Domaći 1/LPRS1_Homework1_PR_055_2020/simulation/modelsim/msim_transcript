@@ -1,0 +1,139 @@
+# Reading pref.tcl
+# do LPRS1_Homework1_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/LPRS1_Homework1_PR_055_2020_Solution/lprs1_homework1.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 12:10:15 on Nov 04,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/LPRS1_Homework1_PR_055_2020_Solution/lprs1_homework1.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity lprs1_homework1
+# -- Compiling architecture arch of lprs1_homework1
+# End time: 12:10:15 on Nov 04,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vcom -93 -work work {C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 12:10:15 on Nov 04,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_textio
+# -- Compiling entity lprs1_max1000_board_emulator
+# -- Compiling architecture lprs1_max1000_board_emulator_arch of lprs1_max1000_board_emulator
+# End time: 12:10:16 on Nov 04,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator_comb.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 12:10:16 on Nov 04,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator_comb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity lprs1_max1000_board_emulator_comb
+# -- Compiling architecture lprs1_max1000_board_emulator_comb_arch of lprs1_max1000_board_emulator_comb
+# -- Loading package std_logic_textio
+# -- Loading entity lprs1_max1000_board_emulator
+# End time: 12:10:16 on Nov 04,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/lprs1_homework1_tb.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 12:10:16 on Nov 04,2021
+# vcom -reportprogress 300 -93 -work work C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/lprs1_homework1_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity lprs1_homework1_tb
+# -- Compiling architecture arch of lprs1_homework1_tb
+# -- Loading entity lprs1_homework1
+# -- Loading entity lprs1_max1000_board_emulator_comb
+# End time: 12:10:16 on Nov 04,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs="+acc"  lprs1_homework1_tb
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=""+acc"" lprs1_homework1_tb 
+# Start time: 12:10:16 on Nov 04,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.lprs1_homework1_tb(arch)
+# Loading work.lprs1_homework1(arch)
+# Loading ieee.std_logic_textio(body)
+# Loading work.lprs1_max1000_board_emulator_comb(lprs1_max1000_board_emulator_comb_arch)
+# Loading work.lprs1_max1000_board_emulator(lprs1_max1000_board_emulator_arch)
+# 
+# do C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/lprs1_homework1_tb_run.do
+# 
+# All is relative to simulation/modelsim/
+# 
+# restart -force
+# delete wave *
+# 
+# set wf lprs1_homework1_tb_wave.do
+# lprs1_homework1_tb_wave.do
+# 
+# if {[file exists wave.do]} {
+# 	file delete ../../$wf
+# 	file copy wave.do ../../$wf
+# }
+# 
+# do $wf
+# onerror {resume}
+# quietly WaveActivateNextPane {} 0
+# add wave -noupdate /lprs1_homework1_tb/uut/i_x
+# add wave -noupdate /lprs1_homework1_tb/uut/i_y
+# add wave -noupdate /lprs1_homework1_tb/uut/i_z
+# add wave -noupdate /lprs1_homework1_tb/uut/i_sel
+# add wave -noupdate /lprs1_homework1_tb/uut/o_res
+# add wave -noupdate /lprs1_homework1_tb/uut/o_cmp
+# add wave -noupdate /lprs1_homework1_tb/uut/o_enc
+# TreeUpdate [SetDefaultTree]
+# WaveRestoreCursors {{Cursor 1} {3000000 ps} 0}
+# quietly wave cursor active 1
+# configure wave -namecolwidth 407
+# configure wave -valuecolwidth 100
+# configure wave -justifyvalue left
+# configure wave -signalnamewidth 0
+# configure wave -snapdistance 10
+# configure wave -datasetprefix 0
+# configure wave -rowmargin 4
+# configure wave -childrowmargin 2
+# configure wave -gridoffset 0
+# configure wave -gridperiod 1
+# configure wave -griddelta 40
+# configure wave -timeline 0
+# configure wave -timelineunits ns
+# update
+# WaveRestoreZoom {0 ps} {1 us}
+# 
+# Ignoring uninitialized signals warnings before reset activated.
+# set StdArithNoWarnings 1
+# 1
+# set NumericStdNoWarnings 1
+# 1
+# run 1ps
+# set StdArithNoWarnings 0
+# 0
+# set NumericStdNoWarnings 0
+# 0
+# 
+# run 1 us
+# End time: 12:23:38 on Nov 04,2021, Elapsed time: 0:13:22
+# Errors: 0, Warnings: 0

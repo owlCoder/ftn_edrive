@@ -1,0 +1,93 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/simulation/modelsim
+Esegmentd
+Z1 w1635620509
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 0
+R0
+Z4 8D:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/SegmentD.vhd
+Z5 FD:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/SegmentD.vhd
+l0
+L4 1
+VCOQnKh^:S2ADCK;8_iz:A1
+!s100 mQK9IFdOFFE[]ST@XoBe71
+Z6 OV;C;2020.1;71
+31
+Z7 !s110 1635620677
+!i10b 1
+Z8 !s108 1635620677.000000
+Z9 !s90 -reportprogress|300|-93|-work|work|D:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/SegmentD.vhd|
+Z10 !s107 D:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/SegmentD.vhd|
+!i113 1
+Z11 o-93 -work work
+Z12 tExplicit 1 CvgOpt 0
+Abehavioral
+R2
+R3
+DEx4 work 8 segmentd 0 22 COQnKh^:S2ADCK;8_iz:A1
+!i122 0
+l21
+L14 17
+VfZG:X>6G<dVoGkP5E3ogI0
+!s100 amW@B]j:dg?N=zGQYeBPh2
+R6
+31
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Esegmentd_tb
+Z13 w1635620584
+R2
+R3
+!i122 1
+R0
+Z14 8D:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/simulation/modelsim/SegmentD_tb.vhd
+Z15 FD:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/simulation/modelsim/SegmentD_tb.vhd
+l0
+L4 1
+V81PN4IB5T3b:Vj2BC15_?0
+!s100 e7=39BY;]XWlOQHcFDM141
+R6
+31
+R7
+!i10b 1
+R8
+Z16 !s90 -reportprogress|300|-93|-work|work|D:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/simulation/modelsim/SegmentD_tb.vhd|
+!s107 D:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/simulation/modelsim/SegmentD_tb.vhd|
+!i113 1
+R11
+R12
+Atest
+R2
+R3
+DEx4 work 11 segmentd_tb 0 22 81PN4IB5T3b:Vj2BC15_?0
+!i122 1
+l25
+L7 127
+VS_69Mfa0IFAXMT=`EmK:K1
+!s100 nWO2`9G08PoKZ`4fHZSDQ3
+R6
+31
+R7
+!i10b 1
+R8
+R16
+Z17 !s107 D:/FTN_S3/LPRS1/02 Minimizacija/SegmentD/simulation/modelsim/SegmentD_tb.vhd|
+!i113 1
+R11
+R12

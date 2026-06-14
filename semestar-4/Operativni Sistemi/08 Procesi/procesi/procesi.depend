@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1650292143 source:c:\users\danijel\desktop\os\09_procesi\procesi\main.cpp
+	<thread>
+	<vector>
+	"proces.h"
+	"dijagnostika.h"
+	"os.h"
+
+1650292143 ika.h"
+
+1492607068 c:\users\danijel\desktop\os\09_procesi\procesi\proces.h
+	<vector>
+
+1493887234 
+
+1493887234 c:\users\danijel\desktop\os\09_procesi\procesi\dijagnostika.h
+	<iostream>
+	<mutex>
+
+1650480666 c:\users\danijel\desktop\os\09_procesi\procesi\os.h
+	"dijagnostika.h"
+	"proces.h"
+	<condition_variable>
+	<mutex>
+	<queue>
+
+1650480666 _variable>
+
+1650481053 source:/mnt/c/Users/Danijel/Desktop/OS/09_Procesi/procesi/main.cpp
+	<thread>
+	<vector>
+	"proces.h"
+	"dijagnostika.h"
+	"os.h"
+
+1492607068 /mnt/c/Users/Danijel/Desktop/OS/09_Procesi/procesi/proces.h
+	<vector>
+
+1493887234 /mnt/c/Users/Danijel/Desktop/OS/09_Procesi/procesi/dijagnostika.h
+	<iostream>
+	<mutex>
+
+1650481102 /mnt/c/Users/Danijel/Desktop/OS/09_Procesi/procesi/os.h
+	"dijagnostika.h"
+	"proces.h"
+	<condition_variable>
+	<mutex>
+	<queue>
+

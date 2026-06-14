@@ -1,0 +1,36 @@
+﻿<Window x:Class="Apoteka_OOT.Lek_Prozori.dodaj_lek"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Apoteka_OOT.Lek_Prozori"
+        mc:Ignorable="d"
+        Title="Dodavanje Leka" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="#FF96C9FF" ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Content="Naziv leka: " Grid.Row="0" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Name="naziv" Grid.Row="0" Grid.Column="1" Margin="20" FontSize="16" FontWeight="Bold"></TextBox>
+
+        <Label Content="Datum proizvodnje: " Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Name="datum_proizvodnje" Grid.Row="1" Grid.Column="1" Margin="20" FontSize="16" FontWeight="Bold"></TextBox>
+
+        <Label Content="Datum važenja: " Grid.Row="2" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Name="datum_vazenja" Grid.Row="2" Grid.Column="1" Margin="20" FontSize="16" FontWeight="Bold"></TextBox>
+
+        <Label Content="Količina leka: " Grid.Row="3" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Name="kolicina" Grid.Row="3" Grid.Column="1" Margin="20" FontSize="16" FontWeight="Bold"></TextBox>
+        
+        <Button Name="dodavanje_leka" Click="dodavanje_leka_Click" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="20" Content="DODAVANJE LEKA U LISTU LEKOVA" FontSize="16" FontWeight="Bold"></Button>
+    </Grid>
+</Window>

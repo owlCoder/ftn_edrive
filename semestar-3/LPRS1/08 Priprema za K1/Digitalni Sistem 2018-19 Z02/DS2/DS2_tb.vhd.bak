@@ -1,0 +1,10 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+library work;
+
+entity DS2_tb is 
+end entity;
+
+architecture Behavioral of DS2_tb is
+	

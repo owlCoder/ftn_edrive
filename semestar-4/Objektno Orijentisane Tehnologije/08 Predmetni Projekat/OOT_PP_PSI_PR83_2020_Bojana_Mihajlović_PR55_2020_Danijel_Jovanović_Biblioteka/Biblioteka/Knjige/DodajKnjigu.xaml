@@ -1,0 +1,28 @@
+﻿<Page x:Class="Biblioteka.Knjige.DodajKnjigu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Biblioteka.Knjige"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DodajKnjigu">
+    
+	<Border Background="White" BorderBrush="White" BorderThickness="0" CornerRadius="20, 20, 20, 20" Margin="80 70 80 90">
+        <StackPanel Margin="20" Orientation="Vertical">
+            <Label HorizontalAlignment="Center" FontWeight="Bold" FontSize="22" Content="DODAVANJE NOVE KNJIGE" Margin="0 10 0 0"/>
+
+            <Label Content="Naziv:" FontSize="16" FontWeight="Bold" Margin="0 10 0 0"/>
+            <TextBox Name="nazivKnjige" FontSize="16" FontWeight="Bold"/>
+
+            <Label Content="Autor:" FontSize="16" FontWeight="Bold"/>
+            <TextBox Name="autorKnjige" FontSize="16" FontWeight="Bold"/>
+
+            <Label Content="Godina Izdanja:" FontSize="16" FontWeight="Bold"/>
+            <TextBox Name="godinaIzdanjaKnjige" FontSize="16" FontWeight="Bold"/>
+
+            <Button Content="DODAVANJE KNJIGE" Name="dodajKnjiguBtn" Click="dodajKnjiguBtn_Click" FontWeight="Bold" FontSize="20" Margin="0 50 0 0"/>
+        </StackPanel>
+    </Border>
+	
+</Page>

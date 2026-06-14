@@ -1,0 +1,11 @@
+D:\FTN\ODP\04 Zadatak 1\Klijent\bin\Debug\Klijent.exe.config
+D:\FTN\ODP\04 Zadatak 1\Klijent\bin\Debug\Klijent.exe
+D:\FTN\ODP\04 Zadatak 1\Klijent\bin\Debug\Klijent.pdb
+D:\FTN\ODP\04 Zadatak 1\Klijent\bin\Debug\Common.dll
+D:\FTN\ODP\04 Zadatak 1\Klijent\bin\Debug\Common.pdb
+D:\FTN\ODP\04 Zadatak 1\Klijent\obj\Debug\Klijent.csproj.AssemblyReference.cache
+D:\FTN\ODP\04 Zadatak 1\Klijent\obj\Debug\Klijent.csproj.SuggestedBindingRedirects.cache
+D:\FTN\ODP\04 Zadatak 1\Klijent\obj\Debug\Klijent.csproj.CoreCompileInputs.cache
+D:\FTN\ODP\04 Zadatak 1\Klijent\obj\Debug\Klijent.csproj.CopyComplete
+D:\FTN\ODP\04 Zadatak 1\Klijent\obj\Debug\Klijent.exe
+D:\FTN\ODP\04 Zadatak 1\Klijent\obj\Debug\Klijent.pdb

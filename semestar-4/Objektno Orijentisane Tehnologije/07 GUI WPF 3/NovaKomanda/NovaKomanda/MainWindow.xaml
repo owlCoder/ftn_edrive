@@ -1,0 +1,26 @@
+﻿<Window x:Class="NovaKomanda.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NovaKomanda"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="200" Width="200">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:NoveKomande.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed" />
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Command="local:NoveKomande.Exit" />
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Command="local:NoveKomande.Exit" Padding="2">Exit</Button>
+        </StackPanel>
+    </Grid>
+</Window>

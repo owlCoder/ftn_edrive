@@ -1,0 +1,125 @@
+[PROCES] 1 je pokrenut i treba da izvrsi 4 naredbi.
+[PROCES] 2 je pokrenut i treba da izvrsi 7 naredbi.
+[PROCES] 2 ceka da se procesor oslobodi.
+[PROCES] 4 je pokrenut i treba da izvrsi 4 naredbi.
+[PROCES] 4 ceka da se procesor oslobodi.
+[PROCES] 3 je pokrenut i treba da izvrsi 6 naredbi.
+[PROCES] 3 ceka da se procesor oslobodi.
+[PROCES] 5 je pokrenut i treba da izvrsi 6 naredbi.
+[PROCES] 5 ceka da se procesor oslobodi.
+[PROCES] 1 izvrsava svoju naredbu broj 0.
+[PROCES] 1 je zavrsio svoju naredbu broj 0.
+[PROCES] 1 ceka da se procesor oslobodi.
+[PROCES] 2 izvrsava svoju naredbu broj 0.
+[PROCES] 2 je zavrsio svoju naredbu broj 0.
+[PROCES] 2 ceka da se procesor oslobodi.
+[U/I UREDJAJ] je postavio signal prekida.
+[U/I UREDJAJ] je postavio signal prekida.
+[PROCES] 4 izvrsava svoju naredbu broj 0.
+[U/I OBRADJIVAC] ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] krece u obradu prekida.
+[PROCES] 4 ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] je zavrsio obradu prekida.
+[U/I UREDJAJ] je ukinuo signal prekida.
+[PROCES] 3 izvrsava svoju naredbu broj 0.
+[PROCES] 3 je zavrsio svoju naredbu broj 0.
+[PROCES] 3 ceka da se procesor oslobodi.
+[U/I UREDJAJ] je postavio signal prekida.
+[U/I UREDJAJ] je postavio signal prekida.
+[PROCES] 5 izvrsava svoju naredbu broj 0.
+[U/I OBRADJIVAC] ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] krece u obradu prekida.
+[PROCES] 5 ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] je zavrsio obradu prekida.
+[U/I UREDJAJ] je ukinuo signal prekida.
+[PROCES] 1 izvrsava svoju naredbu broj 1.
+[PROCES] 1 je zavrsio svoju naredbu broj 1.
+[PROCES] 1 ceka da se procesor oslobodi.
+[PROCES] 2 izvrsava svoju naredbu broj 1.
+[PROCES] 2 je zavrsio svoju naredbu broj 1.
+[PROCES] 2 ceka da se procesor oslobodi.
+[U/I UREDJAJ] je postavio signal prekida.
+[U/I UREDJAJ] je postavio signal prekida.
+[PROCES] 4 izvrsava svoju naredbu broj 1.
+[U/I OBRADJIVAC] ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] krece u obradu prekida.
+[PROCES] 4 ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] je zavrsio obradu prekida.
+[U/I UREDJAJ] je ukinuo signal prekida.
+[PROCES] 3 izvrsava svoju naredbu broj 1.
+[PROCES] 3 je zavrsio svoju naredbu broj 1.
+[PROCES] 3 ceka da se procesor oslobodi.
+[PROCES] 5 izvrsava svoju naredbu broj 1.
+[PROCES] 5 je zavrsio svoju naredbu broj 1.
+[PROCES] 5 ceka da se procesor oslobodi.
+[PROCES] 1 izvrsava svoju naredbu broj 2.
+[PROCES] 1 je zavrsio svoju naredbu broj 2.
+[PROCES] 1 ceka da se procesor oslobodi.
+[PROCES] 2 izvrsava svoju naredbu broj 2.
+[PROCES] 2 je zavrsio svoju naredbu broj 2.
+[PROCES] 2 ceka da se procesor oslobodi.
+[U/I UREDJAJ] je postavio signal prekida.
+[U/I UREDJAJ] je postavio signal prekida.
+[PROCES] 4 izvrsava svoju naredbu broj 2.
+[U/I OBRADJIVAC] ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] krece u obradu prekida.
+[PROCES] 4 ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] je zavrsio obradu prekida.
+[U/I UREDJAJ] je ukinuo signal prekida.
+[PROCES] 3 izvrsava svoju naredbu broj 2.
+[PROCES] 3 je zavrsio svoju naredbu broj 2.
+[PROCES] 3 ceka da se procesor oslobodi.
+[U/I UREDJAJ] je postavio signal prekida.
+[U/I UREDJAJ] je postavio signal prekida.
+[PROCES] 5 izvrsava svoju naredbu broj 2.
+[U/I OBRADJIVAC] ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] krece u obradu prekida.
+[PROCES] 5 ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] je zavrsio obradu prekida.
+[U/I UREDJAJ] je ukinuo signal prekida.
+[PROCES] 1 izvrsava svoju naredbu broj 3.
+[PROCES] 1 je zavrsio svoju naredbu broj 3.
+[PROCES] 2 izvrsava svoju naredbu broj 3.
+[PROCES] 2 je zavrsio svoju naredbu broj 3.
+[PROCES] 2 ceka da se procesor oslobodi.
+[U/I UREDJAJ] je postavio signal prekida.
+[U/I UREDJAJ] je postavio signal prekida.
+[PROCES] 4 izvrsava svoju naredbu broj 3.
+[U/I OBRADJIVAC] ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] krece u obradu prekida.
+[U/I OBRADJIVAC] je zavrsio obradu prekida.
+[U/I UREDJAJ] je ukinuo signal prekida.
+[PROCES] 3 izvrsava svoju naredbu broj 3.
+[PROCES] 3 je zavrsio svoju naredbu broj 3.
+[PROCES] 3 ceka da se procesor oslobodi.
+[PROCES] 5 izvrsava svoju naredbu broj 3.
+[PROCES] 5 je zavrsio svoju naredbu broj 3.
+[PROCES] 5 ceka da se procesor oslobodi.
+[U/I UREDJAJ] je postavio signal prekida.
+[U/I UREDJAJ] je postavio signal prekida.
+[PROCES] 2 izvrsava svoju naredbu broj 4.
+[U/I OBRADJIVAC] ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] krece u obradu prekida.
+[PROCES] 2 ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] je zavrsio obradu prekida.
+[U/I UREDJAJ] je ukinuo signal prekida.
+[PROCES] 3 izvrsava svoju naredbu broj 4.
+[PROCES] 3 je zavrsio svoju naredbu broj 4.
+[U/I UREDJAJ] je postavio signal prekida.
+[U/I UREDJAJ] je postavio signal prekida.
+[PROCES] 3 ceka da se procesor oslobodi.
+[PROCES] 5 izvrsava svoju naredbu broj 4.
+[U/I OBRADJIVAC] ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] krece u obradu prekida.
+[PROCES] 5 ceka da se procesor oslobodi.
+[U/I OBRADJIVAC] je zavrsio obradu prekida.
+[U/I UREDJAJ] je ukinuo signal prekida.
+[PROCES] 2 izvrsava svoju naredbu broj 5.
+[PROCES] 2 je zavrsio svoju naredbu broj 5.
+[PROCES] 2 ceka da se procesor oslobodi.
+[PROCES] 3 izvrsava svoju naredbu broj 5.
+[PROCES] 3 je zavrsio svoju naredbu broj 5.
+[PROCES] 5 izvrsava svoju naredbu broj 5.
+[PROCES] 5 je zavrsio svoju naredbu broj 5.
+[PROCES] 2 izvrsava svoju naredbu broj 6.
+[PROCES] 2 je zavrsio svoju naredbu broj 6.

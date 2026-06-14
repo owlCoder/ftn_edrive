@@ -1,0 +1,112 @@
+# Reading pref.tcl
+# do MySecondDigitalSystem_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {D:/LPRS1/V1/MySecondDigitalSystem/MySecondDigitalSystem.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:55:56 on Oct 19,2021
+# vcom -reportprogress 300 -93 -work work D:/LPRS1/V1/MySecondDigitalSystem/MySecondDigitalSystem.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MySecondDigitalSystem
+# -- Compiling architecture bdf_type of MySecondDigitalSystem
+# End time: 18:55:56 on Oct 19,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vcom -93 -work work {D:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim/MySecondDigitalSystem_tb.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:55:57 on Oct 19,2021
+# vcom -reportprogress 300 -93 -work work D:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim/MySecondDigitalSystem_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MySecondDigitalSystem_tb
+# -- Compiling architecture Test_tb of MySecondDigitalSystem_tb
+# End time: 18:55:57 on Oct 19,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs="+acc"  MySecondDigitalSystem_tb
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=""+acc"" MySecondDigitalSystem_tb 
+# Start time: 18:55:57 on Oct 19,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.myseconddigitalsystem_tb(test_tb)
+# Loading work.myseconddigitalsystem(bdf_type)
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+restart -f
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+vcom -reportprogress 300 -work work D:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim/MySecondDigitalSystem_tb.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:58:33 on Oct 19,2021
+# vcom -reportprogress 300 -work work D:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim/MySecondDigitalSystem_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MySecondDigitalSystem_tb
+# -- Compiling architecture Test_tb of MySecondDigitalSystem_tb
+# End time: 18:58:33 on Oct 19,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+run
+restart -f
+# Loading work.myseconddigitalsystem_tb(test_tb)
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+add wave  \
+sim:/myseconddigitalsystem_tb/sX0 \
+sim:/myseconddigitalsystem_tb/sX1 \
+sim:/myseconddigitalsystem_tb/sX2 \
+sim:/myseconddigitalsystem_tb/sY0 \
+sim:/myseconddigitalsystem_tb/sY1 \
+sim:/myseconddigitalsystem_tb/sY2
+run
+vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=\"+acc\" work.myseconddigitalsystem_tb
+# End time: 19:32:02 on Oct 19,2021, Elapsed time: 0:36:05
+# Errors: 0, Warnings: 0
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=""+acc"" work.myseconddigitalsystem_tb 
+# Start time: 19:32:02 on Oct 19,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.myseconddigitalsystem_tb(test_tb)
+# Loading work.myseconddigitalsystem(bdf_type)
+add wave  \
+sim:/myseconddigitalsystem_tb/sX0 \
+sim:/myseconddigitalsystem_tb/sX1 \
+sim:/myseconddigitalsystem_tb/sX2 \
+sim:/myseconddigitalsystem_tb/sY0 \
+sim:/myseconddigitalsystem_tb/sY1 \
+sim:/myseconddigitalsystem_tb/sY2
+run
+restart -f
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+run
+run
+run
+run
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim/wave.do
+# End time: 19:48:59 on Oct 19,2021, Elapsed time: 0:16:57
+# Errors: 0, Warnings: 0

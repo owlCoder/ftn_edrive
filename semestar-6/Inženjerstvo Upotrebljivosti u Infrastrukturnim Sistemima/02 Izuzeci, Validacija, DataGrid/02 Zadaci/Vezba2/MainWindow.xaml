@@ -1,0 +1,24 @@
+﻿<Window x:Class="Vezba2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vezba2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="350" Closing="save">
+    <Grid>
+        <Rectangle Fill="#FF707070" HorizontalAlignment="Left" Height="8" Margin="10,210,0,0" VerticalAlignment="Top" Width="322"/>
+        <Button x:Name="buttonIzlaz" Content="Izlaz" HorizontalAlignment="Left" Height="28" Margin="238,224,0,0" VerticalAlignment="Top" Width="94" Background="White" Foreground="#FF707070" Click="buttonIzlaz_Click"/>
+        <Label x:Name="labelNaslov" Content="SPISAK STUDENATA" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Width="322" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Agency FB" FontSize="24" Foreground="#FF707070"/>
+        <DataGrid x:Name="dataGridStudenti" ItemsSource="{Binding Studenti}" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="158" Margin="10,47,0,0" VerticalAlignment="Top" Width="322">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
+                <DataGridTextColumn Header="Pol" Binding="{Binding Pol}"/>
+                <DataGridTextColumn Header="Smer" Binding="{Binding Smer}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="buttonDodavanje" Content="Dodaj studenta" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="98" Height="28" Background="White" Foreground="#FF707070" Click="buttonDodavanje_Click"/>
+        <Button x:Name="buttonObrisi" HorizontalAlignment="Left" Margin="113,224,0,0" VerticalAlignment="Top" Width="110" Height="28" Click="buttonObrisi_Click" Content="Obrisi poslednjeg" Background="White" Foreground="#FF707070"/>
+    </Grid>
+</Window>

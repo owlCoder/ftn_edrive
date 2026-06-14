@@ -1,0 +1,18 @@
+Fitter Status : Successful - Sat Oct 30 22:00:56 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : SegmentG
+Top-level Entity Name : segmentG
+Family : MAX 10
+Device : 10M16SAU169C8G
+Timing Models : Final
+Total logic elements : 2 / 15,840 ( < 1 % )
+    Total combinational functions : 2 / 15,840 ( < 1 % )
+    Dedicated logic registers : 0 / 15,840 ( 0 % )
+Total registers : 0
+Total pins : 5 / 130 ( 4 % )
+Total virtual pins : 0
+Total memory bits : 0 / 562,176 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 90 ( 0 % )
+Total PLLs : 0 / 1 ( 0 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 1 ( 0 % )

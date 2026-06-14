@@ -1,0 +1,17 @@
+iRST <= '1';
+wait for 2*iCLK_PERIOD;
+iRST <= '0';
+
+iNEW_REQ <= '1';
+iNEW_FLOOR <= "011";			--3. sprat
+wait for 57*iCLK_PERIOD;
+iNEW_FLOOR <= "001";			--1. sprat
+
+wait for ((19*2)+5)*iCLK_PERIOD;
+iNEW_FLOOR <= "001";			--1. sprat
+
+wait for iCLK_PERIOD;
+iNEW_FLOOR <= "101";			--5. sprat
+
+wait for 76*iCLK_PERIOD;
+

@@ -1,0 +1,189 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/simulation/modelsim
+Elprs1_homework1
+Z1 w1636020118
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 0
+R0
+Z6 8C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/LPRS1_Homework1_PR_055_2020_Solution/lprs1_homework1.vhd
+Z7 FC:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/LPRS1_Homework1_PR_055_2020_Solution/lprs1_homework1.vhd
+l0
+L7 1
+V9g`e0jJABJ2o8;`ma39701
+!s100 L8fBb9QUjHg=>E5NQk1d:1
+Z8 OV;C;2020.1;71
+31
+Z9 !s110 1636024215
+!i10b 1
+Z10 !s108 1636024215.000000
+Z11 !s90 -reportprogress|300|-93|-work|work|C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/LPRS1_Homework1_PR_055_2020_Solution/lprs1_homework1.vhd|
+Z12 !s107 C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/LPRS1_Homework1_PR_055_2020_Solution/lprs1_homework1.vhd|
+!i113 1
+Z13 o-93 -work work
+Z14 tExplicit 1 CvgOpt 0
+Aarch
+R2
+R3
+R4
+R5
+Z15 DEx4 work 15 lprs1_homework1 0 22 9g`e0jJABJ2o8;`ma39701
+!i122 0
+l32
+L20 81
+VKklS?6:NR:fc^f40zcQa=0
+!s100 JmWHL_XM[;jlVg^FVIo>51
+R8
+31
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Elprs1_homework1_tb
+Z16 w1635628316
+R2
+R3
+R4
+R5
+!i122 3
+R0
+Z17 8C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/lprs1_homework1_tb.vhd
+Z18 FC:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/lprs1_homework1_tb.vhd
+l0
+L9 1
+V_Rh1NZ=YAIT:gKRPQgD4]3
+!s100 lFYM<l<>[LzO2oiZG5BVe3
+R8
+31
+Z19 !s110 1636024216
+!i10b 1
+Z20 !s108 1636024216.000000
+Z21 !s90 -reportprogress|300|-93|-work|work|C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/lprs1_homework1_tb.vhd|
+!s107 C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/lprs1_homework1_tb.vhd|
+!i113 1
+R13
+R14
+Aarch
+Z22 DEx4 work 33 lprs1_max1000_board_emulator_comb 0 22 YDjJTS8504PclF0;C:5Id3
+R15
+R2
+R3
+R4
+R5
+DEx4 work 18 lprs1_homework1_tb 0 22 _Rh1NZ=YAIT:gKRPQgD4]3
+!i122 3
+l28
+L12 3294
+VGD6[5R:_4fN_zJnEE_1@>2
+!s100 V2H9eXd4BZO_DEJUBzDJ[1
+R8
+31
+R19
+!i10b 1
+R20
+R21
+Z23 !s107 C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/lprs1_homework1_tb.vhd|
+!i113 1
+R13
+R14
+Elprs1_max1000_board_emulator
+R16
+Z24 DPx4 ieee 16 std_logic_textio 0 22 ^l:n6VFdg74Q?CKDhjD]D3
+R4
+R5
+!i122 1
+R0
+Z25 8C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator.vhd
+Z26 FC:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator.vhd
+l0
+L10 1
+Va?JRZIiT]MW5@Sch8<3560
+!s100 Ug8<7^GVU>Tmi2:OkE_>l1
+R8
+31
+R19
+!i10b 1
+R10
+Z27 !s90 -reportprogress|300|-93|-work|work|C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator.vhd|
+Z28 !s107 C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator.vhd|
+!i113 1
+R13
+R14
+Alprs1_max1000_board_emulator_arch
+R24
+R4
+R5
+Z29 DEx4 work 28 lprs1_max1000_board_emulator 0 22 a?JRZIiT]MW5@Sch8<3560
+!i122 1
+l67
+L54 129
+V[FUA1DFR_@5lzknMB`c5T3
+!s100 G`4C_MXY9ekTWS3VgacVh3
+R8
+31
+R19
+!i10b 1
+R10
+R27
+R28
+!i113 1
+R13
+R14
+Elprs1_max1000_board_emulator_comb
+R16
+R4
+R5
+!i122 2
+R0
+Z30 8C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator_comb.vhd
+Z31 FC:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator_comb.vhd
+l0
+L7 1
+VYDjJTS8504PclF0;C:5Id3
+!s100 ^RG1k1E_Dk007VgZFgIHG2
+R8
+31
+R19
+!i10b 1
+R20
+Z32 !s90 -reportprogress|300|-93|-work|work|C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator_comb.vhd|
+Z33 !s107 C:/Users/Danijel/Desktop/LPRS1_Homework1_PR_055_2020/emulator/hdl/lprs1_max1000_board_emulator_comb.vhd|
+!i113 1
+R13
+R14
+Alprs1_max1000_board_emulator_comb_arch
+R24
+R29
+R4
+R5
+R22
+!i122 2
+l42
+L36 53
+VQdmBGVXTMc[oNQ`2[[8T?1
+!s100 gLFX[L508NIT4S]AMM?BM2
+R8
+31
+R19
+!i10b 1
+R20
+R32
+R33
+!i113 1
+R13
+R14

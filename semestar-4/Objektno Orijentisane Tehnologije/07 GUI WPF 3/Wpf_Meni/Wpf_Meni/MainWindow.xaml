@@ -1,0 +1,31 @@
+﻿<Window x:Class="Wpf_Meni.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_Meni"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Opcija 1" Click="MenuItem_Click">
+                <MenuItem Header="Opcija 1.1" Click="MenuItem_Click_1" />
+                <MenuItem Header="Opcija 1.2" />
+            </MenuItem>
+            <MenuItem Header="Opcija 2">
+                <MenuItem Header="Opcija 2.1"/>
+                <MenuItem Header="Opcija 2.2" IsCheckable="True" IsChecked="True"/>
+            </MenuItem>
+            <MenuItem Header="Komande" Click="MenuItem_Click_2"/>
+            <MenuItem Header="UgradjeneKomande" Click="MenuItem_Click_3"/>
+
+        </Menu>
+        <TextBox AcceptsReturn="True" />
+    </DockPanel>
+</Window>
+    
+    
+    
+
+    
+    

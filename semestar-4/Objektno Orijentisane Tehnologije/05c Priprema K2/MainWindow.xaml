@@ -1,0 +1,120 @@
+﻿<Window x:Class="K2_Priprema.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:K2_Priprema"
+        mc:Ignorable="d"
+        Title="Korisnici" Height="480" Width="800">
+    <Border Padding="10">
+        <StackPanel>
+            <Label Content="Podaci o korisniku" FontWeight="Bold" Margin="0 10 0 0"/>
+
+            <StackPanel Margin="0 10 0 0">
+                <Label Content="Ime" />
+                <TextBox Name="ime" Padding="2" />
+            </StackPanel>
+
+            <StackPanel Margin="0 10 0 0">
+                <TextBlock Text="Prezime" />
+                <TextBox x:Name="prezime" Padding="2" />
+            </StackPanel>
+
+            <Grid Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0 0 5 0">
+                    <Label Content="Vrsta korisnika" />
+                    <ComboBox Name="VrstaKorisnikaCB" SelectionChanged="VrstaKorisnikaCB_SelectionChanged">
+                        <ComboBoxItem>Regularni</ComboBoxItem>
+                        <ComboBoxItem>Specijalni</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Name="Kategorija" Grid.Column="1" Margin="5 0 5 0">
+                    <Label Content="Katerogija" />
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton x:Name="RB1">A</RadioButton>
+                        <RadioButton x:Name="RB2">B</RadioButton>
+                        <RadioButton x:Name="RB3">C</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel x:Name="Osobine" Grid.Column="2" Margin="5 0 0 0">
+                    <Label Content="Osobine" />
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox x:Name="CB1">D</CheckBox>
+                        <CheckBox x:Name="CB2">E</CheckBox>
+                        <CheckBox x:Name="CB3">F</CheckBox>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <Grid Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="Izgenerisi" Click="Izgenerisi_Click" Margin="0 0 5 0" Grid.Column="0" Content="Izgenerisi" />
+                <Button x:Name="Osvezi" Click="Osvezi_Click" Margin="5 0 0 0" Grid.Column="1" Content="Osvezi unos" />
+            </Grid>
+
+            <Grid Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Content="Izgenerisano korisnicko ime" />
+                <TextBox Grid.Row="1" Name="KorisnickoIme" Padding="2" Margin="0 0 5 0" />
+                <Button Name="Sacuvaj" Click="Sacuvaj_Click" Margin="5 0 0 0" Grid.Column="1" Grid.Row="1" Content="Sacuvaj" />
+            </Grid>
+
+            <Grid Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0 0 5 0">
+                    <Label Content="Sacuvano korisnicko ime"/>
+                    <TextBox x:Name="Sacuvano" IsReadOnly="True" Background="#eee" Padding="2" TextChanged="Sacuvano_TextChanged" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="0 0 5 0">
+                    <Label Content="Broj sacuvanih korisnika"/>
+                    <TextBox x:Name="Broj" IsReadOnly="True" Background="#eee" Padding="2" />
+                </StackPanel>
+            </Grid>
+
+            <Grid Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Content="Lozinka" />
+                <PasswordBox Grid.Column="0" Grid.Row="1" Name="Lozinka" Margin="0 0 5 0" Padding="2"/>
+
+                <Button Name="SacuvajLoz" Click="SacuvajLoz_Click" Grid.Row="1" Grid.Column="1" Content="Sacuvaj lozinku" Margin="5 0 5 0"/>
+                <Button Name="Resetuj" Click="Resetuj_Click" Grid.Row="1" Grid.Column="2" Content="Resetuj sve" Margin="5 0 0 0"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>

@@ -1,0 +1,29 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "oY",
+					"strict" : false
+				},
+				{
+					"name" : "iB3",
+					"strict" : false
+				},
+				{
+					"name" : "iB1",
+					"strict" : false
+				},
+				{
+					"name" : "iB2",
+					"strict" : false
+				},
+				{
+					"name" : "iB0",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

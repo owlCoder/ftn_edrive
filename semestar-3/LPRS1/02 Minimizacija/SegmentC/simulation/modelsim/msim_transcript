@@ -1,0 +1,56 @@
+# Reading pref.tcl
+# do SegmentC_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {D:/FTN_S3/LPRS1/02 Minimizacija/SegmentC/SegmentC.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 20:28:47 on Oct 30,2021
+# vcom -reportprogress 300 -93 -work work D:/FTN_S3/LPRS1/02 Minimizacija/SegmentC/SegmentC.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity segmentC
+# -- Compiling architecture Behavioral of segmentC
+# End time: 20:28:48 on Oct 30,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# 
+# vcom -93 -work work {D:/FTN_S3/LPRS1/02 Minimizacija/SegmentC/simulation/modelsim/SegmentC_tb.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 20:28:48 on Oct 30,2021
+# vcom -reportprogress 300 -93 -work work D:/FTN_S3/LPRS1/02 Minimizacija/SegmentC/simulation/modelsim/SegmentC_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity segmentC_tb
+# -- Compiling architecture Test of segmentC_tb
+# End time: 20:28:48 on Oct 30,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs="+acc"  SegmentC_tb
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=""+acc"" SegmentC_tb 
+# Start time: 20:28:48 on Oct 30,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.segmentc_tb(test)
+# Loading work.segmentc(behavioral)
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+run
+restart -f
+run
+# End time: 20:33:23 on Oct 30,2021, Elapsed time: 0:04:35
+# Errors: 0, Warnings: 0

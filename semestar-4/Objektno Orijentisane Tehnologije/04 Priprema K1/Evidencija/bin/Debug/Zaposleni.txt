@@ -1,0 +1,6 @@
+1|Smilja|Tomic|2000|22|5
+2|Ivan|Stojic|3000|24|2
+3|Marko|Vasiljevic|4000|20|0
+4|Pera|Peric|1000|26|5
+5|Marko|Markovic|2500|24|0
+6|Janko|Jankovic|4500|15|3

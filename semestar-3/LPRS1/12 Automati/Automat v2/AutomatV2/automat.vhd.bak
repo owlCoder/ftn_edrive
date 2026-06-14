@@ -1,0 +1,120 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity Automat is
+	port(
+		iCLK		: in  std_logic;
+		inRST		: in  std_logic;
+		oRE		: out std_logic;
+		oYE		: out std_logic;
+		oGR		: out std_logic
+		
+	);
+end entity;
+
+architecture arch of Automat is
+	type tSTATE is(IDLE, RED, YELLOW, GREEN);
+	signal sSTATE, sNEXT_STATE : tSTATE;
+	
+	signal sWR_EN 		: std_logic 					    := '0';
+	signal sDATA 		: std_logic_vector(3 downto 0) := "0000";
+	signal sCNT 		: std_logic_vector(3 downto 0) := "0000";
+	
+begin
+	-- BROJAC PO MODULU 11
+	process(iCLK, inRST) begin
+		if(inRST = '0') then
+			sCNT <= "0000";
+		elsif(rising_edge(iCLK)) then
+			if(sWR_EN = '1') then
+				sCNT <= sDATA;
+			else
+				if(sCNT < 10) then
+					sCNT <= sCNT + 1;
+				elsif(sCNT >= 10) then
+					sCNT <= "0000";
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	-- funkciju pamcenja stanja
+	process(iCLK, inRST) begin
+		if(inRST = '0') then
+			sSTATE <= IDLE;
+		elsif(rising_edge(iCLK)) then
+			sSTATE <= sNEXT_STATE;
+		end if;
+	end process;
+	
+	-- funkcija prelaza stanja
+	process(sSTATE, sCNT) begin
+		case sSTATE is
+			WHEN IDLE =>
+				if(sCNT = "0000") then
+					sNEXT_STATE <= GREEN;
+				elsif(sCNT = "0100") then
+					sNEXT_STATE <= RED;
+				else
+					sNEXT_STATE <= IDLE;
+				end if;
+				
+				WHEN GREEN =>
+					if(sCNT = "1000") then
+						sNEXT_STATE <= YELLOW;
+					end if;
+					
+				WHEN YELLOW =>
+					if(sCNT = "0011") then
+						sNEXT_STATE <= IDLE;
+					end if;
+					
+				WHEN RED =>
+					if(sCNT = "1000") then
+						sNEXT_STATE <= IDLE;
+					end if;
+					
+				WHEN OTHERS => sNEXT_STATE <= IDLE;
+		end case;
+	end process;
+	
+	-- funkcija izlaza automata
+	process(sSTATE, sCNT) begin
+		if(sSTATE = IDLE) then
+			sWR_EN <= '0';
+			sDATA  <= "0000";
+		elsif(sSTATE = GREEN) then
+			sWR_EN <= '0';
+			sDATA  <= "0000";
+		elsif(sSTATE = YELLOW) then
+			if(sCNT = "1010") then
+				sWR_EN <= '1';
+				sDATA  <= "0010";
+			else
+				sWR_EN <= '0';
+				sDATA  <= "0000";
+			end if;
+		elsif(sSTATE = RED) then
+			if(sCNT = "1000") then
+				sWR_EN <= '1';
+				sDATA  <= "0000";
+			else
+				sWR_EN <= '0';
+				sDATA  <= "0000";
+			end if;
+		else
+			sWR_EN <= '0';
+			sDATA  <= "0000";
+		end if;
+	end process;
+	
+	-- dekoder ulazi: sCNT, sSTATE
+	oYE <= '1' WHEN sSTATE = YELLOW ELSE '0';
+	oRE <= '1' WHEN (sSTATE = RED)   
+					 OR (sSTATE = IDLE  AND sCNT = 4) ELSE '0';
+	oGR <= '1' WHEN (sSTATE = GREEN)
+				    OR (sSTATE = YELLOW)
+					 OR ( sSTATE = IDLE AND sCNT = 0) ELSE '0';
+
+end architecture;

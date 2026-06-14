@@ -1,0 +1,12 @@
+Predmet:
+	Ime: oop
+	Sifra: ESI201.2
+	Ocena: 10
+Predmet:
+	Ime: OS
+	Sifra: ESI221.3
+	Ocena: 10
+Predmet:
+	Ime: operativni sistemi
+	Sifra: ESI200.15
+	Ocena: 6

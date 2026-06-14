@@ -1,0 +1,12 @@
+Power Analyzer Status : Successful - Tue Oct 19 18:55:19 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : MySecondDigitalSystem
+Top-level Entity Name : MySecondDigitalSystem
+Family : MAX 10
+Device : 10M16SAU169C8G
+Power Models : Final
+Total Thermal Power Dissipation : 220.43 mW
+Core Dynamic Thermal Power Dissipation : 0.00 mW
+Core Static Thermal Power Dissipation : 215.59 mW
+I/O Thermal Power Dissipation : 4.85 mW
+Power Estimation Confidence : Low: user provided insufficient toggle rate data

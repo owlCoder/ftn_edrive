@@ -1,0 +1,4 @@
+operativni sistemi-ESI200.15-6
+oop-ESI201.2-10
+algebra-MAT333.1-8
+OS-ESI221.3-10

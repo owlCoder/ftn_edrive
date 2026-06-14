@@ -1,0 +1,46 @@
+﻿<Window x:Class="Biblioteka.Biblioteke.KorisniciBiblioteka"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Korisnici Po Biblioteci" Height="500" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    
+	<Border Background="White" BorderBrush="White" BorderThickness="0" CornerRadius="0">
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.4*"></RowDefinition>
+                <RowDefinition Height="1.5*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Name="naslov" HorizontalAlignment="Center" Content="/" FontSize="20" FontWeight="Bold"/>
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="0">
+                <Label Content="Unesite deo ili celo ime/prezime: " FontSize="16" FontWeight="Bold" />
+                <TextBox Name="pretraga" FontSize="16" TextChanged="pretraga_TextChanged" />
+            </StackPanel>
+
+            <DataGrid Grid.Row="2" Grid.Column="0" FontSize="14" FontWeight="Medium" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Name="dataGridSviKorisnici" ItemsSource="{Binding Korisnik}" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dataGridSviKorisnici_MouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ime" Binding="{Binding Path=Ime}"/>
+                    <DataGridTextColumn Header="Prezime" Binding="{Binding Path=Prezime}"/>
+                    <DataGridTextColumn Header="JMBG" Binding="{Binding Path=Jmbg}"/>
+                    <DataGridTextColumn Header="Datum učlanjenja" Binding="{Binding Path=DatumUclanjenja}"/>
+                    <DataGridTextColumn Header="Biblioteka" Binding="{Binding Path=Uclanjen}"/>
+                    <DataGridTemplateColumn Header="Slika" Width="50*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path=ProfilnaSlika}" Width="50" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+	
+</Window>

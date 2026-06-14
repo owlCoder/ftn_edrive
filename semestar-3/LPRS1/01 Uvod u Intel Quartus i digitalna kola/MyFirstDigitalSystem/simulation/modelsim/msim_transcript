@@ -1,0 +1,88 @@
+# Reading pref.tcl
+# do MyFirstDigitalSystem_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {D:/LPRS1/V1/MyFirstDigitalSystem.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 11:36:54 on Oct 19,2021
+# vcom -reportprogress 300 -93 -work work D:/LPRS1/V1/MyFirstDigitalSystem.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MyFirstDigitalSystem
+# -- Compiling architecture bdf_type of MyFirstDigitalSystem
+# End time: 11:36:54 on Oct 19,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vcom -93 -work work {D:/LPRS1/V1/simulation/modelsim/MyFirstDigitalSystem_tb.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 11:36:54 on Oct 19,2021
+# vcom -reportprogress 300 -93 -work work D:/LPRS1/V1/simulation/modelsim/MyFirstDigitalSystem_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MyFirstDigitalSystem_tb
+# -- Compiling architecture Test_tb of MyFirstDigitalSystem_tb
+# End time: 11:36:54 on Oct 19,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs="+acc"  MyFirstDigitalSystem_tb
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=""+acc"" MyFirstDigitalSystem_tb 
+# Start time: 11:36:55 on Oct 19,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.myfirstdigitalsystem_tb(test_tb)
+# Loading work.myfirstdigitalsystem(bdf_type)
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run 1 us
+vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=\"+acc\" work.myfirstdigitalsystem_tb
+# End time: 11:37:41 on Oct 19,2021, Elapsed time: 0:00:46
+# Errors: 0, Warnings: 0
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=""+acc"" work.myfirstdigitalsystem_tb 
+# Start time: 11:37:41 on Oct 19,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.myfirstdigitalsystem_tb(test_tb)
+# Loading work.myfirstdigitalsystem(bdf_type)
+add wave -position insertpoint  \
+sim:/myfirstdigitalsystem_tb/sA
+add wave -position insertpoint  \
+sim:/myfirstdigitalsystem_tb/sB
+add wave -position insertpoint  \
+sim:/myfirstdigitalsystem_tb/sY
+add wave  \
+sim:/myfirstdigitalsystem_tb/sY
+run
+run
+run
+add wave  \
+sim:/myfirstdigitalsystem_tb/sA \
+sim:/myfirstdigitalsystem_tb/sB \
+sim:/myfirstdigitalsystem_tb/sY
+run
+run
+add wave -position insertpoint /myfirstdigitalsystem_tb/sA
+restart -f
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/LPRS1/V1/simulation/modelsim/wave.do
+quit
+# End time: 11:45:03 on Oct 19,2021, Elapsed time: 0:07:22
+# Errors: 0, Warnings: 0

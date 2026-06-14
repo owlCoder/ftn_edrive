@@ -1,0 +1,139 @@
+﻿<Window x:Class="Projekat.DrugaApoteka"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekat"
+        mc:Ignorable="d"
+        Title="Apoteka Ivanić" Height="500" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- RADNICI -->
+        <Grid Margin="5" Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="0.8*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Content="RADNICI" FontSize="22" FontWeight="Bold" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
+            <TextBox x:Name="pretragaRadnika" FontSize="16"  FontWeight="Bold" TextChanged="pretragaRadnika_TextChanged" Margin="8" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"></TextBox>
+
+            <ListBox Name="listaRadnika" Grid.Row="2" Grid.Column="0" Margin="10" SelectionChanged="listaRadnika_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Ime}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Prezime}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid Grid.Column="0" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!-- dodaj klikove -->
+                <Button x:Name="dodajRadnika" Grid.Column="0" FontSize="16" FontWeight="Bold" Margin="10" IsEnabled="True" Click="dodajRadnika_Click">DODAJ</Button>
+                <!--<Button x:Name="izmeniRadnika" Grid.Column="1" FontSize="14" FontWeight="Bold" Margin="10" IsEnabled="False" Click="izmeniRadnika_Click">IZMENI</Button>-->
+                <Button x:Name="obrisiRadnika" Grid.Column="2" FontSize="16" FontWeight="Bold" Margin="10" IsEnabled="False" Click="obrisiRadnika_Click">OBRIŠI</Button>
+            </Grid>
+
+            <StackPanel Name="forma" Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="10" Grid.RowSpan="2" Visibility="Hidden">
+                <Label Content="Ime:"></Label>
+                <TextBox x:Name="ime"></TextBox>
+
+                <Label Content="Prezime:"></Label>
+                <TextBox x:Name="prezime"></TextBox>
+
+                <Label Content="JMBG:"></Label>
+                <TextBox x:Name="jmbg"></TextBox>
+
+                <Label Content="Slika:"></Label>
+                <Image x:Name="slika" Source="/Images/a1.jpeg" Height="40"></Image>
+
+                <Label Content="Datum početka rada:" Margin="0 5 0 0"/>
+                <TextBox x:Name="datum"></TextBox>
+
+                <Button Name="dodajUApotekuRadnika" Content="DODAVANJE RADNIKA" Click="dodajUApotekuRadnika_Click" FontSize="16" Margin="0 30 0 0"></Button>
+                <Button Name="izmeniRadnikaUApoteci" Content="IZMENA RADNIKA" Click="izmeniRadnikaUApoteci_Click" FontSize="16" Margin="0 -30 0 0"></Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- LIJEKOVI -->
+        <Grid Margin="5" Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="0.8*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Content="LEKOVI" FontSize="22" FontWeight="Bold" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
+            <TextBox x:Name="pretragaLekova" FontSize="16"  FontWeight="Bold" TextChanged="pretragaLekova_TextChanged" Margin="8" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"></TextBox>
+
+            <ListBox Name="listaLekova" Grid.Row="2" Grid.Column="0" Margin="10" SelectionChanged="listaLekova_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Naziv}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Kolicina}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid Grid.Column="0" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!-- dodaj klikove -->
+                <Button x:Name="dodajLek" Grid.Column="0" FontSize="16" FontWeight="Bold" Margin="10" IsEnabled="True" Click="dodajLek_Click">DODAJ</Button>
+                <Button x:Name="obrisiLek" Grid.Column="2" FontSize="16" FontWeight="Bold" Margin="10" IsEnabled="False" Click="obrisiLek_Click">OBRIŠI</Button>
+            </Grid>
+
+            <StackPanel Name="forma_lekovi" Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="10" Grid.RowSpan="2" Visibility="Hidden">
+                <Label Content="Naziv:"></Label>
+                <TextBox x:Name="naziv"></TextBox>
+
+                <Label Content="Datum proizvodnje:"></Label>
+                <TextBox x:Name="datumProizvodnje"></TextBox>
+
+                <Label Content="Datum važenja:"></Label>
+                <TextBox x:Name="datumVazenja"></TextBox>
+
+                <Label Content="Količina:" Margin="0 5 0 0"/>
+                <TextBox x:Name="kolicina"></TextBox>
+
+                <Button Name="dodajLekUApoteku" Content="DODAVANJE LEKA" Click="dodajLekUApoteku_Click" FontSize="16" Margin="0 30 0 0"></Button>
+                <Button Name="izmeniLekIzApoteke" Content="IZMENA LEKA" Click="izmeniLekIzApoteke_Click" FontSize="16" Margin="0 -30 0 0"></Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

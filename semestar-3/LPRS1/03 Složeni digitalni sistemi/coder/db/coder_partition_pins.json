@@ -1,0 +1,77 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "oY_uslovna[0]",
+					"strict" : false
+				},
+				{
+					"name" : "oY_uslovna[1]",
+					"strict" : false
+				},
+				{
+					"name" : "oY_uslovna[2]",
+					"strict" : false
+				},
+				{
+					"name" : "oY_if[0]",
+					"strict" : false
+				},
+				{
+					"name" : "oY_if[1]",
+					"strict" : false
+				},
+				{
+					"name" : "oY_if[2]",
+					"strict" : false
+				},
+				{
+					"name" : "oY_case[0]",
+					"strict" : false
+				},
+				{
+					"name" : "oY_case[1]",
+					"strict" : false
+				},
+				{
+					"name" : "oY_case[2]",
+					"strict" : false
+				},
+				{
+					"name" : "iX[7]",
+					"strict" : false
+				},
+				{
+					"name" : "iX[3]",
+					"strict" : false
+				},
+				{
+					"name" : "iX[1]",
+					"strict" : false
+				},
+				{
+					"name" : "iX[2]",
+					"strict" : false
+				},
+				{
+					"name" : "iX[4]",
+					"strict" : false
+				},
+				{
+					"name" : "iX[5]",
+					"strict" : false
+				},
+				{
+					"name" : "iX[6]",
+					"strict" : false
+				},
+				{
+					"name" : "iX[0]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

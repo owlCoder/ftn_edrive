@@ -1,0 +1,9 @@
+﻿<Application x:Class="Zadatak_03_Generisanje_Username_i_Password.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Zadatak_03_Generisanje_Username_i_Password"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

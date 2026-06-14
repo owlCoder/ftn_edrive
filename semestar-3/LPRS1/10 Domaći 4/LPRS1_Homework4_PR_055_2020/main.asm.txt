@@ -1,0 +1,103 @@
+/*
+#include <stdio.h>
+
+const short N = 10;
+short a[10] = {17, 28, 31, 13, 29, 18, 6, 1, 32, 19};
+short b[10] = {19, 6, 30, 21, 16, 23, 11, 4, 21, 26};
+short c[10] = {1, 2, 3, 4, 5, 6, 7, 0, 0, 9};
+
+void main() {
+	short* pa;
+	short* pb;
+	short* pc;
+	short* pae;
+	short* pce;
+	short* pbe;
+	short e;
+
+	for( pb = b+N-1, pc = c+N-1, pa = a+N-1, pbe = b-1; pb != pbe; pb--, pc--, pa--)
+		*pa = *pb - *pc;
+
+	for(pa = a+N-1, e = 0x0000, pae = a-1; pa != pae; pa--)
+		if(*pa < e)
+			e = *pa;
+	
+	printf("\na: ");
+    for(int i = 0; i < 10; i++) printf("%d ", a[i]); printf("\nb: ");
+    for(int i = 0; i < 10; i++) printf("%d ", b[i]); printf("\nc: ");
+    for(int i = 0; i < 10; i++) printf("%d ", c[i]); printf("\ne: %d", e);
+}
+    ---------------------------------------------------------------------------------------------------------
+	a: 18 4 27 17 11 17 4 4 21 17 
+	b: 19 6 30 21 16 23 11 4 21 26 
+	c: 1 2 3 4 5 6 7 0 0 9 
+	e: 0
+	----------------------------------------------------------------------------------------------------------
+	R0 - memory;	R1 - N = 10;	R2 - pa;	R3 - pb;	R4 - pc; 	R5 - pbe; 	R6 - pa (druga for petlja)
+*/
+
+.data
+	10
+	17, 28, 31, 13, 29, 18, 6, 1, 32, 19
+	19, 6, 30, 21, 16, 23, 11, 4, 21, 26
+	1, 2, 3, 4, 5, 6, 7, 0, 0, 9
+.text
+main:
+	ld R1, R0
+
+for_prvi_init:
+	add R0, R0, R1  // R0 -> mem[10]
+	mov R2, R0      // pa = a + 9
+	mov R6, R0      // pa = a + 9 [for2]
+	mov R5, R2      // pbe = b - 1 (ekv. a + 9)
+	add R0, R0, R1  // R0 -> mem[20]
+	mov R3, R0      // pb = b + 9
+	add R0, R0, R1  // R0 -> mem[30]
+	mov R4, R0      // pc = c + 9
+
+for_prvi_body:
+	sub R7, R3, R5  // pb != pbe
+	jmpz for_drugi_init
+
+	ld  R7, R3      // u R7 ucitaj vrednost b[i]
+	ld  R0, R4      // u R0 ucitaj vrednost c[i]
+
+	sub R7, R7, R0  // *pb - *pc 
+	st  R7, R2      // *pa = RAZLIKA
+
+	dec R3, R3     // pb--
+	dec R4, R4     // pc--
+	dec R2, R2	   // pa--
+
+	jmp for_prvi_body
+
+for_drugi_init:
+
+	sub R6, R6, R6  // mem[0]
+	ld  R1, R6      // R1 = 10
+	add R6, R6, R1  // mem[10] --> a[9]
+
+	// R6 = pa
+	sub R3, R3, R3  // Reset registra R3 (R3 kao promenljiva e)
+	sub R4, R4, R4  // Reset registra R4 (R4 kao uloga pae) --> R4 = mem[0] -->  a - 1
+	sub R5, R5, R5  // Reset registra R5
+	jmp for_drugi_body
+
+for_drugi_body:
+	sub R7, R6, R4
+	jmpz end
+
+	ld  R2, R6      // R2 = *pa
+	sub R5, R2, R3  // *pa - e < 0
+	//jmps upis_u_e
+
+	dec R6, R6	    // pa--
+	jmp for_drugi_body
+
+upis_u_e:
+	mov R3, R2      // e = *pa
+	dec R6, R6      // pa--
+	jmp for_drugi_body
+
+end:
+	jmp end

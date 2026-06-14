@@ -1,0 +1,129 @@
+﻿<Window x:Class="UI.Dashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="Dashboard" Height="800" Width="1400">
+    <Window.Resources>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="Black" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#fff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Style.Triggers>
+                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                    <Setter Property="Background" Value="#D4F1F4" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Border Margin="107,145,98,113" Background="White" BorderBrush="White" BorderThickness="1,1,1,1" CornerRadius="10">
+        <Grid Margin="20, 20, 20 ,10" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.45*"></RowDefinition>
+                <RowDefinition Height="0*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <MediaElement x:Name="mediaElement" MediaEnded="MediaElement_MediaEnded" Source="resources/light.mp4" LoadedBehavior="Manual" Grid.RowSpan="6" Margin="-148,-416,-148,-416" Grid.ColumnSpan="2"/>
+            <Border Background="White" Margin="22,-124,22,-80" Grid.ColumnSpan="2" Grid.RowSpan="6" Width="1391" BorderThickness="1,1,1,1" CornerRadius="10" />
+
+            <Button Name="DodajBtn" Margin="50,-140,0,0" Click="DodajBtn_Click" Style="{StaticResource NeonDugmeRegular}" Grid.Row="2" Grid.Column="0" FontSize="24" Content="    NOVI ČLANAK ✒️    " Height="45" HorizontalAlignment="Left"/>
+            <Button Name="BrisanjeBtn" Click="BrisanjeBtn_Click" Style="{StaticResource NeonDugmeClose}" Grid.Row="2" HorizontalAlignment="Left" Margin="320,-140,0,0" Grid.Column="0" FontSize="24" Content="  BRISANJE ODABRANIH ČLANAKA ✖️ " Grid.ColumnSpan="2" Height="45"/>
+            <Button Name="KorisniciBtn" Click="KorisniciBtn_Click" Style="{StaticResource NeonDugmeRegularKorisnik}" Grid.Row="2" HorizontalAlignment="Left" Margin="760,-140,0,0" Grid.Column="0" FontSize="24" Content="  ADMINISTRA. KORISNIKA 👤 " Grid.ColumnSpan="2" Height="45"/>
+
+            <Label Grid.Row="0" Grid.Column="0" x:Name="welcomeMessage" Grid.ColumnSpan="2" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, -80, 0, 0" FontSize="26" FontWeight="Bold" FontFamily="Trebuchet MS" />
+            <Button Grid.Row="0" Grid.Column="1" x:Name="LogOutBtn" Click="LogOutBtn_Click" Style="{StaticResource NeonDugmeOdjava}" Content=" ➡ ODJAVA " FontSize="22" VerticalAlignment="Top" Height="44" Width="150" HorizontalAlignment="Right" FontWeight="SemiBold" Margin="0,-80,50,0" FontFamily="Trebuchet MS" />
+
+            <DataGrid Name="MobilePhones" Margin="40,-60,40,0" SelectionUnit="FullRow" FontSize="15" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Background="Transparent" BorderThickness="0" FontWeight="SemiBold" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" CanUserSortColumns="False" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="6">
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
+                        <Setter Property="Background" Value="#003060" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="BorderBrush" Value="White"/>
+                        <Setter Property="BorderThickness" Value="1 1 1 1"/>
+                        <Setter Property="Margin" Value="-1,-1,0,0" />
+                        <Setter Property="Height" Value="28" />
+                        <Setter Property="Width" Value="auto"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Background" Value="#D4F1F4" />
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePathAssembly}"  Width="80" Height="80" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridHyperlinkColumn Header="External Source" IsReadOnly="True" Binding="{Binding ExtSrc}" Width="150">
+                        <DataGridHyperlinkColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <EventSetter Event="Hyperlink.Click" Handler="OnHyperlinkClick" />
+                            </Style>
+                        </DataGridHyperlinkColumn.ElementStyle>
+                    </DataGridHyperlinkColumn>
+                    <DataGridTextColumn Header="Last Access" IsReadOnly="True" Binding="{Binding LastAccessed}" Width="160"></DataGridTextColumn>
+                    <DataGridTextColumn Header="IMEI" IsReadOnly="True" Binding="{Binding IMEI}" Width="150"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Model" IsReadOnly="True" Binding="{Binding Model}" Width="150"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Memory" IsReadOnly="True" Binding="{Binding Memory}" Width="80"></DataGridTextColumn>
+                    <DataGridCheckBoxColumn Header="  Delete?" Width="80" IsReadOnly="False" Binding="{Binding Delete}">
+                        <DataGridCheckBoxColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                                <Setter Property="Background" Value="#003060" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="BorderBrush" Value="White"/>
+                                <Setter Property="BorderThickness" Value="1 1 1 1"/>
+                                <Setter Property="Margin" Value="-1,-1,0,0" />
+                                <Setter Property="Height" Value="28" />
+                                <Setter Property="Width" Value="auto"/>
+                            </Style>
+                        </DataGridCheckBoxColumn.HeaderStyle>
+                    </DataGridCheckBoxColumn>
+                    <DataGridTemplateColumn Header="Action" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Button Name="PregledBtn" Click="PregledBtn_Click" Style="{StaticResource NeonDugmeRegularWFill}" Content=" VIŠE DETALJA 📄" FontSize="17" Height="30" FontWeight="SemiBold" Margin="10, 0, 10, 8" FontFamily="Trebuchet MS" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+</Window>

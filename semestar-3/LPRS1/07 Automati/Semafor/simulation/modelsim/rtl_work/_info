@@ -1,0 +1,92 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/danijel/Desktop/lab5_postavke/Semafor/simulation/modelsim
+Esemafor
+Z1 w1638185780
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z6 8/home/danijel/Desktop/lab5_postavke/Semafor/Semafor.vhd
+Z7 F/home/danijel/Desktop/lab5_postavke/Semafor/Semafor.vhd
+l0
+L5
+VKzeA:4l3DOilPOFIzNgYd3
+!s100 ^]II`oJH60ME^0hOe:D@m0
+Z8 OV;C;10.5b;63
+31
+Z9 !s110 1638185814
+!i10b 1
+Z10 !s108 1638185814.000000
+Z11 !s90 -reportprogress|300|-93|-work|work|/home/danijel/Desktop/lab5_postavke/Semafor/Semafor.vhd|
+Z12 !s107 /home/danijel/Desktop/lab5_postavke/Semafor/Semafor.vhd|
+!i113 1
+Z13 o-93 -work work
+Z14 tExplicit 1 CvgOpt 0
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 7 semafor 0 22 KzeA:4l3DOilPOFIzNgYd3
+l22
+L15
+VI==lGdI5^E=gHnb2XY^1G3
+!s100 dUT52VhocokZ2:9d];d<]3
+R8
+31
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Esemafor_tb
+Z15 w1638185094
+R4
+R5
+R0
+Z16 8/home/danijel/Desktop/lab5_postavke/Semafor/simulation/modelsim/Semafor_tb.vhd
+Z17 F/home/danijel/Desktop/lab5_postavke/Semafor/simulation/modelsim/Semafor_tb.vhd
+l0
+L4
+VGA2g76OThPfeUBUW?]N?c3
+!s100 7OaT_dh8>ZZeiC?7>Jno>1
+R8
+31
+R9
+!i10b 1
+R10
+Z18 !s90 -reportprogress|300|-93|-work|work|/home/danijel/Desktop/lab5_postavke/Semafor/simulation/modelsim/Semafor_tb.vhd|
+Z19 !s107 /home/danijel/Desktop/lab5_postavke/Semafor/simulation/modelsim/Semafor_tb.vhd|
+!i113 1
+R13
+R14
+Atest
+R4
+R5
+DEx4 work 10 semafor_tb 0 22 GA2g76OThPfeUBUW?]N?c3
+l35
+L7
+V[Rzh5aRm[8D63Ta<aNa`P3
+!s100 fPZeEEal^iBYX069i9UGl2
+R8
+31
+R9
+!i10b 1
+R10
+R18
+R19
+!i113 1
+R13
+R14

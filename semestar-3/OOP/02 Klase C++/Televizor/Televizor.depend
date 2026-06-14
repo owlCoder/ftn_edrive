@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1635433930 source:/home/danijel/Desktop/Televizor/main.cpp
+	"televizor.hpp"
+
+1635433689 /home/danijel/Desktop/Televizor/televizor.hpp
+	<iostream>
+
+1635433667 source:/home/danijel/Desktop/Televizor/televizor.cpp
+	"televizor.hpp"
+

@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1635429505 source:/home/danijel/Desktop/Machine/main.cpp
+	"machine.hpp"
+
+1635428962 source:/home/danijel/Desktop/Machine/machine.cpp
+	"machine.hpp"
+
+1635428497 /home/danijel/Desktop/Machine/machine.hpp
+	<iostream>
+

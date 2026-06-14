@@ -1,0 +1,224 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+-- Libraries.
+
+entity lprs1_homework3 is
+	port(
+		i_clk            :  in std_logic;
+		i_rst            :  in std_logic;
+		i_base           :  in std_logic_vector(1 downto 0);
+		i_sequence       :  in std_logic_vector(63 downto 0);
+		i_load_sequence  :  in std_logic;
+		i_base_src_sel   :  in std_logic;
+		i_cnt_subseq_sel :  in std_logic_vector(1 downto 0);
+		o_cnt_subseq     : out std_logic_vector(3 downto 0)
+	);
+end entity;
+
+
+architecture arch of lprs1_homework3 is
+	-- Constants.
+	constant A : std_logic_vector(1 downto 0) := "00";
+	constant C : std_logic_vector(1 downto 0) := "01";
+	constant G : std_logic_vector(1 downto 0) := "10";
+	constant T : std_logic_vector(1 downto 0) := "11";
+	
+	-- Signals.
+	type tSTATE is (IDLE, C0S012, C0A1, C0T1, C0A1C2, C0A1T2, C0T1T2);
+	signal s_state, s_next_state : tSTATE;
+	
+	------------------ SIGNALI DOZVOLE BROJANJA -------------------
+	signal s_en_subseq0  : std_logic;
+	signal s_en_subseq1  : std_logic;
+	signal s_en_subseq2  : std_logic;
+	
+	--------------------------- BROJAČI ---------------------------
+	signal s_cnt_subseq0 : std_logic_vector(3 downto 0) := "0000";
+	signal s_cnt_subseq1 : std_logic_vector(3 downto 0) := "0000";
+	signal s_cnt_subseq2 : std_logic_vector(3 downto 0) := "0000";
+	
+	---------------------- POMERAČKI REGISTAR ---------------------
+	signal s_base			: std_logic_vector(1 downto 0);
+	signal s_sh_base		: std_logic_vector(1 downto 0);
+	signal s_sh_reg		: std_logic_vector(63 downto 0); -- JER JER SEQUENCE 64 BITA
+	signal s_n_sh_reg		: std_logic_vector(63 downto 0); -- JER JER SEQUENCE 64 BITA
+
+begin
+	-- AUTOMAT SA KONAČNIM BROJEM STANJA ZA PRONALAŽENJE PODSEKVENCI
+	-- PODSEKVENCE: CAC		 CAT		 CTT
+	
+	-- REGISTAR ZA PAMĆENJE STANJA - ASINHRONI RESET
+	process(i_clk, i_rst) begin
+		if(i_rst = '1') then
+				s_state <= IDLE;
+		elsif(falling_edge(i_clk)) then
+		--	if(i_rst = '1') then
+	--			s_state <= IDLE;
+		--	else
+				s_state <= s_next_state;
+		--	end if;
+		end if;
+	end process;
+	
+	-- FUNKCIJA PRELAZA STANJA
+	process(s_state, s_base) begin
+		case s_state is
+			when IDLE =>
+				if(s_base = C) then			-- POČETAK SVAKE PODSEKVENCE POČINJE SA C
+					s_next_state <= C0S012; -- PRVI KARAKTER JESTE SLOVO C, PRELAZAK NA SLEDEĆE STANJE
+				else
+					s_next_state <= IDLE;	-- NIJE PRONAĐEN KARAKTER C
+				end if;
+			
+			when C0S012 =>						-- POČETNO SLOVO JESTE 'C', DA LI JE SLEDEĆI KARAKTER SEKVENCE NEKI OD TRAŽENIH ?
+				if(s_base = A) then 		   -- STANJE KADA JE PRVI CHAR 'C', DRUGI MORA BITI ILI 'T' ili 'A'
+					s_next_state <= C0A1;   -- TREN. PODSEKVENCA JE 'CA', C NA IDX 0, A NA IDX 1
+				elsif(s_base = T) then
+					s_next_state <= C0T1;   -- TREN. PODSEKVENCA JE 'CT', C NA IDX 0, T NA IDX 1
+				else
+					s_next_state <= IDLE;   -- NIJE PRONAĐEN TRAŽENI KARAKTER
+				end if;
+			
+			when C0A1 => 						-- TRENUTNO STANJE JE 'CA', PRETHODNO STANJE JE BILO 'C' TJ. C0S012
+				if(s_base = C) then
+					s_next_state <= C0A1C2; -- NAĐENA JE PODSEKVENCA 'CAC'
+				elsif(s_base = T) then
+					s_next_state <= C0A1T2; -- NAĐENA JE PODSEKVENCA 'CAT' --> MEOW (:
+				else
+					s_next_state <= IDLE;	-- NIJE PRONAĐEN TRAŽENI KARAKTER
+				end if;
+				
+			when C0T1 => 						-- TRENUTNO STANJE JE 'CT'
+				if(s_base = T) then
+					s_next_state <= C0T1T2; -- NAĐENA JE PODSEKVENCA 'CTT'
+				else
+					s_next_state <= IDLE;	-- NIJE PRONAĐEN TRAŽENI KARAKTER
+				end if;
+			
+			when C0A1C2 =>						-- PROVERA STANJA AUTOMATA ZA POVRATAK NA KORAK POČETKA
+				if(s_base = C) then
+					s_next_state <= C0S012;	-- TRAŽI SE SLEDEĆA SEKVENCA
+				else
+					s_next_state <= IDLE;	-- NIJE PRONAĐEN TRAŽENI KARAKTER
+				end if;
+				
+			when C0A1T2 =>						-- PROVERA STANJA AUTOMATA ZA POVRATAK NA KORAK POČETKA
+				if(s_base = C) then
+					s_next_state <= C0S012;	-- TRAŽI SE SLEDEĆA SEKVENCA
+				else
+					s_next_state <= IDLE;	-- NIJE PRONAĐEN TRAŽENI KARAKTER
+				end if;
+				
+			when C0T1T2 =>						-- PROVERA STANJA AUTOMATA ZA POVRATAK NA KORAK POČETKA
+				if(s_base = C) then
+					s_next_state <= C0S012;	-- TRAŽI SE SLEDEĆA SEKVENCA
+				else
+					s_next_state <= IDLE;	-- NIJE PRONAĐEN TRAŽENI KARAKTER
+				end if;
+				
+			when others =>
+				s_next_state <= IDLE;		-- NIJE PRONAĐEN TRAŽENI KARAKTER
+		end case;
+	end process;
+	
+	-- KONTROLE DOZVOLA ZA BROJANJE BROJAČA
+	-- PODSEKVENCE: CAC		 CAT		 CTT
+	s_en_subseq0 <= '1' WHEN s_state = C0A1C2 else '0';
+	s_en_subseq1 <= '1' WHEN s_state = C0A1T2 else '0';
+	s_en_subseq2 <= '1' WHEN s_state = C0T1T2 else '0';
+	
+	-- BROJAČ NULTE PODSEKVENCE - SINHRONI RESET - MODUL 9
+	process(i_clk) begin
+		if(falling_edge(i_clk)) then
+			if(i_rst = '1') then
+				s_cnt_subseq0 <= "0000";
+			else
+				if(s_en_subseq0 = '1') then
+					if(s_cnt_subseq0 >= 8) then
+						s_cnt_subseq0 <= "0000";
+					elsif(s_cnt_subseq0 < 8) then
+						s_cnt_subseq0 <= s_cnt_subseq0 + 1;
+					end if;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	-- BROJAČ PRVE PODSEKVENCE - ASINHRONI RESET - MODUL 9
+	process(i_clk, i_rst) begin
+		if(i_rst = '1') then
+				s_cnt_subseq1 <= "0000";
+		elsif(falling_edge(i_clk)) then
+			if(s_en_subseq1 = '1') then
+				if(s_cnt_subseq1 >= 8) then
+					s_cnt_subseq1 <= "0000";
+				elsif(s_cnt_subseq1 < 8) then
+					s_cnt_subseq1 <= s_cnt_subseq1 + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	-- BROJAČ DRUGE PODSEKVENCE - ASINHRONI RESET - MODUL 4
+	process(i_clk, i_rst) begin
+		if(i_rst = '1') then
+				s_cnt_subseq2 <= "0000";
+		elsif(falling_edge(i_clk)) then
+			if(s_en_subseq2 = '1') then
+				if(s_cnt_subseq2 >= 3) then
+					s_cnt_subseq2 <= "0000";
+				elsif(s_cnt_subseq2 < 3) then
+					s_cnt_subseq2 <= s_cnt_subseq2 + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	-- IZLAZNI MULTIPLEKSER ZA SELEKCIJU IZLAZA SA BROJAČA PROCESS-IF
+	-- ULAZ: BROJAČI
+	-- IZLAZ: o_cnt_subseq(3:0)
+	-- SELEKCIONI SIGNAL: i_cnt_subseq_sel(1:0)
+	process(i_cnt_subseq_sel, s_cnt_subseq0, s_cnt_subseq1, s_cnt_subseq2) begin
+		if(i_cnt_subseq_sel = "00") then
+			o_cnt_subseq <= s_cnt_subseq0;
+		elsif(i_cnt_subseq_sel = "01") then
+			o_cnt_subseq <= s_cnt_subseq1;
+		elsif(i_cnt_subseq_sel = "10") then
+			o_cnt_subseq <= s_cnt_subseq2;
+		else
+			o_cnt_subseq <= "0000";
+		end if;
+	end process;
+	
+	-- ULAZNI MULTIPLEKSER ZA SELEKCIJU BAZE KOJA ĆE UĆI U AUTOMAT WHEN-ELSE
+	-- ULAZ: i_base(1:0)
+	-- IZLAZ: s_base(1:0)
+	-- SELEKCIONI SIGNAL: i_base_src_sel - 1 bit
+		s_base <= i_base 	  WHEN i_base_src_sel = '0' ELSE 
+					 s_sh_base WHEN i_base_src_sel = '1' ELSE 
+					 "00";
+				 
+	-- POMERAČKI REGISTAR - ASINHRONI RESET
+	-- s_sh_reg KAO SIGNAL REGISTRA
+	process(i_clk, i_rst, s_sh_reg) begin
+		if(i_rst = '1') then
+			s_sh_base <= "00";
+		elsif(falling_edge(i_clk)) then
+			s_sh_base <= s_sh_reg(63 downto 62); -- s_sh_base UZIMATI 2 BITA NAJVEĆE VREDNOSTI IZ s_sh_reg
+		end if;
+	end process;
+	
+	-- KOMBINACIONA MREŽA - DODELA VREDNOSTI REGISTRU - WHEN-ELSE
+	process(i_clk, i_rst, i_sequence, i_load_sequence, s_n_sh_reg) begin
+		if(i_rst = '1') then
+			s_sh_reg <= (others => '0');
+		else
+			s_sh_reg <= s_n_sh_reg;
+		end if;
+	end process;
+	
+	s_n_sh_reg    <= i_sequence WHEN i_load_sequence = '1' ELSE
+					     s_sh_reg(62 downto 0) & '0';
+
+end architecture;

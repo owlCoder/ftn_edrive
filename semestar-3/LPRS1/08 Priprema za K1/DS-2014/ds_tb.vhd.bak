@@ -1,0 +1,20 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ds_tb is end entity;
+
+
+architecture beh of ds_tb is
+	 signal sA      :   std_logic_vector(3 downto 0);
+	 signal	  sB      :   std_logic_vector(3 downto 0);
+	signal  sRESULT :  std_logic_vector(7 downto 0)
+
+	component ds is
+		 port(
+			  iA      : in  std_logic_vector(3 downto 0);
+			  iB      : in  std_logic_vector(3 downto 0);
+			  oRESULT : out std_logic_vector(7 downto 0)
+		 );
+	end component;
+	
+end beh;

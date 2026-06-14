@@ -1,0 +1,36 @@
+<html>
+    <body>
+       <script type="text/javascript">
+             function Person(firstName, lastName, age){
+                this.firstName=firstName;
+                this.lastName=lastName;
+                this.age=age;
+              };
+
+              Person.prototype.fullName=function(){
+                  return this.firstName+" "+this.lastName;
+              }
+
+              function Student(firstName, lastName, age,studentNum){
+                  Person.call(this, firstName, lastName, age);
+                  this.studentNum=studentNum;
+              }
+
+              Student.prototype=Object.create(Person.prototype);
+              Student.prototype.constructor=Student;
+
+            //Student.prototype.fullName=function(){
+            //     return "Student, "+ Person.prototype.fullName.call(this)
+            //}
+              var person1=new Person("Pera", "Peric",23);
+              var person2=new Student("Mika", "Mikic",24, "mm-11-2222");
+
+             console.log("Ime prvog korisnika je "+person1.firstName);
+             console.log("Ime drugog korisnika je "+person2.firstName);
+             console.log("Broj indeksa drugog korisnika je " + person2.studentNum);
+             console.log("Puno ime prvog korisnika je "+person1.fullName());
+             console.log("Puno ime drugog korisnika je "+person2.fullName());
+        </script>
+    </body>
+</html>
+

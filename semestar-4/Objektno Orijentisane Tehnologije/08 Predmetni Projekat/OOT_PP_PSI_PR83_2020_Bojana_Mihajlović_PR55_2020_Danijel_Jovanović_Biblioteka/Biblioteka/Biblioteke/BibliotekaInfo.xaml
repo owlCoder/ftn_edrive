@@ -1,0 +1,29 @@
+﻿<Window x:Class="Biblioteka.Biblioteke.BibliotekaInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Izmena podataka o biblioteci" Height="410" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    
+	<Border Background="White" BorderBrush="White" BorderThickness="0" CornerRadius="20, 20, 20, 20">
+        <StackPanel Margin="20" Orientation="Vertical">
+            <Label HorizontalAlignment="Center" FontWeight="Bold" FontSize="22" Content="IZMENA PODATAKA BIBLIOTEKE" Margin="0 5 0 0"/>
+
+            <Label Content="Naziv:" FontSize="16" FontWeight="Bold"/>
+            <TextBox Name="nazivBiblioteke" FontSize="16" FontWeight="Bold"/>
+
+            <Label Content="Adresa:" FontSize="16" FontWeight="Bold"/>
+            <TextBox Name="adresaBiblioteke" FontSize="16" FontWeight="Bold"/>
+
+            <Label Content="Godina Osnivanja:" FontSize="16" FontWeight="Bold"/>
+            <TextBox Name="godinaOsnivanjaBiblioteke" FontSize="16" FontWeight="Bold"/>
+
+            <Image x:Name="logo" Source="/Slike/placeholder.png" Height="50" Width="50" HorizontalAlignment="Center" Margin="5"/>
+            <Button Name="logoBiblioteke" Click="logoBiblioteke_Click" Content="ODABIR LOGOA BIBLIOTEKE" FontSize="14" FontWeight="Bold" />
+
+            <Button Content="IZMENA PODATAKA O BIBLIOTECI" Click="Button_Click" FontWeight="Bold"  FontSize="20" Margin="0 10 0 0"/>
+        </StackPanel>
+    </Border>
+	
+</Window>

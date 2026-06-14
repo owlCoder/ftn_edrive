@@ -1,0 +1,93 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim
+Emyseconddigitalsystem
+Z1 w1634662461
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 0
+R0
+Z4 8D:/LPRS1/V1/MySecondDigitalSystem/MySecondDigitalSystem.vhd
+Z5 FD:/LPRS1/V1/MySecondDigitalSystem/MySecondDigitalSystem.vhd
+l0
+L25 1
+VbzYO_Ez2H_c_[B]]KhN0]0
+!s100 ?7^PAWi:L4=99>97CkIla1
+Z6 OV;C;2020.1;71
+31
+Z7 !s110 1634662556
+!i10b 1
+Z8 !s108 1634662556.000000
+Z9 !s90 -reportprogress|300|-93|-work|work|D:/LPRS1/V1/MySecondDigitalSystem/MySecondDigitalSystem.vhd|
+Z10 !s107 D:/LPRS1/V1/MySecondDigitalSystem/MySecondDigitalSystem.vhd|
+!i113 1
+Z11 o-93 -work work
+Z12 tExplicit 1 CvgOpt 0
+Abdf_type
+R2
+R3
+DEx4 work 21 myseconddigitalsystem 0 22 bzYO_Ez2H_c_[B]]KhN0]0
+!i122 0
+l51
+L37 64
+VO^:63J;3;XY81ZzdD@i611
+!s100 nQ022[PI<T_e8SWGkTM:33
+R6
+31
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Emyseconddigitalsystem_tb
+Z13 w1634661891
+R2
+R3
+!i122 2
+R0
+Z14 8D:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim/MySecondDigitalSystem_tb.vhd
+Z15 FD:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim/MySecondDigitalSystem_tb.vhd
+l0
+L4 1
+Vf_Xdem7Xb0IF[7ohP:V2e0
+!s100 @_6iATI]GDRGFDN^60@l[3
+R6
+32
+Z16 !s110 1634662713
+!i10b 1
+Z17 !s108 1634662713.000000
+Z18 !s90 -reportprogress|300|-work|work|D:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim/MySecondDigitalSystem_tb.vhd|
+Z19 !s107 D:/LPRS1/V1/MySecondDigitalSystem/simulation/modelsim/MySecondDigitalSystem_tb.vhd|
+!i113 1
+Z20 o-work work
+R12
+Atest_tb
+R2
+R3
+DEx4 work 24 myseconddigitalsystem_tb 0 22 f_Xdem7Xb0IF[7ohP:V2e0
+!i122 2
+l26
+Z21 L7 72
+V?@=Y10=0@E@6C7;YMIZ]42
+Z22 !s100 e2SBOHzjHUjoh`Sm6AD<M0
+R6
+32
+R16
+!i10b 1
+R17
+R18
+R19
+!i113 1
+R20
+R12

@@ -1,0 +1,7 @@
+STA 15
+TCP 25252
+
+DO_REG  2 2005  0  0      1     0  DO  @P      #
+DO_REG  1 2000  0  0      1     0  DO  @STOP   #
+DO_REG  1 2002  0  0      1     0  DO  @V1     #
+HR_INT  1 1000  0  0   4095     0  AO  @L      #

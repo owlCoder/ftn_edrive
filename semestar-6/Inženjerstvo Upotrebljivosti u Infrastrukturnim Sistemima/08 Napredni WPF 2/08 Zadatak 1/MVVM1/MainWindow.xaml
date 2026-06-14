@@ -1,0 +1,36 @@
+﻿<Window x:Class="MVVM1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVM1"
+        xmlns:viewModel="clr-namespace:MVVM1.ViewModel"
+        xmlns:views="clr-namespace:MVVM1.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <views:HomeView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:StudentViewModel}">
+            <views:StudentView />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Margin="5" Background="Transparent">
+            <MenuItem Header="Home" Command="{Binding NavCommand}" CommandParameter="home" />
+            <MenuItem Header="Studenti" Command="{Binding NavCommand}" CommandParameter="student" />
+        </Menu>
+
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+    </Grid>
+</Window>

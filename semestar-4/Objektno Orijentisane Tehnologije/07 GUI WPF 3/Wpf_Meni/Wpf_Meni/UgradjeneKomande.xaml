@@ -1,0 +1,26 @@
+﻿<Window x:Class="Wpf_Meni.UgradjeneKomande"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Wpf_Meni"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="UgradjeneKomande">
+
+    <Grid>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" Command="ApplicationCommands.Cut" CommandTarget="{Binding ElementName=txtMain}">Iseci</Button>
+            <Button Grid.Column="1" Grid.Row="0" Command="ApplicationCommands.Copy" CommandTarget="{Binding ElementName=txtMain}">Kopiraj</Button>
+            <Button Grid.Column="2" Grid.Row="0" Command="ApplicationCommands.Paste" CommandTarget="{Binding ElementName=txtMain}">Nalepi</Button>
+        <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Name="txtMain" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBox>
+    </Grid>
+</Window>

@@ -1,0 +1,41 @@
+﻿<Page x:Class="Biblioteka.Knjige.ObrisiKnjigu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Biblioteka.Knjige"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ObrisiKnjigu">
+    
+	<Border Background="White" BorderBrush="White" BorderThickness="0" CornerRadius="20, 20, 20, 20" Margin="80 70 80 90">
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="0">
+                <Label Content="Unesite naziv njige ili ime autora: " FontSize="16" FontWeight="Bold" />
+                <TextBox Name="pretraga" FontSize="16" TextChanged="pretraga_TextChanged" />
+            </StackPanel>
+
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Content="ODABERITE DUPLIM KLIKOM KNJIGU ZA BRISANJE" FontSize="18" FontWeight="Bold"/>
+
+            <DataGrid Grid.Row="2" Grid.Column="0" FontWeight="Medium" FontSize="16" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Name="dataGridSveKnjige" ItemsSource="{Binding Knjiga}" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dataGridSveKnjige_MouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Naziv" Binding="{Binding Path=Naziv}"/>
+                    <DataGridTextColumn Header="Autor" Binding="{Binding Path=Autor}"/>
+                    <DataGridTextColumn Header="Godina Izdanja" Binding="{Binding Path=GodinaIzdanja}" Width="100*"/>
+                    <DataGridTextColumn Header="Biblioteka" Width="100*" Binding="{Binding Path=NijeDodata}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+	
+</Page>

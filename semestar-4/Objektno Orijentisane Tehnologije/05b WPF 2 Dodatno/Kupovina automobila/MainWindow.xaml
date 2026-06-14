@@ -1,0 +1,74 @@
+﻿<Window x:Class="K2_G8.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:K2_G8"
+        mc:Ignorable="d"
+        Title="Kupovina automobila" Height="430" Width="550">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Content="Tip karoserije" FontWeight="Bold" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+        <StackPanel Margin="20, 0, 0, 0"  Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+            <RadioButton Margin="0, 20, 0, 0" Content="Limuzina" Name="limuzina" Click="limuzina_Click" />
+            <RadioButton Margin="20, 20, 0, 0" Content="Hedzbek" Name="hedzbek" Click="hedzbek_Click"/>
+            <RadioButton Margin="20, 20, 0, 0" Content="Karavan" Name="karavan" Click="karavan_Click"/>
+        </StackPanel>
+
+        <Label Grid.Column="0" Grid.Row="2" Content="Marka automobila i zapremina motora" FontWeight="Bold" VerticalAlignment="Bottom" />
+        <Label Grid.Column="0" Grid.Row="3" Content="Marka" VerticalAlignment="Bottom"/>
+        <Label Grid.Column="1" Grid.Row="3" Content="Zapremina motora" VerticalAlignment="Bottom"/>
+
+        <ComboBox SelectionChanged="marka_SelectionChanged" IsEnabled="False" Margin="5, 12, 12, 12" Name="marka" Grid.Column="0" Grid.Row="4">
+            <ComboBoxItem Content="Audi"></ComboBoxItem>
+            <ComboBoxItem Content="Opel"></ComboBoxItem>
+            <ComboBoxItem Content="Toyota"></ComboBoxItem>
+        </ComboBox>
+
+        <ComboBox SelectionChanged="zapreminaMotora_SelectionChanged" IsEnabled="False" Margin="5, 12, 12, 12" Name="zapreminaMotora" Grid.Column="1" Grid.Row="4">
+            <ComboBoxItem Content="1000"></ComboBoxItem>
+            <ComboBoxItem Content="1400"></ComboBoxItem>
+            <ComboBoxItem Content="2000"></ComboBoxItem>
+        </ComboBox>
+
+        <Label Grid.Column="0" Grid.Row="5" Content="Dodatna oprema" FontWeight="Bold" VerticalAlignment="Bottom"/>
+
+        <Grid x:Name="oblast" IsEnabled="False" Margin="5, 0, 0, 0"  Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <CheckBox Click="cb1_Click" Grid.Column="0" Content="Maglenke" Name="cb1" />
+            <CheckBox Click="cb2_Click" Grid.Column="1" Content="Grejaci sedista" Name="cb2"/>
+            <CheckBox Click="cb3_Click" Grid.Column="2" Content="Zimske gume" Name="cb3"/>
+            <CheckBox Click="cb4_Click" Grid.Column="3" Content="Klima" Name="cb4"/>
+        </Grid>
+
+        <Button x:Name="naruciBtn" Content="Naruci" Margin="10" Click="naruciBtn_Click" Grid.Column="1" Grid.Row="7"/>
+
+        <StackPanel Grid.Row="8" Grid.Column="0" Orientation="Horizontal">
+            <Label Grid.Row="8" Grid.Column="0" Content="Cena je: "/>
+            <Label Grid.Row="8" Grid.Column="0" Name="Cena" Margin="-4, -2, -2, 22" Content="0" FontSize="16" Background="Red"/>
+            <Label Grid.Row="8" Grid.Column="0" Content="EUR"/>
+        </StackPanel>
+    </Grid>
+</Window>

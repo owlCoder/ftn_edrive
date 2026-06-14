@@ -1,0 +1,95 @@
+# Dependency directories
+node_modules/
+npm-debug.log
+
+# Optional npm cache directory
+.npm
+
+# Optional yarn cache directory
+yarn-error.log
+.yarn-integrity
+
+# Environment configuration
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Directory for testing output
+__tests__/output
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Parcel
+.cache
+
+# Next.js
+.next/
+out/
+
+# Nuxt.js
+.nuxt/
+dist/
+
+# Gatsby
+.cache/
+
+# IntelliJ
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Log files
+logs/
+
+# Sensitive or environment-specific files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor directories
+.idea/
+.vscode/
+
+# Node.js generated files
+node_modules/
+dist/
+logs/
+
+# Yarn
+.yarn-error.log
+.yarn-integrity
+.pnp.*
+
+# npm package locks
+npm-debug.log
+package-lock.json
+
+# Nuxt.js
+.nuxt/
+dist/
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Mac and Windows files
+.DS_Store
+Thumbs.db
+
+# ESLint cache
+.eslintcache

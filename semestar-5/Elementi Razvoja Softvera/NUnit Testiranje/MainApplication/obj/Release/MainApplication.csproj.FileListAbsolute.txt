@@ -1,0 +1,1 @@
+D:\NUnit Testiranje\MainApplication\obj\Release\MainApplication.csproj.CoreCompileInputs.cache

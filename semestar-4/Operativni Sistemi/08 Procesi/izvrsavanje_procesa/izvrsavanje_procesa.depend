@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1493887242 source:/mnt/c/Users/Danijel/Desktop/OS/09_Procesi/izvrsavanje_procesa/main.cpp
+	<thread>
+	"procesor.h"
+
+1650211507 /mnt/c/Users/Danijel/Desktop/OS/09_Procesi/izvrsavanje_procesa/procesor.h
+	"dijagnostika.h"
+	<condition_variable>
+
+1493887240 /mnt/c/Users/Danijel/Desktop/OS/09_Procesi/izvrsavanje_procesa/dijagnostika.h
+	<iostream>
+	<mutex>
+

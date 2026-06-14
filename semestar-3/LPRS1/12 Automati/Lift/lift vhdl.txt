@@ -1,0 +1,263 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.ALL;
+
+entity lift is port ( 
+	iRST  : in  std_logic;
+	iCLK  : in  std_logic;
+	iNEW_REQ	    : in  std_logic;
+	iNEW_FLOOR   : in  std_logic_vector(2 downto 0);
+	iOPEN_DOOR   : in  std_logic;
+	iSTAY_OPEN	 : in  std_logic;
+	oCURRENT_FLOOR : out std_logic_vector(2 downto 0);
+	oDOOR_OPENED  	: out std_logic
+	);
+end entity;
+
+architecture Behavioral of lift is
+
+	type tSTATE is (IDLE, CHECK_STATE, UP, DOWN, MOVE_UP, MOVE_DOWN, OPEN_DOOR, STAY_OPEN);
+	signal sSTATE, sNEXT_STATE : tSTATE;
+
+	signal sIDLE_CNT : std_logic_vector(2 downto 0);
+	signal sIDLE_TC  : std_logic;
+	
+	
+	signal sMOVE_TC  : std_logic;
+	signal sMOVE_CNT : std_logic_vector(4 downto 0);
+	
+	signal sDOOR_TC  : std_logic;
+	signal sDOOR_CNT : std_logic_vector(3 downto 0);
+	
+	signal sNEW_REQ  : std_logic;
+	
+	signal sDIRECTION: std_logic_vector(1 downto 0);
+	signal sFLOOR 	  : std_logic_vector(2 downto 0);
+begin
+
+	--IDLE Counter
+
+	process(iCLK, iRST) begin
+		if(iRST = '1')then
+			sIDLE_CNT <= "000";
+		elsif(rising_edge(iCLK))then
+			if(sCNT_EN(2) = '1')then
+				if(sIDLE_CNT = "100")then
+					sIDLE_CNT <= "000";
+				else
+					sIDLE_CNT <= sIDLE_CNT + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	sIDLE_TC <= '1' when sIDLE_CNT = "100" else '0';
+	
+	
+	--MOVE Counter
+	
+	process(iCLK, iRST) begin
+		if(iRST = '1')then
+			sMOVE_CNT <= "00000";
+		elsif(rising_edge(iCLK))then
+			if(sCNT_EN(1) = '1')then
+				if(sMOVE_CNT = 19)then
+					sMOVE_CNT <= "00000";
+				else
+					sMOVE_CNT <= sMOVE_CNT + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	sMOVE_TC <= '1' when sMOVE_CNT = 19 else '0';
+	
+	
+	--DOOR Counter
+	process(iCLK, iRST) begin
+		if(iRST = '1')then
+			sDOOR_CNT <= "0000";
+		elsif(rising_edge(iCLK))then
+			if(sCNT_EN(0) = '1')then
+				if(sDOOR_CNT = 9)then
+					sDOOR_CNT <= "0000";
+				else
+					sDOOR_CNT <= sDOOR_CNT + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	sDOOR_TC <= '1' when sDOOR_TC = 9 else '0';
+	
+	--Request Reg
+	process(iCLK, iRST) begin
+		if(iRST = '1')then
+			sNEW_REQ <= '0';
+		elsif(rising_edge(iCLK))then
+			if(iNEW_REQ = '1')then
+				sNEW_REQ <= '1';
+			elsif(sCLEAR_REQ = '1')then
+				sNEW_REQ <= '0';
+			end if;
+		end if;
+	end process;
+	
+	--Floor Reg
+	process(iCLK, iRST) begin
+		if(iRST = '1')then
+			sDIRECTION <= "00";
+			oCURRENT_FLOOR <= "000";
+		elsif(rising_edge(iCLK))then
+			if(iNEW_FLOOR /= sFLOOR)then
+					if(iNEW_FLOOR > sFLOOR)then
+						sDIRECTION <= "10";
+					else
+						sDIRECTION <= "01";
+					end if;
+			else
+				sDIRECTION <= "00";
+			end if;
+		end if;
+		if(sEN = '1')then
+			if(sMOVE = "10")then
+				sFLOOR <= sFLOOR + 1;
+			elsif(sMOVE = "01")then
+				sFLOOR <= sFLOOR - 1;
+			end if;
+		end if;
+	end process;
+	
+	--FSM
+	
+	--NEXT_STATE
+	process(iCLK, iRST) begin
+		if(iRST = '1')then
+			sSTATE <= IDLE;
+		else
+			sSTATE <= sNEXT_STATE;
+		end if;
+	end process;
+	
+	--Funkcija promene stanja
+	process(sSTATE) begin
+		case(sSTATE)is
+			when IDLE =>
+								if(sIDLE_TC = '1')then
+									sNEXT_STATE <= CHECK_STATE;
+								else
+									sNEXT_STATE <= IDLE;
+								end if;
+								
+			when CHECK_STATE =>
+								if(sDIRECTION = "10")then
+									sNEXT_STATE <= UP;
+								elsif(sDIRECTION = "01")then
+									sNEXT_STATE <= DOWN;
+								elsif(sDIRECTION = "00")then
+									sNEXT_STATE <= OPEN_DOOR;
+								elsif(sNEW_REQ = '0')then
+									sNEXT_STATE <= IDLE;
+								end if;
+								
+			when UP =>
+								if(sFLOOR /= iNEW_FLOOR)then
+									sNEXT_STATE <= MOVE_UP;
+								else
+									sNEXT_STATE <= OPEN_DOOR;
+								end if;
+								
+			when MOVE_UP =>
+								if(sMOVE_TC = '1')then
+									sNEXT_STATE <= UP;
+								else
+									sNEXT_STATE <= MOVE_UP;
+								end if;
+								
+			when DOWN =>
+								if(sFLOOR /= iNEW_FLOOR)then
+									sNEXT_STATE <= MOVE_DOWN;
+								else
+									sNEXT_STATE <= OPEN_DOOR;
+								end if;
+								
+			when MOVE_DOWN =>
+								if(sMOVE_TC = '1')then
+									sNEXT_STATE <= DOWN;
+								else
+									sNEXT_STATE <= MOVE_DOWN;
+								end if;
+			
+			when OPEN_DOOR =>
+								if(iSTAY_OPEN = '1')then
+									sNEXT_STATE <= STAY_OPEN;
+								elsif(sDOOR_TC = '1')then
+									sNEXT_STATE <= IDLE;
+								end if;
+			
+			when STAY_OPEN =>
+								sNEXT_STATE <= OPEN_DOOR;
+		end case;	
+	end process;
+	
+	--Funkcija izlaza
+	process(iCLK, iRST) begin
+		if(iRST = '1')then
+			sCLEAR_REQ <= '0';
+			sMOVE <= "00";
+			sEN <= '0';
+			sCNT_EN <= "000";
+		elsif(rising_edge(iCLK)) then
+			case(sSTATE)is
+				when IDLE =>
+							sCNT_EN <= "100";
+							sMOVE <= "00";
+							sEN <= '0';
+							sCLEAR_REQ <= '0';
+				
+				when CHECK_STATE =>
+							sCLEAR_REQ <= '0';
+							sMOVE <= "00";
+							sEN <= '0';
+							sCNT_EN <= "000";
+							
+				when UP =>
+							sEN <= '1';
+							sMOVE <= "10";
+							sCLEAR_REQ <= '0';
+							sCNT_EN <= "000";
+				
+				when DOWN =>
+							sEN <= '1';
+							sMOVE <= "01";
+							sCLEAR_REQ <= '0';
+							sCNT_EN <= "000";
+							
+				when MOVE_UP =>
+							sCNT_EN <= "010";
+							sMOVE <= "00";
+							sEN <= '0';
+							sCLEAR_REQ <= '0';
+							
+				when MOVE_DOWN =>
+							sCNT_EN <= "010";
+							sMOVE <= "00";
+							sEN <= '0';
+							sCLEAR_REQ <= '0';
+							
+				when OPEN_DOOR =>
+							sCNT_EN <= "001";
+							sMOVE <= "00";
+							sEN <= '0';
+							sCLEAR_REQ <= '0';
+							
+				when STAY_OPEN =>
+							sCNT_EN <= "000";
+							sMOVE <= "00";
+							sEN <= '0';
+							sCLEAR_REQ <= '0';
+			end case;
+		end if;
+	end process;
+
+end architecture;

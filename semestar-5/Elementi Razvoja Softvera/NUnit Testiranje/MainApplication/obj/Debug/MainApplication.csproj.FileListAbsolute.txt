@@ -1,0 +1,16 @@
+D:\NUnit Testiranje\MainApplication\obj\Debug\MainApplication.csproj.CoreCompileInputs.cache
+D:\NUnit Testiranje\MainApplication\bin\Debug\MainApplication.exe.config
+D:\NUnit Testiranje\MainApplication\bin\Debug\MainApplication.exe
+D:\NUnit Testiranje\MainApplication\bin\Debug\MainApplication.pdb
+D:\NUnit Testiranje\MainApplication\bin\Debug\Common.dll
+D:\NUnit Testiranje\MainApplication\bin\Debug\Osoba.dll
+D:\NUnit Testiranje\MainApplication\bin\Debug\OsobaTest.dll
+D:\NUnit Testiranje\MainApplication\bin\Debug\nunit.framework.dll
+D:\NUnit Testiranje\MainApplication\bin\Debug\Common.pdb
+D:\NUnit Testiranje\MainApplication\bin\Debug\Osoba.pdb
+D:\NUnit Testiranje\MainApplication\bin\Debug\OsobaTest.pdb
+D:\NUnit Testiranje\MainApplication\bin\Debug\nunit.framework.xml
+D:\NUnit Testiranje\MainApplication\obj\Debug\MainApplication.csproj.AssemblyReference.cache
+D:\NUnit Testiranje\MainApplication\obj\Debug\MainApplication.csproj.CopyComplete
+D:\NUnit Testiranje\MainApplication\obj\Debug\MainApplication.exe
+D:\NUnit Testiranje\MainApplication\obj\Debug\MainApplication.pdb

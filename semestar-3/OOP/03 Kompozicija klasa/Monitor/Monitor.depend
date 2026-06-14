@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1636045109 source:/home/danijel/Desktop/03 Kompozicija klasa/Monitor/main.cpp
+	"Monitor.hpp"
+
+1636045058 /home/danijel/Desktop/03 Kompozicija klasa/Monitor/Monitor.hpp
+	"Screen.hpp"
+
+1636042919 /home/danijel/Desktop/03 Kompozicija klasa/Monitor/Screen.hpp
+	<iostream>
+

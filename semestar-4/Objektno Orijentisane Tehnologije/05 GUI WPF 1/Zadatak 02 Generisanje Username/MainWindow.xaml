@@ -1,0 +1,50 @@
+﻿<Window x:Class="Zadatak_02_Generisanje_Username.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_02_Generisanje_Username"
+        mc:Ignorable="d"
+        Title="Zadatak 02 | Generisanje Korisničkog imena" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1.3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1.3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="1.3*"></RowDefinition>
+            <RowDefinition Height="1.3*"></RowDefinition>
+            <RowDefinition Height="1.3*"></RowDefinition>
+            <RowDefinition Height="1.3*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="PODACI O KORISNIKU" FontSize="20" FontWeight="Bold" Margin="5"></Label>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Ime" FontSize="18"></Label>
+        <TextBox x:Name="ime" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="18" Margin="5, 0, 5, 0"></TextBox>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Prezime" FontSize="18"></Label>
+        <TextBox x:Name="prezime" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" FontSize="18" Margin="5, 0, 5, 0"></TextBox>
+
+        <Button x:Name="generisanje" Grid.Row="5" Grid.Column="0" Content="Izgeneriši" Click="generisanje_Click" FontSize="18" Margin="5, 12, 10, 10"></Button>
+        <Button x:Name="ciscenje" Grid.Row="5" Grid.Column="1" Content="Očisti sva polja" Click="ciscenje_Click" FontSize="18" Margin="5, 12, 5, 10"></Button>
+
+        <Label Grid.Row="7" Grid.Column="0" FontSize="18" Content="Izgenerisano korisničko ime" Margin="5, 0, 0, 0"></Label>
+        <TextBox x:Name="izgenerisano" Grid.Row="8" Grid.Column="0" FontSize="18" Margin="10, 0, -50, 0"></TextBox>
+        <Button x:Name="sacuvaj" Grid.Row="8" Grid.Column="1" Content="Sačuvaj" Click="sacuvaj_Click" FontSize="18" Margin="65, 0, 0, 0"></Button>
+
+        <Label Grid.Row="9" Grid.Column="0" FontSize="18" Content="Sačuvano korisničko ime" Margin="5, 0, 0, 0"></Label>
+        <TextBox x:Name="sacuvanoKorisnickoIme" Grid.Row="10" Grid.Column="0" FontSize="18" IsEnabled="False" Margin="5, 0, 0, 5" Background="#D3D3D3"></TextBox>
+        
+        <Label Grid.Row="9" Grid.Column="1" FontSize="18" Content="Broj sačuvanih korisnika" Margin="5, 0, 0, 0"></Label>
+        <TextBox x:Name="brojSacuvanihKorisnika" Grid.Row="10" Grid.Column="1" FontSize="18" IsEnabled="False" Margin="5, 0, 0, 5" Background="#D3D3D3"></TextBox>
+    </Grid>
+</Window>

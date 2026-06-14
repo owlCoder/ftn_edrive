@@ -1,0 +1,101 @@
+[
+    {
+        "IMEI": 4893847382734,
+        "Model": "Mix Fold 2",
+        "Memory": "12/512Gb",
+        "ImagePath": "fold.jpg",
+        "RTFPath": "4893847382734.rtf",
+        "ExternalSource": "https:/www.phonearena.com/news/leaked-prototype-show-Xiaomi-outward-foldable-phone_id143790",
+        "ExtSrc": "https:/www.phonearena.com",
+        "LastAccessed": "2023-03-21T18:39:28.7696535+01:00",
+        "Delete": false
+    },
+    {
+        "IMEI": 9583843734538,
+        "Model": "Oppo Foldable",
+        "Memory": "16/512Gb",
+        "ImagePath": "oppo.jpg",
+        "RTFPath": "9583843734538.rtf",
+        "ExternalSource": "https://www.engadget.com/oppo-find-n2-flip-foldable-phone-pricing-availability-101858317.html",
+        "ExtSrc": "https:/www.engadget",
+        "LastAccessed": "2023-03-21T18:47:54.2962206+01:00",
+        "Delete": false
+    },
+    {
+        "IMEI": 8547375438432,
+        "Model": "Google Pixel Fold",
+        "Memory": "8/1024Gb",
+        "ImagePath": "pixelfold.jpg",
+        "RTFPath": "8547375438432.rtf",
+        "ExternalSource": "https://www.tomsguide.com/news/google-pixel-fold",
+        "ExtSrc": "https:/www.tomsguid",
+        "LastAccessed": "2023-03-21T18:51:40.8391043+01:00",
+        "Delete": false
+    },
+    {
+        "IMEI": 26364738473647,
+        "Model": "Nothing Phone 2",
+        "Memory": "8/128Gb",
+        "ImagePath": "np2.jpg",
+        "RTFPath": "26364738473647.rtf",
+        "ExternalSource": "https://www.digitalphablet.com/smartphones/nothing-phone-2/",
+        "ExtSrc": "https:/www.digitalt",
+        "LastAccessed": "2023-03-21T18:55:06.5092108+01:00",
+        "Delete": false
+    },
+    {
+        "IMEI": 6847375643231,
+        "Model": "Google Pixel G10",
+        "Memory": "8/256Gb",
+        "ImagePath": "gp10.jpg",
+        "RTFPath": "6847375643231.rtf",
+        "ExternalSource": "https://www.notebookcheck.net/Google-Pixel-G10-New-leak-provides-clues-about-possible-Pixel-7-Ultra.664092.0.html",
+        "ExtSrc": "https:/www.notebook",
+        "LastAccessed": "2023-03-21T18:57:52.5571244+01:00",
+        "Delete": false
+    },
+    {
+        "IMEI": 9843325482743,
+        "Model": "Motorola Razr 2023",
+        "Memory": "12/512Gb",
+        "ImagePath": "mrazr.jpg",
+        "RTFPath": "9843325482743.rtf",
+        "ExternalSource": "https://specs-tech.com/en/motorola-razr-2023/",
+        "ExtSrc": "https:/specs-tech.c",
+        "LastAccessed": "2023-03-21T19:00:25.7907243+01:00",
+        "Delete": false
+    },
+    {
+        "IMEI": 9854323432432,
+        "Model": "GPhone Original",
+        "Memory": "64/64Mb",
+        "ImagePath": "gphone.jpg",
+        "RTFPath": "9854323432432.rtf",
+        "ExternalSource": "https://www.theverge.com/2012/4/25/2974676/this-was-the-original-google-phone-presented-in-2006",
+        "ExtSrc": "https:/www.theverge",
+        "LastAccessed": "2023-03-21T19:02:46.1543313+01:00",
+        "Delete": false
+    },
+    {
+        "IMEI": 3234635437273,
+        "Model": "Samsung Galaxy X",
+        "Memory": "4/32Gb",
+        "ImagePath": "galaxyx.jpg",
+        "RTFPath": "3234635437273.rtf",
+        "ExternalSource": "https://samsungmobilespecs.com/samsung-galaxy-prototype-x-specification-2018/3/",
+        "ExtSrc": "https:/samsungmobil",
+        "LastAccessed": "2023-03-21T19:04:56.5282333+01:00",
+        "Delete": false
+    },
+    {
+        "IMEI": 4343456532345,
+        "Model": "Samsung Galaxy Youm",
+        "Memory": "3/16Gb",
+        "ImagePath": "gyoum.jpg",
+        "RTFPath": "4343456532345.rtf",
+        "ExternalSource": "https://samsungmobilespecs.com/category/samsung-phones-prototype/",
+        "ExtSrc": "https:/samsungmobil",
+        "LastAccessed": "2023-03-21T19:07:42.7472219+01:00",
+        "Delete": false
+    }
+]

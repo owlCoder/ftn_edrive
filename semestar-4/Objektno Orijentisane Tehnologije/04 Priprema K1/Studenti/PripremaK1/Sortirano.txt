@@ -1,0 +1,29 @@
+------------- STUDENT -------------
+	Ime: Jovana
+	Prezime: Jovanovic
+	Indeks: 19
+	Godina Upisa: 2015
+	Smer: RA
+
+------------- STUDENT -------------
+	Ime: Jovana
+	Prezime: Jovanovic
+	Indeks: 20
+	Godina Upisa: 2015
+	Smer: RA
+
+------------- STUDENT -------------
+	Ime: Marko
+	Prezime: Markovic
+	Indeks: 31
+	Godina Upisa: 2015
+	Smer: RA
+
+------------- STUDENT -------------
+	Ime: Petar
+	Prezime: Petrovic
+	Indeks: 44
+	Godina Upisa: 2016
+	Smer: RA
+
+
